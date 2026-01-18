@@ -1,0 +1,181 @@
+{
+    "text": "About About As an aspiring computer engineer student, I am building a solid foundation in machine learning, computer vision, and full-stack development while exploring new algorithms and technologies. My technical experience includes Python, JavaScript, Go, and frameworks like TensorFlow, OpenCV, MediaPipe, React, and Flask. I also have knowledge of databases and cloud platforms. I enjoy solving problems that combine innovation with real-world effects. This ranges from experimenting with gesture-based human-computer interaction to creating intelligent systems that improve security, accessibility, and user experience. In each project, I focus on writing clear, maintainable code while enhancing my understanding of algorithms and data-driven decision-making. I am excited to take on roles where I can make a meaningful contribution, learn quickly, and work with diverse teams. My aim is to grow into a well-rounded professional who not only keeps up with technological changes but also helps shape them by developing scalable, ethical, and impactful solutions. As an aspiring computer engineer student, I am building a solid foundation in machine learning, computer vision, and full-stack development while exploring new algorithms and technologies. My technical experience includes Python, JavaScript, Go, and frameworks like TensorFlow, OpenCV, MediaPipe, React, and Flask. I also have knowledge of databases and cloud platforms. I enjoy solving problems that combine innovation with real-world effects. This ranges from experimenting with gesture-based human-computer interaction to creating intelligent systems that improve security, accessibility, and user experience. In each project, I focus on writing clear, maintainable code while enhancing my understanding of algorithms and data-driven decision-making. I am excited to take on roles where I can make a meaningful contribution, learn quickly, and work with diverse teams. My aim is to grow into a well-rounded professional who not only keeps up with technological changes but also helps shape them by developing scalable, ethical, and impactful solutions. Experience Experience Joint Placement Secretary Joint Placement Secretary Cursor Cursor Oct 2025 - Present \u00b7 4 mos Oct 2025 to Present \u00b7 4 mos Goa, India \u00b7 On-site Goa, India \u00b7 On-site Intern Intern Intern vyomsolutions \u00b7 Part-time vyomsolutions \u00b7 Part-time May 2024 - Present \u00b7 1 yr 9 mos May 2024 to Present \u00b7 1 yr 9 mos Ponda, Goa, India \u00b7 On-site Ponda, Goa, India \u00b7 On-site Computer Vision, React.js and +3 skills Intern Intern Intern Infipre IT Services (OPC) Pvt. Ltd \u00b7 Full-time Infipre IT Services (OPC) Pvt. Ltd \u00b7 Full-time Jul 2023 - Oct 2023 \u00b7 4 mos Jul 2023 to Oct 2023 \u00b7 4 mos Sanquelim,Goa \u00b7 On-site Sanquelim,Goa \u00b7 On-site Worked on Websites , CRM project and react uploader Worked on Websites , CRM project and react uploader React.js, WordPress and +3 skills",
+    "entities": [
+        {
+            "text": "About About",
+            "label": "CARDINAL"
+        },
+        {
+            "text": "Python",
+            "label": "ORG"
+        },
+        {
+            "text": "JavaScript",
+            "label": "ORG"
+        },
+        {
+            "text": "TensorFlow",
+            "label": "ORG"
+        },
+        {
+            "text": "MediaPipe",
+            "label": "PRODUCT"
+        },
+        {
+            "text": "React",
+            "label": "GPE"
+        },
+        {
+            "text": "Flask",
+            "label": "GPE"
+        },
+        {
+            "text": "Python",
+            "label": "ORG"
+        },
+        {
+            "text": "JavaScript",
+            "label": "ORG"
+        },
+        {
+            "text": "TensorFlow",
+            "label": "ORG"
+        },
+        {
+            "text": "MediaPipe",
+            "label": "PRODUCT"
+        },
+        {
+            "text": "React",
+            "label": "GPE"
+        },
+        {
+            "text": "Flask",
+            "label": "GPE"
+        },
+        {
+            "text": "Joint Placement",
+            "label": "PERSON"
+        },
+        {
+            "text": "Cursor Cursor",
+            "label": "PERSON"
+        },
+        {
+            "text": "4",
+            "label": "CARDINAL"
+        },
+        {
+            "text": "Oct 2025",
+            "label": "DATE"
+        },
+        {
+            "text": "4 mos Goa",
+            "label": "PERSON"
+        },
+        {
+            "text": "India",
+            "label": "GPE"
+        },
+        {
+            "text": "Goa",
+            "label": "GPE"
+        },
+        {
+            "text": "India",
+            "label": "GPE"
+        },
+        {
+            "text": "Intern Intern Intern",
+            "label": "ORG"
+        },
+        {
+            "text": "May 2024 - Present",
+            "label": "DATE"
+        },
+        {
+            "text": "1",
+            "label": "CARDINAL"
+        },
+        {
+            "text": "May 2024",
+            "label": "DATE"
+        },
+        {
+            "text": "1",
+            "label": "CARDINAL"
+        },
+        {
+            "text": "Ponda",
+            "label": "PRODUCT"
+        },
+        {
+            "text": "Goa",
+            "label": "GPE"
+        },
+        {
+            "text": "India",
+            "label": "GPE"
+        },
+        {
+            "text": "Ponda",
+            "label": "PRODUCT"
+        },
+        {
+            "text": "Goa",
+            "label": "GPE"
+        },
+        {
+            "text": "India",
+            "label": "GPE"
+        },
+        {
+            "text": "Computer Vision",
+            "label": "ORG"
+        },
+        {
+            "text": "Intern Intern Intern Infipre IT Services",
+            "label": "ORG"
+        },
+        {
+            "text": "Infipre IT Services",
+            "label": "ORG"
+        },
+        {
+            "text": "4 mos Jul",
+            "label": "QUANTITY"
+        },
+        {
+            "text": "2023 to Oct 2023",
+            "label": "DATE"
+        },
+        {
+            "text": "4 mos Sanquelim,Goa",
+            "label": "QUANTITY"
+        },
+        {
+            "text": "Sanquelim,Goa \u00b7",
+            "label": "WORK_OF_ART"
+        },
+        {
+            "text": "Worked on Websites",
+            "label": "WORK_OF_ART"
+        },
+        {
+            "text": "CRM",
+            "label": "PRODUCT"
+        },
+        {
+            "text": "Worked on Websites",
+            "label": "WORK_OF_ART"
+        },
+        {
+            "text": "CRM",
+            "label": "PRODUCT"
+        },
+        {
+            "text": "WordPress",
+            "label": "ORG"
+        }
+    ]
+}

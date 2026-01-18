@@ -1,0 +1,45 @@
+text,label
+About About,CARDINAL
+Python,ORG
+JavaScript,ORG
+TensorFlow,ORG
+MediaPipe,PRODUCT
+React,GPE
+Flask,GPE
+Python,ORG
+JavaScript,ORG
+TensorFlow,ORG
+MediaPipe,PRODUCT
+React,GPE
+Flask,GPE
+Joint Placement,PERSON
+Cursor Cursor,PERSON
+4,CARDINAL
+Oct 2025,DATE
+4 mos Goa,PERSON
+India,GPE
+Goa,GPE
+India,GPE
+Intern Intern Intern,ORG
+May 2024 - Present,DATE
+1,CARDINAL
+May 2024,DATE
+1,CARDINAL
+Ponda,PRODUCT
+Goa,GPE
+India,GPE
+Ponda,PRODUCT
+Goa,GPE
+India,GPE
+Computer Vision,ORG
+Intern Intern Intern Infipre IT Services,ORG
+Infipre IT Services,ORG
+4 mos Jul,QUANTITY
+2023 to Oct 2023,DATE
+"4 mos Sanquelim,Goa",QUANTITY
+"Sanquelim,Goa ·",WORK_OF_ART
+Worked on Websites,WORK_OF_ART
+CRM,PRODUCT
+Worked on Websites,WORK_OF_ART
+CRM,PRODUCT
+WordPress,ORG

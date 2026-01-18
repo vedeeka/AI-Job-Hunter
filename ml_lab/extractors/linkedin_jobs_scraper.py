@@ -1,68 +1,58 @@
-from playwright.sync_api import sync_playwright
+
+import requests
+from bs4 import BeautifulSoup
 import pandas as pd
+import time
 
-def scrape_jobs_guest(keyword="Machine Learning", location="India", limit=10):
-    url = f"https://www.linkedin.com/jobs/search?keywords={keyword}&location={location}"
-    jobs_data = []
+def scrape_jobs_guest(keyword="Developer", location="Goa", max_jobs=20):
+    """
+    LinkedIn ke guest view se jobs scrape kare aur DataFrame me return kare.
+    """
+    jobs = []  # Saari jobs store karne ke liye list
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+    }
+    base_url = "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search"
+    params = {"keywords": keyword, "location": location, "start": 0}
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
-        page = browser.new_page()
-        page.goto(url)
-        page.wait_for_selector("ul.jobs-search__results-list", timeout=10000)
+    while len(jobs) < max_jobs:
+        resp = requests.get(base_url, headers=headers, params=params)  # Request bhejna
+        if resp.status_code != 200:
+            break
 
-        scrolls = (limit // 5) + 1
-        for _ in range(scrolls):
-            page.mouse.wheel(0, 3000)
-            page.wait_for_timeout(1500)
+        soup = BeautifulSoup(resp.text, "html.parser")
+        job_cards = soup.find_all("li")  # Job cards find karna
+        if not job_cards:
+            break
 
-        cards = page.locator("ul.jobs-search__results-list > li")
-        total_cards = cards.count()
-        print(f"Found {total_cards} list items")
-
-        collected = 0
-
-        for i in range(total_cards):
-            if collected >= limit:
+        for card in job_cards:
+            if len(jobs) >= max_jobs:
                 break
 
-            card = cards.nth(i)
-            link_locator = card.locator("a.base-card__full-link")
-            if link_locator.count() == 0:
-                continue
+            # Important info extract karna
+            title = card.find("h3").get_text(strip=True) if card.find("h3") else ""
+            company = card.find("h4").get_text(strip=True) if card.find("h4") else ""
 
-            title = card.locator("h3.base-search-card__title").inner_text().strip()
-            company = card.locator("h4.base-search-card__subtitle").inner_text().strip()
-            loc = card.locator(".job-search-card__location").inner_text().strip()
-            link = link_locator.get_attribute("href").split("?")[0]
+         
+            location_tag = card.find("span", class_="job-result-card__location")
+            if not location_tag:
+                location_tag = card.find(lambda tag: tag.name=="span" and "location" in tag.get_text(strip=True).lower())
+            location = location_tag.get_text(strip=True) if location_tag else "Not Specified"
 
-            detail_page = browser.new_page()
-            detail_page.goto(link)
-            detail_page.wait_for_load_state("domcontentloaded")
+            link = card.find("a", href=True)['href'] if card.find("a", href=True) else ""
+            description = card.find("p").get_text(strip=True) if card.find("p") else ""
+            date_posted = card.find("time").get_text(strip=True) if card.find("time") else ""
 
-            try:
-                detail_page.wait_for_selector("div.show-more-less-html__markup", timeout=8000)
-                description = detail_page.locator("div.show-more-less-html__markup").inner_text()
-            except:
-                description = ""
-            detail_page.close()
-
-            jobs_data.append({
+            # Job dictionary
+            jobs.append({
                 "title": title,
                 "company": company,
-                "location": loc,
+                "location": location,
                 "link": link,
-                "description": description.strip()
+                "description": description,
+                "date_posted": date_posted
             })
 
-            collected += 1
-            print(f"Collected {collected} jobs")
-
-        browser.close()
-
-    return pd.DataFrame(jobs_data)
-
-if __name__ == "__main__":
-    df = scrape_jobs_guest("Developer", "Goa", 20)
-    df.to_csv("data/linkedin_jobs.csv", index=False)
-    print("✅ Jobs saved to data/linkedin_jobs.csv")
+        params["start"] += 25
+        time.sleep(1)           
+    return pd.DataFrame(jobs)  
