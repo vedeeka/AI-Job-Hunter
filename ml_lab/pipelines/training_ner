@@ -1,0 +1,21 @@
+from gliner import GLiNER
+import json
+
+model = GLiNER.from_pretrained("urchade/gliner_small-v2.1")
+
+text = "Looking for a Data Scientist skilled in Python, TensorFlow, and AWS with 3 years experience."
+
+labels = ["job_title", "technical_skill", "cloud_platform", "years_experience"]
+
+entities = model.predict_entities(text, labels)
+
+# Directly store
+result = {
+    "text": text,
+    "entities": entities
+}
+
+with open("gliner_output.json", "w", encoding="utf-8") as f:
+    json.dump(result, f, indent=4)
+
+print("Saved to gliner_output.json")
