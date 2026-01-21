@@ -17,7 +17,7 @@ import os
 
 
 salary_model = joblib.load(MODEL_PATH)
-print("✅ Salary Model Loaded")
+print(" Salary Model Loaded")
 def predict_salary(job_state, same_state, age, python_yn, R_yn, spark, aws, excel,
                    job_simp, seniority, desc_len, num_comp):
 
@@ -55,4 +55,4 @@ result = predict_salary(
     desc_len=2536,
     num_comp=0
 )
-print("💰 Predicted Salary:", result)
+print(" Predicted Salary:", result)
