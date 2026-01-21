@@ -5,6 +5,7 @@ import joblib
 import pandas as pd
 import numpy as np
 import os
+from api.endpoints import pipeline
 
 
 app = FastAPI(title="AI Job Hunter API", version="1.0")
@@ -18,6 +19,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(pipeline.router)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "models/salary_model_structured.pkl")
