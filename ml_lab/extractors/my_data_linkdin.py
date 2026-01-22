@@ -3,7 +3,7 @@ from playwright.sync_api import sync_playwright
 
 COOKIE_FILE = "cookies.json" 
 
-def scrape_my_profile(profile_url):
+def scrape_my_profile(url: str, output_path: str):
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False)  # Browser open (headless=False for debug)
         context = browser.new_context()
@@ -28,7 +28,7 @@ def scrape_my_profile(profile_url):
             return None
 
         # Step 2: Target profile page open karo
-        page.goto(profile_url)
+        page.goto(url)
         page.wait_for_load_state("domcontentloaded")
 
        
@@ -64,7 +64,7 @@ def scrape_my_profile(profile_url):
         }
 
         # JSON me save 
-        with open("data/profile_data.json", "w", encoding="utf-8") as f:
+        with open(output_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
 
         browser.close()

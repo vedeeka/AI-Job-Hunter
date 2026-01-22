@@ -3,10 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
 import pandas as pd
-import numpy as np
+
 import os
 from backend.app.api.endpoints import pipeline
-
+from backend.app.api.endpoints import profile
 
 
 app = FastAPI(title="AI Job Hunter API", version="1.0")
@@ -14,14 +14,15 @@ app = FastAPI(title="AI Job Hunter API", version="1.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], 
+   
+    allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 app.include_router(pipeline.router)
-
+app.include_router(profile.router)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "models/salary_model_structured.pkl")
 
