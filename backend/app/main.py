@@ -5,7 +5,8 @@ import joblib
 import pandas as pd
 import numpy as np
 import os
-from api.endpoints import pipeline
+from backend.app.api.endpoints import pipeline
+
 
 
 app = FastAPI(title="AI Job Hunter API", version="1.0")

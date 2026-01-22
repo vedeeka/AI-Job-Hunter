@@ -1,41 +1,566 @@
 [
     {
-        "title": "Sales and Marketing Internship in Hubballi, Panaji, Chitradurga, Dharwad (Hybrid)",
+        "title": "Sales and Marketing Internship in Dharwad, Chitradurga, Panaji, Hubballi (Hybrid)",
         "company": "DeCarbonic",
-        "location": "Not Specified",
-        "link": "https://in.linkedin.com/jobs/view/sales-and-marketing-internship-in-hubballi-panaji-chitradurga-dharwad-hybrid-at-decarbonic-4362366645?position=1&pageNum=0&refId=ZxlQ5URIsGU1fqkjSaYq3w%3D%3D&trackingId=VgxdLwknZYPxx0aDe0jlXg%3D%3D",
-        "description": "",
-        "date_posted": "3 days ago",
+        "location": "Panaji, Goa, India",
+        "link": "https://in.linkedin.com/jobs/view/sales-and-marketing-internship-in-dharwad-chitradurga-panaji-hubballi-hybrid-at-decarbonic-4362366645?position=1&pageNum=0&refId=hmGcnGzECVis628Kg6upYA%3D%3D&trackingId=l9LhFiakLLAFAI0paqeFyw%3D%3D",
+        "description": "Are you passionate about sales and marketing? Do you have a knack for driving revenue and creating impactful marketing campaigns? DeCarbonic is looking for a dynamic sales and marketing intern to join our team! As a sales and marketing intern, you will have the opportunity to learn and grow in a fast-paced environment.Selected Intern\u2019s Day-to-day Responsibilities IncludeAssisting the sales team with lead generation and prospectingSupporting sales management in analyzing sales data and trendsCollaborating with the marketing team to create and implement marketing campaignsDeveloping and executing marketing strategies to drive brand awareness and customer engagementConducting market research to identify new opportunities for growthAssisting in the coordination of sales and marketing eventsProviding administrative support to the sales and marketing departmentsIf you are a motivated self-starter with a passion for sales and marketing, we want to hear from you! Join us at DeCarbonic and take your skills to the next level. Apply now!About Company: DeCarbonic is a brand of Noon IT Solutions India Private Limited and a leading provider of carbon credit services. Our mission is to help companies and individuals reduce their carbon footprint and mitigate the impact of climate change. We offer a range of services, including carbon credit procurement, project development, and certification. Our team of experts has extensive experience in the carbon credits industry, and we work closely with our clients to understand their specific needs and goals.At DeCarbonic, we believe in the power of sustainability and the role that businesses and individuals can play in creating a greener future. We are committed to providing high-quality, affordable carbon credits and helping our clients reduce their environmental impact. Whether you're a company looking to offset your emissions or an individual looking to reduce your carbon footprint, DeCarbonic has the expertise and resources to help you achieve your goals.",
+        "date_posted": "1 week ago",
         "entities_in_job": [
-            {
-                "text": "Hubballi",
-                "label": "GPE"
-            },
             {
                 "text": "Panaji",
                 "label": "PERSON"
             },
             {
-                "text": "Dharwad",
+                "text": "Hubballi",
                 "label": "PERSON"
             },
             {
-                "text": "3 days ago",
+                "text": "Panaji, Goa",
+                "label": "PERSON"
+            },
+            {
+                "text": "India",
+                "label": "GPE"
+            },
+            {
+                "text": "DeCarbonic",
+                "label": "PERSON"
+            },
+            {
+                "text": "DeCarbonic",
+                "label": "ORG"
+            },
+            {
+                "text": "DeCarbonic",
+                "label": "ORG"
+            },
+            {
+                "text": "Noon IT Solutions India Private Limited",
+                "label": "ORG"
+            },
+            {
+                "text": "DeCarbonic",
+                "label": "ORG"
+            },
+            {
+                "text": "DeCarbonic",
+                "label": "ORG"
+            },
+            {
+                "text": "1 week ago",
                 "label": "DATE"
             }
         ],
-        "matched_profile_entities": []
+        "matched_profile_entities": [
+            {
+                "text": "India",
+                "label": "GPE"
+            }
+        ]
+    },
+    {
+        "title": "Marketing Intern",
+        "company": "SUN360",
+        "location": "Marmagao, Goa, India",
+        "link": "https://in.linkedin.com/jobs/view/marketing-intern-at-sun360-4359124625?position=2&pageNum=0&refId=hmGcnGzECVis628Kg6upYA%3D%3D&trackingId=GfzyKC%2BZgR3QBDCQe3Nc2A%3D%3D",
+        "description": "AtSUN360, we\u2019re more than just a solar company\u2014we\u2019re building a sustainable future. Since 2013, we\u2019ve been driving solar adoption across residential, commercial, and industrial sectors. With 15+ MW installations across Goa, we\u2019re on a mission to make clean energy accessible, impactful, and innovative.Join Our TeamIf you\u2019re creative, curious, and passionate about marketing, this is your chance to learn, grow, and make a real difference. At SUN360, your ideas are heard, your creativity is encouraged, and your work contributes to a greener planet.Responsibilities:Create engaging content for social media, blogs, newsletters, reels, and digital platformsAssist in designing marketing materials (brochures, posters, presentations, videos)Support planning and execution of online & offline marketing campaignsHelp organize events, promotions, and brand activitiesMaintain marketing databases and assist with CRM updatesRequirementsGraduates fromBA / BCom / BBA / BMSor related fieldsStrong interest inMarketing, Digital Media, or Content CreationCreative mindset with basic design skills or familiarity with design toolsGood understanding of social media and digital marketing trendsStrong written and verbal communication skillsEager to learn and comfortable working in a fast-paced team environmentBenefitsStipend + Internship Completion CertificateHands-on learning in digital marketing, branding & content creationPortfolio-building opportunities with real projectsCreative freedom to bring your ideas to lifeOne-on-one mentorship from experienced professionalsExposure to the fast-growing clean energy & sustainability sector.",
+        "date_posted": "1 week ago",
+        "entities_in_job": [
+            {
+                "text": "SUN360 Marmagao",
+                "label": "PERSON"
+            },
+            {
+                "text": "India",
+                "label": "GPE"
+            },
+            {
+                "text": "2013",
+                "label": "DATE"
+            },
+            {
+                "text": "15",
+                "label": "CARDINAL"
+            },
+            {
+                "text": "Goa",
+                "label": "PERSON"
+            },
+            {
+                "text": "SUN360",
+                "label": "ORG"
+            },
+            {
+                "text": "videos)Support",
+                "label": "ORG"
+            },
+            {
+                "text": "CRM",
+                "label": "PRODUCT"
+            },
+            {
+                "text": "fromBA / BCom / BBA /",
+                "label": "ORG"
+            },
+            {
+                "text": "Digital Media",
+                "label": "ORG"
+            },
+            {
+                "text": "Content CreationCreative",
+                "label": "ORG"
+            },
+            {
+                "text": "1 week ago",
+                "label": "DATE"
+            }
+        ],
+        "matched_profile_entities": [
+            {
+                "text": "India",
+                "label": "GPE"
+            },
+            {
+                "text": "Goa",
+                "label": "PERSON"
+            },
+            {
+                "text": "CRM",
+                "label": "PRODUCT"
+            }
+        ]
     },
     {
         "title": "Accounts Intern",
         "company": "SUN360",
-        "location": "Not Specified",
-        "link": "https://in.linkedin.com/jobs/view/accounts-intern-at-sun360-4355195121?position=2&pageNum=0&refId=ZxlQ5URIsGU1fqkjSaYq3w%3D%3D&trackingId=y4TjflId7E58TQnIU%2BbrMg%3D%3D",
-        "description": "",
-        "date_posted": "3 days ago",
+        "location": "Marmagao, Goa, India",
+        "link": "https://in.linkedin.com/jobs/view/accounts-intern-at-sun360-4355195121?position=3&pageNum=0&refId=hmGcnGzECVis628Kg6upYA%3D%3D&trackingId=3iaVQe7dsrZtjWLbuLHAPQ%3D%3D",
+        "description": "About Us:At Sun360, we\u2019re leading Goa\u2019s solar energy revolution, driving the mass adoption of renewable energy across residential, commercial, and industrial sectors. Since 2013, we\u2019ve delivered over 15 MW of solar installations and played a key role in shaping Goa\u2019s Solar Policy.We\u2019re on a mission to make clean energy accessible, sustainable, and transformative for communities while offering cutting-edge technology and seamless services from consultation to installation and maintenance.Roles & ResponsibilitiesReceiving materials and verifying related billingsReconciliation support for materials and billsPhysical document maintenance and systematic updating in the systemTracking of materials and regular follow-upsFollowing up on pending paymentsHandling day-to-day office administration activitiesRequirementsMinimum qualification: B.Com, M.Com (Freshers can apply)Basic knowledge of MS Excel (including formulasBasic understanding of office administration workStrong attention to details and willingness to learnGood communicaion and organizational SkillsBenefitsHands on exposure to accounts & office admin workMS Excel and system-based skill developmentCareer growth based on performanceGood starting opportunity for freshersInternship completion certificateFriendly and supportive work environment",
+        "date_posted": "6 days ago",
         "entities_in_job": [
             {
-                "text": "3 days ago",
+                "text": "SUN360 Marmagao",
+                "label": "PERSON"
+            },
+            {
+                "text": "India",
+                "label": "GPE"
+            },
+            {
+                "text": "Us",
+                "label": "GPE"
+            },
+            {
+                "text": "Goa",
+                "label": "PERSON"
+            },
+            {
+                "text": "2013",
+                "label": "DATE"
+            },
+            {
+                "text": "15",
+                "label": "CARDINAL"
+            },
+            {
+                "text": "MW",
+                "label": "ORG"
+            },
+            {
+                "text": "Goa\u2019s Solar Policy",
+                "label": "ORG"
+            },
+            {
+                "text": "Roles & ResponsibilitiesReceiving",
+                "label": "ORG"
+            },
+            {
+                "text": "B.Com, M.Com (Freshers",
+                "label": "ORG"
+            },
+            {
+                "text": "MS Excel",
+                "label": "ORG"
+            },
+            {
+                "text": "SkillsBenefitsHands",
+                "label": "PRODUCT"
+            },
+            {
+                "text": "workMS Excel",
+                "label": "ORG"
+            },
+            {
+                "text": "6 days ago",
+                "label": "DATE"
+            }
+        ],
+        "matched_profile_entities": [
+            {
+                "text": "India",
+                "label": "GPE"
+            },
+            {
+                "text": "Goa",
+                "label": "PERSON"
+            }
+        ]
+    },
+    {
+        "title": "Intern \u2013 Content Writer (Technical) - Goa",
+        "company": "SJ Innovation LLC",
+        "location": "Goa, India",
+        "link": "https://in.linkedin.com/jobs/view/intern-%E2%80%93-content-writer-technical-goa-at-sj-innovation-llc-4340582309?position=4&pageNum=0&refId=hmGcnGzECVis628Kg6upYA%3D%3D&trackingId=%2F9IAE8XWCTOctflbS2DHbQ%3D%3D",
+        "description": "We\u2019re looking for a smart Intern who has a passion for technology, IT, and emerging trends in AI. This role involves creating engaging written content that bridges the gap between complex technical ideas and easy-to-understand communication.You will contribute to blogs, website articles, case studies, and social media content that highlight innovation in software, IT, and digital transformation.Key Responsibilities:Research and write blogs, articles, and guides on topics like software development, AI tools, DevOps, cloud computing, and cybersecurity.Create short-form social media content (posts, captions, and updates) promoting technical blogs, company initiatives, and tech awareness.Convert complex technical input from engineers or teams into simple, engaging language.Use AI-assisted writing tools (ChatGPT, Jasper, Grammarly, etc.) for content ideation, refinement, and productivity.Assist in editing and proofreading content to ensure quality, clarity, and brand tone consistency.Support SEO strategies through keyword integration and optimized formatting.Collaborate with the marketing team to align content with ongoing campaigns and trends.Requirements:Pursuing or recently completed a Bachelor\u2019s in Computer Science, IT, EngineeringGood writing and research skills with attention to accuracy.Familiarity with AI-powered tools and interest in learning how to use them for content creation.Awareness of social media platforms and how technical content can be repurposed for engagement.Duration:4 MonthsImportant Information for CandidatesSJ Innovation does not ask for any payment at any stage of the recruitment process.We do not charge fees for job applications, interviews, offer letters, training, or onboarding.If you receive any suspicious call, message, or email claiming to represent SJI, please report it immediately to: job@sjinnovation.com",
+        "date_posted": "2 months ago",
+        "entities_in_job": [
+            {
+                "text": "India",
+                "label": "GPE"
+            },
+            {
+                "text": "Intern",
+                "label": "ORG"
+            },
+            {
+                "text": "AI",
+                "label": "GPE"
+            },
+            {
+                "text": "Key Responsibilities:Research",
+                "label": "ORG"
+            },
+            {
+                "text": "AI",
+                "label": "GPE"
+            },
+            {
+                "text": "DevOps",
+                "label": "ORG"
+            },
+            {
+                "text": "Convert",
+                "label": "PERSON"
+            },
+            {
+                "text": "AI",
+                "label": "GPE"
+            },
+            {
+                "text": "Jasper",
+                "label": "GPE"
+            },
+            {
+                "text": "Bachelor\u2019s",
+                "label": "ORG"
+            },
+            {
+                "text": "AI",
+                "label": "GPE"
+            },
+            {
+                "text": "MonthsImportant Information",
+                "label": "ORG"
+            },
+            {
+                "text": "SJI",
+                "label": "ORG"
+            },
+            {
+                "text": "2 months ago",
+                "label": "DATE"
+            }
+        ],
+        "matched_profile_entities": [
+            {
+                "text": "India",
+                "label": "GPE"
+            }
+        ]
+    },
+    {
+        "title": "Inside Sales Intern",
+        "company": "SUN360",
+        "location": "Marmagao, Goa, India",
+        "link": "https://in.linkedin.com/jobs/view/inside-sales-intern-at-sun360-4342941880?position=5&pageNum=0&refId=hmGcnGzECVis628Kg6upYA%3D%3D&trackingId=iQ9pGjf32XzNEWAOHXaSng%3D%3D",
+        "description": "Make outbound calls to prospective customers from our leads database.Understand client requirements & explain solar solutions and Sun360\u2019s offerings over the phone.Schedule follow-up calls or arrange site visits for the field sales/technical team.Maintain daily call logs and update CRM systems with lead status.Answer customer queries and build positive customer relationships.Assist in email communication and sales coordination tasks.",
+        "date_posted": "1 month ago",
+        "entities_in_job": [
+            {
+                "text": "SUN360 Marmagao",
+                "label": "PERSON"
+            },
+            {
+                "text": "India",
+                "label": "GPE"
+            },
+            {
+                "text": "daily",
+                "label": "DATE"
+            },
+            {
+                "text": "CRM",
+                "label": "PRODUCT"
+            },
+            {
+                "text": "1 month ago",
+                "label": "DATE"
+            }
+        ],
+        "matched_profile_entities": [
+            {
+                "text": "India",
+                "label": "GPE"
+            },
+            {
+                "text": "CRM",
+                "label": "PRODUCT"
+            }
+        ]
+    },
+    {
+        "title": "Tour Guide South India (English/Spanish) Internship in Bangalore, Puduchery, South Goa, North Goa, Chennai, Coimbatore, Mysuru, Panjim, Thiruvananthapuram, Alappuzha, Hyderabad, Kochi",
+        "company": "Nine Tours",
+        "location": "South Goa, Goa, India",
+        "link": "https://in.linkedin.com/jobs/view/tour-guide-south-india-english-spanish-internship-in-bangalore-puduchery-south-goa-north-goa-chennai-coimbatore-mysuru-panjim-thiruvananthapuram-alappuzha-hyderabad-kochi-at-nine-tours-4365164889?position=6&pageNum=0&refId=hmGcnGzECVis628Kg6upYA%3D%3D&trackingId=b8kC3gToevDoqNhMJyynCg%3D%3D",
+        "description": "Selected Intern's Day-to-day Responsibilities IncludeLeading groups on walking tours, day trips, or other types of tours, depending on the specific needs.Being aware of the area's history, landmarks, and different points of interest and communicating this information effectively to your tour groups.Providing a good experience to visitors to ensure that your tour group feels welcome and comfortable throughout their tour.Assisting with operational tasks related to tour operations.Being active in the group and being available for tours.Maintaining tour reports and updating tour itineraries.Assisting with marketing efforts.About Company: Nine Tours (Ritej Travel Tech Private Limited) is a tour operator company specializing in guided tours for inbound tourists. We offer a variety of experiences, including walking tours, full-day trips, and 48-hour city tours. Currently operating in 10 cities across India, we aim to expand our presence to over 25 cities by the end of the year. Our core focus is to provide travelers with immersive experiences by actively and meaningfully engaging them with the culture, history, people, food, and environment of each destination. Our goal is to make tours not just about visiting a place, but about truly connecting with it in a fun and informative way.",
+        "date_posted": "7 hours ago",
+        "entities_in_job": [
+            {
+                "text": "Tour Guide South India",
+                "label": "ORG"
+            },
+            {
+                "text": "English",
+                "label": "LANGUAGE"
+            },
+            {
+                "text": "Bangalore",
+                "label": "PERSON"
+            },
+            {
+                "text": "Puduchery",
+                "label": "PRODUCT"
+            },
+            {
+                "text": "South Goa",
+                "label": "GPE"
+            },
+            {
+                "text": "North Goa",
+                "label": "LOC"
+            },
+            {
+                "text": "Coimbatore",
+                "label": "ORG"
+            },
+            {
+                "text": "Mysuru",
+                "label": "GPE"
+            },
+            {
+                "text": "Thiruvananthapuram",
+                "label": "ORG"
+            },
+            {
+                "text": "Alappuzha",
+                "label": "ORG"
+            },
+            {
+                "text": "Hyderabad",
+                "label": "ORG"
+            },
+            {
+                "text": "Kochi Nine Tours",
+                "label": "ORG"
+            },
+            {
+                "text": "About Company",
+                "label": "CARDINAL"
+            },
+            {
+                "text": "Nine Tours",
+                "label": "ORG"
+            },
+            {
+                "text": "Ritej Travel Tech Private Limited",
+                "label": "ORG"
+            },
+            {
+                "text": "full-day",
+                "label": "DATE"
+            },
+            {
+                "text": "48-hour",
+                "label": "TIME"
+            },
+            {
+                "text": "10",
+                "label": "CARDINAL"
+            },
+            {
+                "text": "India",
+                "label": "GPE"
+            },
+            {
+                "text": "over 25",
+                "label": "CARDINAL"
+            },
+            {
+                "text": "the end of the year",
+                "label": "DATE"
+            },
+            {
+                "text": "7 hours ago",
+                "label": "TIME"
+            }
+        ],
+        "matched_profile_entities": [
+            {
+                "text": "India",
+                "label": "GPE"
+            }
+        ]
+    },
+    {
+        "title": "Tour Guide South India (English/Spanish) Internship in Bangalore, Puduchery, South Goa, North Goa, Chennai, Coimbatore, Mysuru, Panjim, Thiruvananthapuram, Alappuzha, Hyderabad, Kochi",
+        "company": "Nine Tours",
+        "location": "North Goa, Goa, India",
+        "link": "https://in.linkedin.com/jobs/view/tour-guide-south-india-english-spanish-internship-in-bangalore-puduchery-south-goa-north-goa-chennai-coimbatore-mysuru-panjim-thiruvananthapuram-alappuzha-hyderabad-kochi-at-nine-tours-4365175033?position=7&pageNum=0&refId=hmGcnGzECVis628Kg6upYA%3D%3D&trackingId=dS2Q2jaISzQBXR%2B68DCs%2FA%3D%3D",
+        "description": "Selected Intern's Day-to-day Responsibilities IncludeLeading groups on walking tours, day trips, or other types of tours, depending on the specific needs.Being aware of the area's history, landmarks, and different points of interest and communicating this information effectively to your tour groups.Providing a good experience to visitors to ensure that your tour group feels welcome and comfortable throughout their tour.Assisting with operational tasks related to tour operations.Being active in the group and being available for tours.Maintaining tour reports and updating tour itineraries.Assisting with marketing efforts.About Company: Nine Tours (Ritej Travel Tech Private Limited) is a tour operator company specializing in guided tours for inbound tourists. We offer a variety of experiences, including walking tours, full-day trips, and 48-hour city tours. Currently operating in 10 cities across India, we aim to expand our presence to over 25 cities by the end of the year. Our core focus is to provide travelers with immersive experiences by actively and meaningfully engaging them with the culture, history, people, food, and environment of each destination. Our goal is to make tours not just about visiting a place, but about truly connecting with it in a fun and informative way.",
+        "date_posted": "7 hours ago",
+        "entities_in_job": [
+            {
+                "text": "Tour Guide South India",
+                "label": "ORG"
+            },
+            {
+                "text": "English",
+                "label": "LANGUAGE"
+            },
+            {
+                "text": "Bangalore",
+                "label": "PERSON"
+            },
+            {
+                "text": "Puduchery",
+                "label": "PRODUCT"
+            },
+            {
+                "text": "South Goa",
+                "label": "GPE"
+            },
+            {
+                "text": "North Goa",
+                "label": "LOC"
+            },
+            {
+                "text": "Coimbatore",
+                "label": "ORG"
+            },
+            {
+                "text": "Mysuru",
+                "label": "GPE"
+            },
+            {
+                "text": "Thiruvananthapuram",
+                "label": "ORG"
+            },
+            {
+                "text": "Alappuzha",
+                "label": "ORG"
+            },
+            {
+                "text": "Hyderabad",
+                "label": "ORG"
+            },
+            {
+                "text": "Kochi Nine Tours",
+                "label": "ORG"
+            },
+            {
+                "text": "About Company",
+                "label": "CARDINAL"
+            },
+            {
+                "text": "Nine Tours",
+                "label": "ORG"
+            },
+            {
+                "text": "Ritej Travel Tech Private Limited",
+                "label": "ORG"
+            },
+            {
+                "text": "full-day",
+                "label": "DATE"
+            },
+            {
+                "text": "48-hour",
+                "label": "TIME"
+            },
+            {
+                "text": "10",
+                "label": "CARDINAL"
+            },
+            {
+                "text": "India",
+                "label": "GPE"
+            },
+            {
+                "text": "over 25",
+                "label": "CARDINAL"
+            },
+            {
+                "text": "the end of the year",
+                "label": "DATE"
+            },
+            {
+                "text": "7 hours ago",
+                "label": "TIME"
+            }
+        ],
+        "matched_profile_entities": [
+            {
+                "text": "India",
+                "label": "GPE"
+            }
+        ]
+    },
+    {
+        "title": "Content Writer Intern",
+        "company": "Cidroy Infotech",
+        "location": "Marmagao, Goa, India",
+        "link": "https://in.linkedin.com/jobs/view/content-writer-intern-at-cidroy-infotech-4353009627?position=8&pageNum=0&refId=hmGcnGzECVis628Kg6upYA%3D%3D&trackingId=ZqkgoecKzY9hkicP22ytnw%3D%3D",
+        "description": "Content Writer InternIT | Tech Content | Remote Internship | 3\u20136 Months | \u20b95,000/monthAbout Cidroy InfotechCidroy Infotech Pvt. Ltd. is a fast-growing technology company building scalable digital products and solutions. We believe good content is not just about writing, it\u2019s about storytelling that simplifies technology and builds trust.Role OverviewWe are looking for a Content Writer Intern who can convert tech concepts, our startup journey, and product storiesinto clear, engaging content. You\u2019ll work closely with the marketing and leadership teams and contribute to content that actually gets published.Key ResponsibilitiesWrite blogs, website content, LinkedIn posts, and case studiesTranslate IT & tech concepts into simple, engaging narrativesSupport storytelling around products, clients, and startup lifeResearch trends in tech, SaaS, and startupsEdit and proofread content for clarity and consistencyWhat We\u2019re Looking ForStrong written English and a storytelling mindsetInterest in IT, technology, and startup ecosystemsAbility to research and structure content independentlyBasic SEO knowledge is a plus, not mandatoryWhy Join CidroyReal startup exposure (no dummy tasks)Ownership of content with visible impactMentorship and learning opportunitiesCertificate + potential full-time opportunity based on performanceTo apply, please fill out the Google Form below. Shortlisting will be based on responses submitted through the form.https://forms.gle/jwpAugjrkDzrvxys7",
+        "date_posted": "6 days ago",
+        "entities_in_job": [
+            {
+                "text": "Content Writer Intern",
+                "label": "ORG"
+            },
+            {
+                "text": "Months",
+                "label": "DATE"
+            },
+            {
+                "text": "Role OverviewWe",
+                "label": "PERSON"
+            },
+            {
+                "text": "Key ResponsibilitiesWrite",
+                "label": "PERSON"
+            },
+            {
+                "text": "LinkedIn",
+                "label": "ORG"
+            },
+            {
+                "text": "English",
+                "label": "LANGUAGE"
+            },
+            {
+                "text": "6 days ago",
                 "label": "DATE"
             }
         ],
@@ -44,10 +569,10 @@
     {
         "title": "Reservation & CRM Agent Internship in Noida, North Goa (Hybrid)",
         "company": "Stay To Unwind Pvt Ltd",
-        "location": "Not Specified",
-        "link": "https://in.linkedin.com/jobs/view/reservation-crm-agent-internship-in-noida-north-goa-hybrid-at-stay-to-unwind-pvt-ltd-4361507200?position=3&pageNum=0&refId=ZxlQ5URIsGU1fqkjSaYq3w%3D%3D&trackingId=6C1Spz36DSsN9wGQBpFRow%3D%3D",
-        "description": "",
-        "date_posted": "4 days ago",
+        "location": "North Goa, Goa, India",
+        "link": "https://in.linkedin.com/jobs/view/reservation-crm-agent-internship-in-noida-north-goa-hybrid-at-stay-to-unwind-pvt-ltd-4361507200?position=9&pageNum=0&refId=hmGcnGzECVis628Kg6upYA%3D%3D&trackingId=YGZphnBUm3QI4R4Ug8MsuQ%3D%3D",
+        "description": "Selected Intern\u2019s Day-to-day Responsibilities IncludeHandle booking enquiries via Airbnb, OTAs, WhatsApp, calls, and emailsManage reservations, modifications, cancellations, and refundsUpdate availability, pricing, and minimum stay requirementsEnsure accurate guest details and booking recordsCoordinate with operations, housekeeping, and on-ground teamsShare pre-arrival, check-in, house rules, and check-out instructionsHandle guest concerns, complaints, and service recovery professionallyBuild repeat guest relationships and loyaltyUpsell add-on services where applicablePrepare daily/weekly reservation and occupancy reportsTrack enquiry conversion and response timeEnsure SOP compliance across guest communicationMaintenance updates + ChallengesMaintain guest database and interaction historySend pre-arrival, in-stay, and post-stay messagesCollect feedback and encourage reviews post check-outAbout Company: Stay to Unwind Private Limited is a hospitality management and consulting company founded by professionals with global experience across brands like Marriott, Hyatt, Taj, ITC, Oberoi, Carlson, and American Express. We specialize in property management, sales strategy, hospitality operations, logistics, vendor management, and pre-opening projects. Our portfolio includes premium homestays, villas, hotels, and boutique stays across India.For property owners, we offer end-to-end management which involves Sales and Marketing with brand development solutions. Blending international standards with local cultural insights, we craft personalised guest experiences and build sustainable, value-driven partnerships across the evolving landscape of Indian hospitality.",
+        "date_posted": "1 week ago",
         "entities_in_job": [
             {
                 "text": "Reservation & CRM",
@@ -62,123 +587,123 @@
                 "label": "LOC"
             },
             {
-                "text": "4 days ago",
-                "label": "DATE"
-            }
-        ],
-        "matched_profile_entities": []
-    },
-    {
-        "title": "Intern \u2013 Content Writer (Technical) - Goa",
-        "company": "SJ Innovation LLC",
-        "location": "Not Specified",
-        "link": "https://in.linkedin.com/jobs/view/intern-%E2%80%93-content-writer-technical-goa-at-sj-innovation-llc-4340582309?position=4&pageNum=0&refId=ZxlQ5URIsGU1fqkjSaYq3w%3D%3D&trackingId=60RwujsNRuRCpE03cJ0M0g%3D%3D",
-        "description": "",
-        "date_posted": "2 months ago",
-        "entities_in_job": [
+                "text": "WhatsApp",
+                "label": "ORG"
+            },
             {
-                "text": "2 months ago",
+                "text": "daily",
+                "label": "DATE"
+            },
+            {
+                "text": "weekly",
+                "label": "DATE"
+            },
+            {
+                "text": "SOP",
+                "label": "ORG"
+            },
+            {
+                "text": "Unwind Private Limited",
+                "label": "ORG"
+            },
+            {
+                "text": "Marriott",
+                "label": "GPE"
+            },
+            {
+                "text": "Hyatt",
+                "label": "GPE"
+            },
+            {
+                "text": "Taj",
+                "label": "GPE"
+            },
+            {
+                "text": "ITC",
+                "label": "ORG"
+            },
+            {
+                "text": "Oberoi",
+                "label": "GPE"
+            },
+            {
+                "text": "Carlson",
+                "label": "PERSON"
+            },
+            {
+                "text": "American Express",
+                "label": "ORG"
+            },
+            {
+                "text": "India",
+                "label": "GPE"
+            },
+            {
+                "text": "Indian",
+                "label": "NORP"
+            },
+            {
+                "text": "1 week ago",
                 "label": "DATE"
             }
         ],
-        "matched_profile_entities": []
+        "matched_profile_entities": [
+            {
+                "text": "India",
+                "label": "GPE"
+            }
+        ]
     },
     {
         "title": "Video Editing/Making Internship in Moira",
         "company": "Maker's Asylum",
-        "location": "Not Specified",
-        "link": "https://in.linkedin.com/jobs/view/video-editing-making-internship-in-moira-at-maker-s-asylum-4358166543?position=5&pageNum=0&refId=ZxlQ5URIsGU1fqkjSaYq3w%3D%3D&trackingId=nBkXDGu%2BAQJHxq8VJR3ziQ%3D%3D",
-        "description": "",
-        "date_posted": "1 week ago",
+        "location": "Bardez, Goa, India",
+        "link": "https://in.linkedin.com/jobs/view/video-editing-making-internship-in-moira-at-maker-s-asylum-4358166543?position=10&pageNum=0&refId=hmGcnGzECVis628Kg6upYA%3D%3D&trackingId=oGDylEYqPp2Y3TEW8teRpg%3D%3D",
+        "description": "Selected Intern's Day-to-day Responsibilities IncludeSetting up the studio space for shooting educational content, which includes managing and setting up the cameras, mics, lights, computers, shooting space (foreground and background) and peripherals (like batteries, cables, etc).Creating and updating design guidelines consistent with our brand guidelines, for pro-production/editing.Maintaining the log sheet, backing up video files in the correct drives.Editing the shot videos, preferably using DaVinci Resolve (free version).Implementing process improvements for making content creation efficient over time.Note: Accommodation can be provided along with the mentioned stipend.About Company: Maker's Asylum is a community of MakerSpace based in Goa, Mumbai, and Delhi that allows collaborative ideation. It brings together interdisciplinary activities covering science, technology, engineering, art, and math (STEAM) to foster a culture of innovation, exploration, and learning. For hardware entrepreneurs, it's easy to access tools, technology, and talent so they can prototype their ideas. For problem-solvers, it's a space to exchange ideas with other like-minded and unlike-minded folks who share your passion.",
+        "date_posted": "2 weeks ago",
         "entities_in_job": [
             {
                 "text": "Moira Maker's",
                 "label": "ORG"
             },
             {
-                "text": "1 week ago",
-                "label": "DATE"
-            }
-        ],
-        "matched_profile_entities": []
-    },
-    {
-        "title": "Inside Sales Intern",
-        "company": "SUN360",
-        "location": "Not Specified",
-        "link": "https://in.linkedin.com/jobs/view/inside-sales-intern-at-sun360-4342941880?position=6&pageNum=0&refId=ZxlQ5URIsGU1fqkjSaYq3w%3D%3D&trackingId=ZFGFtQKxS1zOzVePMGZEbQ%3D%3D",
-        "description": "",
-        "date_posted": "1 month ago",
-        "entities_in_job": [
+                "text": "Asylum Bardez, Goa",
+                "label": "PERSON"
+            },
             {
-                "text": "1 month ago",
-                "label": "DATE"
-            }
-        ],
-        "matched_profile_entities": []
-    },
-    {
-        "title": "Marketing Intern",
-        "company": "SUN360",
-        "location": "Not Specified",
-        "link": "https://in.linkedin.com/jobs/view/marketing-intern-at-sun360-4359124625?position=7&pageNum=0&refId=ZxlQ5URIsGU1fqkjSaYq3w%3D%3D&trackingId=PQF3j6FhCnzRLKB8JbKP7w%3D%3D",
-        "description": "",
-        "date_posted": "3 days ago",
-        "entities_in_job": [
-            {
-                "text": "3 days ago",
-                "label": "DATE"
-            }
-        ],
-        "matched_profile_entities": []
-    },
-    {
-        "title": "Video Editing/Making Internship in Margao",
-        "company": "Haztech",
-        "location": "Not Specified",
-        "link": "https://in.linkedin.com/jobs/view/video-editing-making-internship-in-margao-at-haztech-4358295325?position=8&pageNum=0&refId=ZxlQ5URIsGU1fqkjSaYq3w%3D%3D&trackingId=nH7Ag4GQJOjiAg1KJA9IcA%3D%3D",
-        "description": "",
-        "date_posted": "1 week ago",
-        "entities_in_job": [
-            {
-                "text": "1 week ago",
-                "label": "DATE"
-            }
-        ],
-        "matched_profile_entities": []
-    },
-    {
-        "title": "Content Writer Intern",
-        "company": "Cidroy Infotech",
-        "location": "Not Specified",
-        "link": "https://in.linkedin.com/jobs/view/content-writer-intern-at-cidroy-infotech-4353009627?position=9&pageNum=0&refId=ZxlQ5URIsGU1fqkjSaYq3w%3D%3D&trackingId=v9XJbGMreO6LtWb9mhqrnQ%3D%3D",
-        "description": "",
-        "date_posted": "3 days ago",
-        "entities_in_job": [
-            {
-                "text": "Content Writer Intern",
+                "text": "DaVinci Resolve",
                 "label": "ORG"
             },
             {
-                "text": "3 days ago",
-                "label": "DATE"
-            }
-        ],
-        "matched_profile_entities": []
-    },
-    {
-        "title": "Interior Designer",
-        "company": "Livspace",
-        "location": "Not Specified",
-        "link": "https://in.linkedin.com/jobs/view/interior-designer-at-livspace-4323659074?position=10&pageNum=0&refId=ZxlQ5URIsGU1fqkjSaYq3w%3D%3D&trackingId=9k7emo4rHtCcDlqkz%2FNq%2BA%3D%3D",
-        "description": "",
-        "date_posted": "1 month ago",
-        "entities_in_job": [
+                "text": "Asylum",
+                "label": "ORG"
+            },
             {
-                "text": "1 month ago",
+                "text": "MakerSpace",
+                "label": "ORG"
+            },
+            {
+                "text": "Goa",
+                "label": "GPE"
+            },
+            {
+                "text": "Mumbai",
+                "label": "GPE"
+            },
+            {
+                "text": "Delhi",
+                "label": "GPE"
+            },
+            {
+                "text": "2 weeks ago",
                 "label": "DATE"
             }
         ],
-        "matched_profile_entities": []
+        "matched_profile_entities": [
+            {
+                "text": "Goa",
+                "label": "GPE"
+            }
+        ]
     }
 ]
