@@ -14,7 +14,10 @@ DATA_DIR.mkdir(exist_ok=True)
 COOKIE_FILE = "cookies.json"
 
 def ensure_linkedin_cookies():
+    if os.path.exists(COOKIE_FILE):
+        return
     with sync_playwright() as p:
+
         browser = p.chromium.launch(headless=False)
         context = browser.new_context()
         page = context.new_page()
@@ -52,3 +55,31 @@ def get_profile(linkedin_url: str = Query(...)):
 
     with open(file_path, "r") as f:
         return json.load(f)
+
+
+
+DATA_DIR = "data"  # Path to your data folder
+
+@router.get("/profile/skills")
+def get_profile_skills(linkedin_url: str = Query(...)):
+    # Extract username from LinkedIn URL
+    username = linkedin_url.rstrip("/").split("/")[-1]
+    file_path = os.path.join(DATA_DIR, f"{username}_profile.json")
+    print(file_path)
+
+    if not os.path.exists(file_path):
+        print("No skills data found.")
+        return {"skills": []}
+
+    skills = []
+    with open(file_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+        # If JSON directly contains fields like "name", "about_raw", "experience_raw"
+        skills.append({
+            "name": data.get("name", ""),
+            "about_raw": data.get("about_raw", ""),
+            "experience_raw": data.get("experience_raw", "")
+        })
+
+    print(f"Extracted {len(skills)} skill entries.")
+    return {"skills": skills}

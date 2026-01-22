@@ -18,6 +18,7 @@ export default function Dashboard() {
   // Check login
   useEffect(() => {
     const logged = localStorage.getItem('loggedIn');
+    const linkedinUrl = localStorage.getItem('linkedinUrl');
     if (!logged) {
       router.push('auth/login');
     } else {
@@ -31,10 +32,10 @@ export default function Dashboard() {
 
 async function fetchProfile() {
   try {
-    const linkedinUrl = "https://www.linkedin.com/in/sample-username/";
+    const linkedinUrl = localStorage.getItem('linkedinUrl') || '';
 
     const res = await fetch(
-      `http://localhost:8000/profile?linkedin_url=${encodeURIComponent(linkedinUrl)}`,
+      `http://localhost:8000/profile/skills?linkedin_url=${encodeURIComponent(linkedinUrl)}`,
       {
         method: 'GET',
         headers: { Accept: 'application/json' },
@@ -48,6 +49,7 @@ async function fetchProfile() {
 
     const data = await res.json();
     setProfileData(data);
+    console.log("Fetched profile data:", data);
   } catch (err: any) {
     setError(err.message);
   } finally {
