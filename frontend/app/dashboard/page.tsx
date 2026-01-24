@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import JobSearch from '../pages/JobSearch/page';
+import JobSearch from './JobSearch/page';
 import { ResumeAnalyzer } from '../components/ResumeAnalyzer';
 import InterviewCoach from '../pages/InterviewCoach/page';
 import SkillGraph from '../components/SkillGraph';

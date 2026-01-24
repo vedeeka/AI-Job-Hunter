@@ -7,22 +7,28 @@ import pandas as pd
 import os
 from backend.app.api.endpoints import pipeline
 from backend.app.api.endpoints import profile
-
+from backend.app.api.endpoints.map_email import router as map_email_router
 
 app = FastAPI(title="AI Job Hunter API", version="1.0")
 
 
+origins = [
+    "http://localhost:3000",     # Next.js default
+    "http://127.0.0.1:3000",     # Alternative localhost
+    "http://localhost:8000", 
+    "http://localhost:8000", 
+]
+
 app.add_middleware(
     CORSMiddleware,
-   
-    allow_origins=["http://localhost:3000"],
-    allow_credentials=True,
+    allow_origins=origins,       # 👈 Set specific origins here
+    allow_credentials=True,      # This can stay True now
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 app.include_router(pipeline.router)
 app.include_router(profile.router)
+app.include_router(map_email_router)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "models/salary_model_structured.pkl")
 

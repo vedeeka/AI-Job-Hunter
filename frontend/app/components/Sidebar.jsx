@@ -10,20 +10,22 @@ import {
   Network, 
   Settings, 
   LogOut, 
-  Bot 
+  Bot ,Mail
 } from 'lucide-react';
 
 const Sidebar = () => {
   const pathname = usePathname(); // Next.js hook to get current URL
 
   const menuItems = [
-    { name: 'Dashboard', icon: LayoutDashboard, path: '/' },
-    { name: 'Job Search', icon: Search, path: '/search' },
-    { name: 'Resume Doctor', icon: FileText, path: '/resume' },
-    { name: 'Interview Coach', icon: MessageSquare, path: '/interview' },
-    { name: 'Career Graph', icon: Network, path: '/graph' },
+    { name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
+    { name: 'Job Search', icon: Search, path: '/dashboard/JobSearch' },
+    { name: 'Email Scraper', icon: Mail, path: '/dashboard/email_section' },
+    { name: 'Resume Doctor', icon: FileText, path: '/dashboard/resume' },
+    { name: 'Interview Coach', icon: MessageSquare, path: '/dashboard/interview' },
+    { name: 'Career Graph', icon: Network, path: '/dashboard/graph' },
   ];
 
+  
   return (
     <aside className="fixed top-0 left-0 z-40 h-screen w-64 bg-white border-r border-gray-200 flex flex-col transition-transform">
       
