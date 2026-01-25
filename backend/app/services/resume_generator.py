@@ -10,7 +10,7 @@ import google.generativeai as genai
 api_key = os.getenv("GEMINI_API_KEY") 
 if not api_key:
     # Fallback for testing (REMOVE before sharing)
-    api_key = "AIzaSyAt90h4UkN7tuj95HGeFOjaNdS3eRb5nk4"
+    api_key = "AIzaSyCaYlNtnX706ua-ASEGuK2d9_P6qQoq0Zg"
 
 genai.configure(api_key=api_key)
 
