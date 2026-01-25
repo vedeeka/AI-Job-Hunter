@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: 'Helvetica', sans-serif; font-size: 12px; line-height: 1.4; }
+        .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 20px; }
+        .name { font-size: 24px; font-weight: bold; text-transform: uppercase; }
+        .section { margin-bottom: 15px; }
+        .section-title { font-size: 14px; font-weight: bold; text-transform: uppercase; border-bottom: 1px solid #ccc; margin-bottom: 5px; }
+        ul { margin: 0; padding-left: 20px; }
+        .flex-row { display: flex; justify-content: space-between; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="name">{{ resume.personal_info.name }}</div>
+        <div>{{ resume.personal_info.email }} | {{ resume.personal_info.phone }} | {{ resume.personal_info.linkedin }}</div>
+    </div>
+
+    <!-- DYNAMIC SUMMARY (AI writes this) -->
+    <div class="section">
+        <div class="section-title">Professional Summary</div>
+        <p>{{ generated_summary }}</p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Technical Skills</div>
+        <p><strong>Languages:</strong> {{ resume.skills | join(', ') }}</p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Experience</div>
+        {% for job in resume.experience %}
+        <div class="mb-2">
+            <div class="flex-row">
+                <span>{{ job.role }}</span>
+                <span>{{ job.company }}</span>
+            </div>
+            <ul>
+                {% for point in job.points %}
+                <li>{{ point }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

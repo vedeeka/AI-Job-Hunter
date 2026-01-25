@@ -1,0 +1,27 @@
+{
+  "personal_info": {
+    "name": "Vedeeka Parab",
+    "email": "vedeeka@example.com",
+    "phone": "+91 98765 43210",
+    "linkedin": "linkedin.com/in/vedeeka"
+  },
+  "summary": "Aspiring AI Engineer with experience in Python and ML.",
+  "skills": ["Python", "C++", "HTML"],
+  "experience": [
+    {
+      "role": "President",
+      "company": "AI Innovators Club",
+      "points": [
+        "Led a team of 50 students.",
+        "Organized 3 hackathons."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "AI Job Hunter",
+      "tech": "FastAPI, React",
+      "points": ["Built an automated scraper.", "Implemented ML models."]
+    }
+  ]
+}
