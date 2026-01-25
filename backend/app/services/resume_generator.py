@@ -4,73 +4,105 @@ from jinja2 import Environment, FileSystemLoader
 from weasyprint import HTML
 import google.generativeai as genai
 
-# SECURE YOUR KEY: Use environment variables instead of hardcoding
-# Run this in your terminal before running the script: export GEMINI_API_KEY="your_new_key_here"
-api_key = os.getenv("AIzaSyAt90h4UkN7tuj95HGeFOjaNdS3eRb5nk4") 
+# --- CONFIGURATION ---
+# 1. SET YOUR API KEY
+# Ideally use: export GEMINI_API_KEY="your_key"
+api_key = os.getenv("GEMINI_API_KEY") 
+if not api_key:
+    # Fallback for testing (REMOVE before sharing)
+    api_key = "AIzaSyAt90h4UkN7tuj95HGeFOjaNdS3eRb5nk4"
 
-genai.configure(api_key="AIzaSyAt90h4UkN7tuj95HGeFOjaNdS3eRb5nk4")
+genai.configure(api_key=api_key)
 
-# CORRECTED MODEL NAME
+# 2. SELECT MODEL
+# Using gemini-1.5-flash as it is fast and handles large context well.
+# You can try 'gemini-2.0-flash-exp' if available in your region.
 model = genai.GenerativeModel(
-    model_name="gemini-2.5-flash",  # Changed from 'gemini-1.5-flash-latest'
+    model_name="gemini-2.5-flash", 
     generation_config={
-        "temperature": 0.2,
+        "temperature": 0.4, # Slightly higher creativity for rewriting bullets
         "response_mime_type": "application/json"
     }
 )
 
 def tailor_resume(master_json_path, job_description_text, output_pdf_path):
+    # 1. Load Master Data
     with open(master_json_path, 'r') as f:
-        resume_data = json.load(f)
+        master_data = json.load(f)
 
-    print("🤖 AI is rewriting your resume...")
+    print("🤖 AI is reading your resume and the Job Description...")
+    print("🔄 Rewriting ALL bullet points and summaries...")
 
+    # 2. THE PROMPT (The most important part)
     prompt = f"""
-    You are an expert Resume Writer. 
-    Here is my resume JSON: {json.dumps(resume_data)}
+    You are an expert ATS Resume Writer and Career Coach.
     
-    Here is the Job Description:
-    "{job_description_text}"
+    INPUT DATA:
+    1. My Master Resume JSON: {json.dumps(master_data)}
+    2. Target Job Description: "{job_description_text}"
+
+    YOUR TASK:
+    Rewrite the ENTRIE resume content to target this specific job. 
     
-    Task 1: Rewrite the "summary" to include keywords from the Job Description. Keep it under 50 words.
-    Task 2: Select the top 5 skills from my resume that match this job.
+    GUIDELINES:
+    1. **Personal Info & Education:** Keep exactly as is. Do not change dates or degrees.
+    2. **Summary:** Write a powerful, keyword-rich professional summary (max 4 lines) tailored to the JD.
+    3. **Experience:** REWRITE the bullet points ('responsibilities'). 
+       - Use keywords from the Job Description.
+       - Use strong action verbs (Architected, Engineered, Optimized).
+       - Focus on achievements relevant to the JD.
+    4. **Projects:** REWRITE the 'description' bullet points to highlight the specific tech stack requested in the JD.
+    5. **Skills:** Reorder the 'technical_skills' so the most relevant matching skills appear first.
     
-    Return ONLY valid JSON:
-    {{
-        "new_summary": "...",
-        "highlighted_skills": ["Skill1", "Skill2"]
-    }}
+    OUTPUT FORMAT:
+    Return a SINGLE valid JSON object with the exact same structure as the input (personal_info, summary, education, experience, projects, technical_skills, achievements).
     """
 
-    response = model.generate_content(prompt)
+    # 3. Generate Content
+    try:
+        response = model.generate_content(prompt)
+        
+        # Clean response string
+        raw_text = response.text.strip()
+        if raw_text.startswith("```json"):
+            raw_text = raw_text[7:-3] # Remove markdown code blocks
+        elif raw_text.startswith("```"):
+            raw_text = raw_text[3:-3]
+
+        # Parse the NEW fully tailored resume
+        tailored_data = json.loads(raw_text)
+        
+        print("✅ AI has successfully rewritten the resume.")
+
+        # 4. Render HTML
+        # Point this to where your template file is located
+        env = Environment(loader=FileSystemLoader('.')) 
+        template = env.get_template('backend/app/templates/resume_template.html')
+
+        # Pass the WHOLE tailored_data object as 'resume'
+        html_content = template.render(resume=tailored_data)
+
+        # 5. Generate PDF
+        print("📄 Generating PDF...")
+        HTML(string=html_content).write_pdf(output_pdf_path)
+        print(f"🎉 Tailored Resume saved to: {output_pdf_path}")
+        return output_pdf_path
+
+    except Exception as e:
+        print(f"❌ Error occurred: {e}")
+        return None
+
+# --- EXECUTION ---
+if __name__ == "__main__":
     
-    # Clean up potential markdown formatting in response
-    raw_text = response.text.strip()
-    if raw_text.startswith("```"):
-        # Remove ```json and ``` lines
-        lines = raw_text.splitlines()
-        if lines[0].startswith("```"):
-            lines = lines[1:]
-        if lines[-1].startswith("```"):
-            lines = lines[:-1]
-        raw_text = "\n".join(lines)
+    # Define paths
+    json_file = "resume_data.json"
+    
+    # Paste the Job Description here
+    target_job_description = """
+    We are looking for a Python Backend Developer. 
+    Must have experience with AI integration, Flask/Django, and PostgreSQL.
+    Experience with Computer Vision (OpenCV) is a huge plus.
+    """
 
-    ai_response = json.loads(raw_text)
-
-    resume_data['skills'] = ai_response['highlighted_skills']
-    generated_summary = ai_response['new_summary']
-
-    # Ensure the templates directory exists
-    env = Environment(loader=FileSystemLoader('backend/app/templates/'))
-    template = env.get_template('resume_template.html')
-
-    html_content = template.render(
-        resume=resume_data,
-        generated_summary=generated_summary
-    )
-
-    print("📄 Generating PDF...")
-    HTML(string=html_content).write_pdf(output_pdf_path)
-    print(f"✅ Tailored Resume saved to: {output_pdf_path}")
-
-    return output_pdf_path
+    tailor_resume(json_file, target_job_description, "Vedeeka_Tailored_Resume.pdf")

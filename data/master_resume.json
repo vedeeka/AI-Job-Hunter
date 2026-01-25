@@ -1,27 +1,111 @@
 {
   "personal_info": {
     "name": "Vedeeka Parab",
-    "email": "vedeeka@example.com",
-    "phone": "+91 98765 43210",
-    "linkedin": "linkedin.com/in/vedeeka"
+    "location": "Codar, Ponda, Goa",
+    "email": "vedeekaparab9999@gmail.com",
+    "phone": "8446279142",
+    "github": "https://github.com/vedeeka",
+    "linkedin": "https://linkedin.com/in/vedeeka-parab-7a5174270/"
   },
-  "summary": "Aspiring AI Engineer with experience in Python and ML.",
-  "skills": ["Python", "C++", "HTML"],
+
+  "summary": "Computer Engineering undergraduate actively learning and working in Artificial Intelligence, Machine Learning, and Backend Development. Hands-on experience building ML-driven applications, optimizing system performance, and developing end-to-end solutions through internships, hackathons, and group projects.",
+
+  "education": [
+    {
+      "institution": "Goa Engineering College — Government of Goa",
+      "degree": "Bachelor of Engineering (B.E.) in Computer Science",
+      "duration": "July 2024 – July 2027",
+      "sgpa": "8.5"
+    },
+    {
+      "institution": "Government Polytechnic Panaji",
+      "degree": "Diploma in Computer Engineering",
+      "duration": "2021 – 2024",
+      "grade": "91.4%"
+    }
+  ],
+
   "experience": [
     {
-      "role": "President",
-      "company": "AI Innovators Club",
-      "points": [
-        "Led a team of 50 students.",
-        "Organized 3 hackathons."
+      "company": "Infipre IT Services (OPC) Pvt. Ltd",
+      "role": "Software Development Intern",
+      "duration": "July 2023 – Oct 2023",
+      "responsibilities": [
+        "Developed and deployed dynamic web applications and CRM modules using PHP, MySQL, and React",
+        "Implemented a React-based file upload system with improved validation and UI responsiveness",
+        "Collaborated in an agile environment, contributing to feature development and testing"
+      ]
+    },
+    {
+      "company": "Vyom Solutions",
+      "role": "Software Engineering Intern",
+      "duration": "2024",
+      "responsibilities": [
+        "Worked on internal software tools following production-level coding standards",
+        "Contributed to debugging, feature implementation, and deployment support"
       ]
     }
   ],
+
   "projects": [
     {
-      "title": "AI Job Hunter",
-      "tech": "FastAPI, React",
-      "points": ["Built an automated scraper.", "Implemented ML models."]
+      "name": "Open-Source AI Proctoring System",
+      "duration": "Jan 2024 – Present",
+      "technologies": ["TensorFlow", "OpenCV", "MediaPipe", "FER"],
+      "description": [
+        "Built a real-time AI-based exam proctoring system detecting gaze direction, phone usage, and multiple faces",
+        "Integrated facial emotion recognition to identify suspicious behavioral patterns",
+        "Optimized video processing pipeline for low-latency inference"
+      ]
+    },
+    {
+      "name": "AI-Powered Website Generator — CodeCraft AI",
+      "duration": "2024",
+      "technologies": ["LLMs", "Flask", "React"],
+      "description": [
+        "Developing an AI-driven platform to generate websites from user requirements",
+        "Implemented backend APIs for prompt orchestration and response handling"
+      ]
+    },
+    {
+      "name": "ArogyaYaan — Medical Supply Chain System (Mumbai Hacks 2025)",
+      "duration": "Nov 2025",
+      "technologies": ["Go (Gin)", "PostgreSQL (Supabase)", "Next.js", "React Native"],
+      "description": [
+        "Built a medical supply chain platform to track inventory and logistics with an AI agent integrated into a Go backend",
+        "Developed a cross-platform React Native mobile application for real-time inventory monitoring and field updates"
+      ]
+    }
+  ],
+
+  "technical_skills": {
+    "languages": ["Python", "Java", "JavaScript", "C", "C++", "Go", "PHP"],
+    "ai_ml_cv": ["TensorFlow", "OpenCV", "MediaPipe", "FER", "Scikit-learn", "Hugging Face"],
+    "backend": ["Flask", "Node.js", "REST APIs", "SQL"],
+    "databases": ["MySQL", "PostgreSQL", "Firebase"],
+    "frontend": ["React.js", "Next.js", "HTML", "CSS"],
+    "app_development": ["Flutter", "React Native"],
+    "tools_concepts": ["Git", "Linux", "Data Structures & Algorithms", "System Design Basics"]
+  },
+
+  "achievements": [
+    {
+      "title": "Winner — Brand Builder Battle (Ventura, Goa)",
+      "description": "Led development of HerbalEase"
+    },
+    {
+      "title": "Finalist — Level Supermind Hackathon (Mumbai)"
+    },
+    {
+      "title": "Finalist — MumbaiHacks 2025"
+    },
+    {
+      "title": "3rd Place — TechYothon (AITD)",
+      "description": "AI-powered campus safety system"
+    },
+    {
+      "title": "Recognition — Computer Vision Expo 2024 (Ready Tensor)",
+      "description": "ProctoringAI project"
     }
   ]
 }
