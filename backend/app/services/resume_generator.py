@@ -4,9 +4,7 @@ from jinja2 import Environment, FileSystemLoader
 from weasyprint import HTML
 import google.generativeai as genai
 
-# --- CONFIGURATION ---
-# 1. SET YOUR API KEY
-# Ideally use: export GEMINI_API_KEY="your_key"
+
 api_key = os.getenv("GEMINI_API_KEY") 
 if not api_key:
     # Fallback for testing (REMOVE before sharing)

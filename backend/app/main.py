@@ -9,6 +9,7 @@ from backend.app.api.endpoints import pipeline
 from backend.app.api.endpoints import profile
 from backend.app.api.endpoints.map_email import router as map_email_router
 from backend.app.api.endpoints.resume import router as resume_router
+from backend.app.services.pdf_json import pdf_to_json
 app = FastAPI(title="AI Job Hunter API", version="1.0")
 
 
@@ -30,6 +31,7 @@ app.include_router(pipeline.router)
 app.include_router(profile.router)
 app.include_router(map_email_router)
 app.include_router(resume_router)
+app.include_router(pdf_to_json)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "models/salary_model_structured.pkl")
 
