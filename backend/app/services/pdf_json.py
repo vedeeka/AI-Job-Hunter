@@ -15,12 +15,4 @@ def pdf_to_text(pdf_path: str) -> str:
                 text += extracted + "\n"
     return text
 
-import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-pdf_path = os.path.join(BASE_DIR,"test.pdf")
-text = pdf_to_text(pdf_path)
-
-
-
-print(text[:5000])

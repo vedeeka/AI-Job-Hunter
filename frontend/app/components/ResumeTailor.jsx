@@ -36,41 +36,45 @@ const ResumeTailor = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+const handleGenerate = async () => {
+  if (!jobDescription.trim() || !resumeFile) return;
 
-  const handleGenerate = async () => {
-    if (!jobDescription.trim()) return;
+  setLoading(true);
+  setError(null);
+  setResult(null);
 
-    setLoading(true);
-    setError(null);
-    setResult(null);
+  try {
+    const formData = new FormData();
+    formData.append("job_description", jobDescription);
+    formData.append("resume_pdf", resumeFile);
 
-    try {
-      const response = await fetch('http://localhost:8000/generate-resume', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ job_description: jobDescription }),
-      });
+    const response = await fetch("http://localhost:8000/generate-resume", {
+      method: "POST",
+      body: formData,
+    });
 
-      const data = await response.json();
+    const data = await response.json();
+    if (!response.ok) throw new Error("Failed");
 
-      if (!response.ok) throw new Error("Failed to generate resume");
+    setResult({
+      download_url: data.download_url,
+      summary: data.parsed_resume.summary || "Summary parsed successfully.",
+      skills: data.parsed_resume.technical_skills || [],
+      match_score: 100,
+      missing_keywords: [],
+      optimization_tips: []
+    });
 
-      setResult({
-        download_url: data.download_url,
-        summary: data.generated_summary || "AI has rewritten your summary to match the job requirements perfectly.",
-        skills: data.highlighted_skills || ["Python", "FastAPI", "React", "Machine Learning"],
-        match_score: data.match_score || 85,
-        missing_keywords: data.missing_keywords || [],
-        optimization_tips: data.optimization_tips || []
-      });
-      setActiveTab('preview');
+    setActiveTab("preview");
 
-    } catch (err) {
-      setError("Something went wrong. Is the backend running?");
-    } finally {
-      setLoading(false);
-    }
-  };
+  } catch {
+    setError("Backend not running or file upload failed.");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
 
   return (
     <div className="min-h-screen bg-white p-6">

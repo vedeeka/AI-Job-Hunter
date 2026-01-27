@@ -12,13 +12,11 @@ if not api_key:
 
 genai.configure(api_key=api_key)
 
-# 2. SELECT MODEL
-# Using gemini-1.5-flash as it is fast and handles large context well.
-# You can try 'gemini-2.0-flash-exp' if available in your region.
+
 model = genai.GenerativeModel(
     model_name="gemini-2.5-flash", 
     generation_config={
-        "temperature": 0.4, # Slightly higher creativity for rewriting bullets
+        "temperature": 0.4, 
         "response_mime_type": "application/json"
     }
 )
