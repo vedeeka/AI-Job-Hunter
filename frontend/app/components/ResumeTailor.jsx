@@ -37,42 +37,59 @@ const ResumeTailor = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 const handleGenerate = async () => {
-  if (!jobDescription.trim() || !resumeFile) return;
+    if (!jobDescription.trim() || !resumeFile) return;
 
-  setLoading(true);
-  setError(null);
-  setResult(null);
+    setLoading(true);
+    setError(null);
+    setResult(null);
 
-  try {
-    const formData = new FormData();
-    formData.append("job_description", jobDescription);
-    formData.append("resume_pdf", resumeFile);
+    try {
+      const formData = new FormData();
+      formData.append("job_description", jobDescription);
+      formData.append("resume_pdf", resumeFile);
 
-    const response = await fetch("http://localhost:8000/generate-resume", {
-      method: "POST",
-      body: formData,
-    });
+      const response = await fetch("http://localhost:8000/generate-resume", {
+        method: "POST",
+        body: formData,
+      });
 
-    const data = await response.json();
-    if (!response.ok) throw new Error("Failed");
+      // 1. Check response status BEFORE parsing JSON
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+      }
 
-    setResult({
-      download_url: data.download_url,
-      summary: data.parsed_resume.summary || "Summary parsed successfully.",
-      skills: data.parsed_resume.technical_skills || [],
-      match_score: 100,
-      missing_keywords: [],
-      optimization_tips: []
-    });
+      // 2. Try parsing JSON, but log if it fails
+      let data;
+      try {
+        data = await response.json();
+      } catch (jsonError) {
+        console.error("Failed to parse JSON:", jsonError);
+        throw new Error("Server returned 200 but response was not valid JSON");
+      }
 
-    setActiveTab("preview");
+      console.log("Backend Response:", data); // Check your console for this!
 
-  } catch {
-    setError("Backend not running or file upload failed.");
-  } finally {
-    setLoading(false);
-  }
-};
+      // 3. Defensive coding: Use optional chaining (?.) and fallback values
+      // This prevents the app from crashing if 'parsed_resume' is missing
+      setResult({
+        download_url: data?.download_url || "#",
+        summary: data?.parsed_resume?.summary || "Summary not available.",
+        skills: data?.parsed_resume?.technical_skills || [],
+        match_score: data?.match_score || 85, // Example fallback
+        missing_keywords: data?.missing_keywords || [],
+        optimization_tips: data?.optimization_tips || []
+      });
+
+      setActiveTab("preview");
+
+    } catch (err) {
+      // 4. Log the ACTUAL error to the console
+      console.error("Full Error Details:", err);
+      setError(err.message || "An unexpected error occurred.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
 
