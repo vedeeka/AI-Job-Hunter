@@ -72,10 +72,10 @@ export default function Dashboard() {
   // Loading / error states
   if (!loggedIn) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 to-slate-800 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Checking authentication...</p>
+          <div className="w-12 h-12 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-300 text-sm font-medium">Checking authentication...</p>
         </div>
       </div>
     );
@@ -83,10 +83,10 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 to-slate-800 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading your profile...</p>
+          <div className="w-12 h-12 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-300 text-sm font-medium">Loading your profile...</p>
         </div>
       </div>
     );
@@ -94,21 +94,21 @@ export default function Dashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 to-slate-800 flex items-center justify-center">
         <div className="max-w-md w-full mx-4">
-          <div className="bg-red-50 border border-red-200 rounded-xl p-6">
+          <div className="bg-red-950/50 backdrop-blur border border-red-500/40 rounded-xl p-6">
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold text-red-900 mb-1">Error Loading Profile</h3>
-                <p className="text-sm text-red-700">{error}</p>
+                <h3 className="font-semibold text-red-200 mb-1">Error Loading Profile</h3>
+                <p className="text-sm text-red-300">{error}</p>
                 <button
                   onClick={() => window.location.reload()}
-                  className="mt-4 text-sm font-medium text-red-600 hover:text-red-700"
+                  className="mt-4 text-sm font-medium text-red-400 hover:text-red-300 transition-colors"
                 >
                   Try Again
                 </button>
@@ -126,30 +126,30 @@ export default function Dashboard() {
   const matchScore = analysis.match_score || 0;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-slate-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5">
           <div className="flex items-center justify-between">
             {/* Logo & Title */}
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-md">
                 <Briefcase className="text-white" size={24} />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">AI Job Hunter</h1>
-                <p className="text-gray-600 text-sm">Your AI-powered career assistant</p>
+                <h1 className="text-2xl font-bold text-slate-900">AI Job Hunter</h1>
+                <p className="text-slate-500 text-sm font-medium">Your AI-powered career assistant</p>
               </div>
             </div>
 
             {/* Actions */}
             <div className="flex items-center gap-3">
-              <button className="px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg font-medium text-sm transition-colors">
+              <button className="px-4 py-2 text-slate-700 hover:bg-slate-100 rounded-lg font-medium text-sm transition-colors">
                 Profile
               </button>
               <button
                 onClick={handleLogout}
-                className="px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white rounded-lg font-medium text-sm transition-colors"
+                className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-medium text-sm transition-colors shadow-sm"
               >
                 Logout
               </button>
@@ -161,11 +161,11 @@ export default function Dashboard() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
         {/* Welcome Banner */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 mb-8 text-white shadow-lg">
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 mb-8 text-white shadow-lg hover:shadow-xl transition-shadow">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-3xl font-bold mb-2">Welcome back! 👋</h2>
-              <p className="text-blue-100 text-lg">Let's continue building your career path</p>
+              <p className="text-blue-50 text-lg">Let's continue building your career path</p>
             </div>
             <div className="hidden md:block">
               
@@ -174,38 +174,22 @@ export default function Dashboard() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                <Target className="text-blue-600" size={24} />
-              </div>
-            </div>
-            <p className="text-2xl font-bold text-gray-900">{skills.length}</p>
-            <p className="text-sm text-gray-600">Total Skills</p>
-          </div>
 
-      
-
-        
-
-      
-        </div>
 
         {/* Main Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column - Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {/* Career Path Section */}
-            <section className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+            <section className="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow p-6">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <h2 className="text-xl font-bold text-gray-900">Career Path</h2>
-                  <span className="text-xs font-semibold bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
+                  <h2 className="text-xl font-bold text-slate-900">Career Path</h2>
+                  <span className="text-xs font-semibold bg-blue-100 text-blue-700 px-3 py-1 rounded-full border border-blue-200">
                     AI/ML
                   </span>
                 </div>
-                <button className="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1">
+                <button className="text-sm font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1 transition-colors">
                   View Details
                   <ArrowRight size={16} />
                 </button>
@@ -217,29 +201,29 @@ export default function Dashboard() {
   experience_raw={profileData.experience_raw}
 />
 
-              <SkillGraph skills={skills} />
+          
             </section>
-
+    <SkillGraph skills={skills} />
             {/* Quick Actions */}
             <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <button className="bg-white border border-gray-200 rounded-xl p-6 hover:border-blue-300 hover:shadow-md transition-all text-left group">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-600 transition-colors">
+              <button className="bg-white border border-slate-200 rounded-xl p-6 hover:border-blue-300 hover:shadow-md hover:bg-blue-50/30 transition-all text-left group">
+                <div className="w-12 h-12 bg-blue-100 group-hover:bg-blue-600 rounded-lg flex items-center justify-center mb-4 transition-all shadow-sm">
                   <svg className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Job Search</h3>
-                <p className="text-sm text-gray-600">Find matching opportunities</p>
+                <h3 className="font-semibold text-slate-900 mb-2">Job Search</h3>
+                <p className="text-sm text-slate-600">Find matching opportunities</p>
               </button>
 
-              <button className="bg-white border border-gray-200 rounded-xl p-6 hover:border-purple-300 hover:shadow-md transition-all text-left group">
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-600 transition-colors">
+              <button className="bg-white border border-slate-200 rounded-xl p-6 hover:border-purple-300 hover:shadow-md hover:bg-purple-50/30 transition-all text-left group">
+                <div className="w-12 h-12 bg-purple-100 group-hover:bg-purple-600 rounded-lg flex items-center justify-center mb-4 transition-all shadow-sm">
                   <svg className="w-6 h-6 text-purple-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Resume Analyzer</h3>
-                <p className="text-sm text-gray-600">Optimize your resume</p>
+                <h3 className="font-semibold text-slate-900 mb-2">Resume Analyzer</h3>
+                <p className="text-sm text-slate-600">Optimize your resume</p>
               </button>
             </section>
           </div>
@@ -248,16 +232,16 @@ export default function Dashboard() {
           <div className="space-y-6">
             {/* Missing Skills */}
             {analysis.missing_skills && analysis.missing_skills.length > 0 && (
-              <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-                <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <div className="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow p-6">
+                <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
                   <TrendingUp size={20} className="text-orange-600" />
                   Skills to Learn
                 </h3>
                 <div className="space-y-3">
                   {analysis.missing_skills.slice(0, 5).map((skill: string, idx: number) => (
-                    <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                      <span className="text-sm font-medium text-gray-700">{skill}</span>
-                      <button className="text-xs font-semibold text-blue-600 hover:text-blue-700">
+                    <div key={idx} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors group">
+                      <span className="text-sm font-medium text-slate-700 group-hover:text-slate-900">{skill}</span>
+                      <button className="text-xs font-semibold text-blue-600 hover:text-blue-700 opacity-0 group-hover:opacity-100 transition-opacity">
                         Learn
                       </button>
                     </div>
@@ -266,18 +250,26 @@ export default function Dashboard() {
               </div>
             )}
 
-            {/* Progress Card */}
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl border border-green-200 p-6">
+              <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-200 transition-all">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                <Target className="text-blue-600" size={24} />
+              </div>
+            </div>
+            <p className="text-2xl font-bold text-slate-900">{skills.length}</p>
+            <p className="text-sm text-slate-600 font-medium">Total Skills</p>
+          </div>
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200/60 p-6 shadow-sm hover:shadow-md transition-shadow">
               <h3 className="font-semibold text-green-900 mb-2">Keep Going! 🎯</h3>
               <p className="text-sm text-green-700 mb-4">You're on track to reach your career goals</p>
-              <div className="bg-white rounded-lg p-3">
-                <div className="flex justify-between text-xs font-medium text-gray-600 mb-2">
+              <div className="bg-white/70 rounded-lg p-3 backdrop-blur-sm border border-green-100/50">
+                <div className="flex justify-between text-xs font-semibold text-slate-600 mb-2">
                   <span>Profile Completion</span>
-                  <span>{matchScore}%</span>
+                  <span className="text-green-700 bg-green-100/60 px-2 py-0.5 rounded">{matchScore}%</span>
                 </div>
-                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div className="h-2 bg-green-100 rounded-full overflow-hidden">
                   <div 
-                    className="h-full bg-gradient-to-r from-green-400 to-green-600 transition-all duration-500"
+                    className="h-full bg-gradient-to-r from-green-400 to-emerald-600 transition-all duration-500"
                     style={{ width: `${matchScore}%` }}
                   ></div>
                 </div>
@@ -285,13 +277,22 @@ export default function Dashboard() {
             </div>
 
             {/* Interview Prep */}
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-              <h3 className="font-semibold text-gray-900 mb-4">Interview Prep</h3>
-              <p className="text-sm text-gray-600 mb-4">Practice with AI-powered mock interviews</p>
-              <button className="w-full bg-gray-900 hover:bg-gray-800 text-white rounded-lg py-3 font-medium text-sm transition-colors">
+            <div className="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow p-6">
+              <h3 className="font-semibold text-slate-900 mb-4">Interview Prep</h3>
+              <p className="text-sm text-slate-600 mb-4">Practice with AI-powered mock interviews</p>
+              <button className="w-full bg-slate-900 hover:bg-slate-800 text-white rounded-lg py-3 font-semibold text-sm transition-all shadow-sm hover:shadow-md">
                 Start Practice
               </button>
             </div>
+     
+     
+
+      
+
+        
+
+      
+
           </div>
         </div>
       </main>
