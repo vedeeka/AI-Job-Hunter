@@ -77,7 +77,22 @@ def download():
         return FileResponse(OUTPUT_FILE, filename="leads.csv")
     return JSONResponse(status_code=404, content={"error": "File not found"})
 
-# ------------------- Attach router -------------------
+
+@router.get("/email_des")
+def generate_email(job_description: str, company_name: str):
+    from backend.app.services.email_sender import generate_cold_email
+
+    try:
+        email_content = generate_cold_email(job_description, company_name)
+        return JSONResponse(status_code=200, content=email_content)
+    except Exception as e:
+        print("EMAIL GENERATION ERROR:\n", traceback.format_exc())
+        return JSONResponse(
+            status_code=500,
+            content={"status": "error", "message": str(e)}
+        )
+
+
 app.include_router(router)
 
 # ------------------- Run -------------------

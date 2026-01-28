@@ -9,13 +9,12 @@ from email.mime.base import MIMEBase
 from email import encoders
 
 # Load .env
-load_dotenv()
+load_dotenv()  # this reads the .env file
 
-# Configure Gemini
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel("gemini-2.5-flash")
 
-# 1. Generate Email using Gemini
+
 def generate_cold_email(job_desc, company_name):
     prompt = f"""
 Write a cold email to a recruiter at {company_name}.

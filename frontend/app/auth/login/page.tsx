@@ -16,7 +16,7 @@ export default function LoginPage() {
     setError(null);
     setLoading(true);
 
-    if (email === 'user@example.com' && password === 'password123') {
+    if (email === 'vedeekaparab9999@gmail.com' && password === 'password123') {
       try {
         const apiUrl = `http://127.0.0.1:8000/profile?linkedin_url=${encodeURIComponent(
           linkedinUrl

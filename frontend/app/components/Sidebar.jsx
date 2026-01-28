@@ -21,8 +21,8 @@ const Sidebar = () => {
     { name: 'Job Search', icon: Search, path: '/dashboard/JobSearch' },
     { name: 'Email Scraper', icon: Mail, path: '/dashboard/email_section' },
     { name: 'Resume Doctor', icon: FileText, path: '/dashboard/resume' },
-    { name: 'Interview Coach', icon: MessageSquare, path: '/dashboard/interview' },
-    { name: 'Career Graph', icon: Network, path: '/dashboard/graph' },
+    { name: 'Email Generator', icon: MessageSquare, path: '/dashboard/email_des' },
+    
   ];
 
   

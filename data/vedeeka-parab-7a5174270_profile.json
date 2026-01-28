@@ -1,5 +1,157 @@
 {
-    "name": "Vedeeka parab",
-    "about_raw": "About\nAbout\nAs an aspiring computer engineer student, I am building a solid foundation in machine learning, computer vision, and full-stack development while exploring new algorithms and technologies. My technical experience includes Python, JavaScript, Go, and frameworks like TensorFlow, OpenCV, MediaPipe, React, and Flask. I also have knowledge of databases and cloud platforms.\n\nI enjoy solving problems that combine innovation with real-world effects. This ranges from experimenting with gesture-based human-computer interaction to creating intelligent systems that improve security, accessibility, and user experience. In each project, I focus on writing clear, maintainable code while enhancing my understanding of algorithms and data-driven decision-making.\n\nI am excited to take on roles where I can make a meaningful contribution, learn quickly, and work with diverse teams. My aim is to grow into a well-rounded professional who not only keeps up with technological changes but also helps shape them by developing scalable, ethical, and impactful solutions.\nAs an aspiring computer engineer student, I am building a solid foundation in machine learning, computer vision, and full-stack development while exploring new algorithms and technologies. My technical experience includes Python, JavaScript, Go, and frameworks like TensorFlow, OpenCV, MediaPipe, React, and Flask. I also have knowledge of databases and cloud platforms. I enjoy solving problems that combine innovation with real-world effects. This ranges from experimenting with gesture-based human-computer interaction to creating intelligent systems that improve security, accessibility, and user experience. In each project, I focus on writing clear, maintainable code while enhancing my understanding of algorithms and data-driven decision-making. I am excited to take on roles where I can make a meaningful contribution, learn quickly, and work with diverse teams. My aim is to grow into a well-rounded professional who not only keeps up with technological changes but also helps shape them by developing scalable, ethical, and impactful solutions.",
-    "experience_raw": "Experience\nExperience\nJoint Placement Secretary\nJoint Placement Secretary\nCursor\nCursor\nOct 2025 - Present \u00b7 4 mos\nOct 2025 to Present \u00b7 4 mos\nGoa, India \u00b7 On-site\nGoa, India \u00b7 On-site\nIntern\nIntern\nIntern\nvyomsolutions \u00b7 Part-time\nvyomsolutions \u00b7 Part-time\nMay 2024 - Present \u00b7 1 yr 9 mos\nMay 2024 to Present \u00b7 1 yr 9 mos\nPonda, Goa, India \u00b7 On-site\nPonda, Goa, India \u00b7 On-site\nComputer Vision, React.js and +3 skills\nIntern\nIntern\nIntern\nInfipre IT Services (OPC) Pvt. Ltd \u00b7 Full-time\nInfipre IT Services (OPC) Pvt. Ltd \u00b7 Full-time\nJul 2023 - Oct 2023 \u00b7 4 mos\nJul 2023 to Oct 2023 \u00b7 4 mos\nSanquelim,Goa \u00b7 On-site\nSanquelim,Goa \u00b7 On-site\nWorked on Websites , CRM project and react uploader\nWorked on Websites , CRM project and react uploader\nReact.js, WordPress and +3 skills"
+  "name": "Vedeeka parab",
+  "about_raw": "About\nAbout\nAs an aspiring computer engineer student, I am building a solid foundation in machine learning, computer vision, and full-stack development while exploring new algorithms and technologies. My technical experience includes Python, JavaScript, Go, and frameworks like TensorFlow, OpenCV, MediaPipe, React, and Flask. I also have knowledge of databases and cloud platforms.\n\nI enjoy solving problems that combine innovation with real-world effects. This ranges from experimenting with gesture-based human-computer interaction to creating intelligent systems that improve security, accessibility, and user experience. In each project, I focus on writing clear, maintainable code while enhancing my understanding of algorithms and data-driven decision-making.\n\nI am excited to take on roles where I can make a meaningful contribution, learn quickly, and work with diverse teams. My aim is to grow into a well-rounded professional who not only keeps up with technological changes but also helps shape them by developing scalable, ethical, and impactful solutions.\nAs an aspiring computer engineer student, I am building a solid foundation in machine learning, computer vision, and full-stack development while exploring new algorithms and technologies. My technical experience includes Python, JavaScript, Go, and frameworks like TensorFlow, OpenCV, MediaPipe, React, and Flask. I also have knowledge of databases and cloud platforms. I enjoy solving problems that combine innovation with real-world effects. This ranges from experimenting with gesture-based human-computer interaction to creating intelligent systems that improve security, accessibility, and user experience. In each project, I focus on writing clear, maintainable code while enhancing my understanding of algorithms and data-driven decision-making. I am excited to take on roles where I can make a meaningful contribution, learn quickly, and work with diverse teams. My aim is to grow into a well-rounded professional who not only keeps up with technological changes but also helps shape them by developing scalable, ethical, and impactful solutions.",
+  "experience_raw": "Experience\nExperience\nJoint Placement Secretary\nJoint Placement Secretary\nCursor\nCursor\nOct 2025 - Present · 4 mos\nOct 2025 to Present · 4 mos\nGoa, India · On-site\nGoa, India · On-site\nIntern\nIntern\nIntern\nvyomsolutions · Part-time\nvyomsolutions · Part-time\nMay 2024 - Present · 1 yr 9 mos\nMay 2024 to Present · 1 yr 9 mos\nPonda, Goa, India · On-site\nPonda, Goa, India · On-site\nComputer Vision, React.js and +3 skills\nIntern\nIntern\nIntern\nInfipre IT Services (OPC) Pvt. Ltd · Full-time\nInfipre IT Services (OPC) Pvt. Ltd · Full-time\nJul 2023 - Oct 2023 · 4 mos\nJul 2023 to Oct 2023 · 4 mos\nSanquelim,Goa · On-site\nSanquelim,Goa · On-site\nWorked on Websites , CRM project and react uploader\nWorked on Websites , CRM project and react uploader\nReact.js, WordPress and +3 skills",
+  "skills": [
+    {
+      "name": "Machine Learning",
+      "category": "Artificial Intelligence",
+      "proficiency": ""
+    },
+    {
+      "name": "Computer Vision",
+      "category": "Artificial Intelligence",
+      "proficiency": ""
+    },
+    {
+      "name": "Full-stack Development",
+      "category": "Software Development",
+      "proficiency": ""
+    },
+    {
+      "name": "Python",
+      "category": "Programming Language",
+      "proficiency": ""
+    },
+    {
+      "name": "JavaScript",
+      "category": "Programming Language",
+      "proficiency": ""
+    },
+    {
+      "name": "Go",
+      "category": "Programming Language",
+      "proficiency": ""
+    },
+    {
+      "name": "TensorFlow",
+      "category": "Machine Learning Framework",
+      "proficiency": ""
+    },
+    {
+      "name": "OpenCV",
+      "category": "Computer Vision Library",
+      "proficiency": ""
+    },
+    {
+      "name": "MediaPipe",
+      "category": "Computer Vision Library",
+      "proficiency": ""
+    },
+    {
+      "name": "React",
+      "category": "Front-end Development",
+      "proficiency": ""
+    },
+    {
+      "name": "Flask",
+      "category": "Web Framework",
+      "proficiency": ""
+    },
+    {
+      "name": "Databases",
+      "category": "Data Management",
+      "proficiency": ""
+    },
+    {
+      "name": "Cloud Platforms",
+      "category": "Cloud Computing",
+      "proficiency": ""
+    },
+    {
+      "name": "Algorithms",
+      "category": "Computer Science",
+      "proficiency": ""
+    },
+    {
+      "name": "Human-Computer Interaction (HCI)",
+      "category": "UI/UX",
+      "proficiency": ""
+    },
+    {
+      "name": "Intelligent Systems Design",
+      "category": "System Design",
+      "proficiency": ""
+    },
+    {
+      "name": "System Security",
+      "category": "Cybersecurity",
+      "proficiency": ""
+    },
+    {
+      "name": "Accessibility Design",
+      "category": "UI/UX",
+      "proficiency": ""
+    },
+    {
+      "name": "User Experience (UX)",
+      "category": "UI/UX",
+      "proficiency": ""
+    },
+    {
+      "name": "Software Engineering Practices",
+      "category": "Software Development",
+      "proficiency": ""
+    },
+    {
+      "name": "Data-Driven Decision Making",
+      "category": "Data Analysis",
+      "proficiency": ""
+    },
+    {
+      "name": "Scalable Architecture",
+      "category": "Software Architecture",
+      "proficiency": ""
+    },
+    {
+      "name": "Problem Solving",
+      "category": "Soft Skill",
+      "proficiency": ""
+    },
+    {
+      "name": "Learning Agility",
+      "category": "Soft Skill",
+      "proficiency": ""
+    },
+    {
+      "name": "Teamwork",
+      "category": "Soft Skill",
+      "proficiency": ""
+    },
+    {
+      "name": "Ethical Solutions Development",
+      "category": "Soft Skill",
+      "proficiency": ""
+    },
+    {
+      "name": "Impactful Solutions Development",
+      "category": "Soft Skill",
+      "proficiency": ""
+    },
+    {
+      "name": "WordPress",
+      "category": "Content Management System",
+      "proficiency": ""
+    },
+    {
+      "name": "Web Development",
+      "category": "Software Development",
+      "proficiency": ""
+    },
+    {
+      "name": "CRM Development",
+      "category": "Software Development",
+      "proficiency": ""
+    }
+  ]
 }
