@@ -1,11 +1,37 @@
+# Core backend
 fastapi
-pandas
-uvicorn
-playwright
-openai
+uvicorn[standard]
+
+# CORS & responses
 python-multipart
-jinja2
-httpx
 
+# Environment variables
+python-dotenv
+
+# Data handling
+pandas
+numpy
+
+# ML / model loading
 scikit-learn
+joblib
 
+# PDF handling
+PyPDF2
+weasyprint
+jinja2
+
+# File & path utilities
+python-filesystem-spec
+
+# Scraping / automation
+playwright
+
+# Google Gemini
+google-generativeai
+
+# Email
+
+
+# Misc
+requests
