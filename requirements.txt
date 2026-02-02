@@ -6,10 +6,6 @@ openai
 python-multipart
 jinja2
 httpx
-sqlmodel
-python-dotenv
-pytest
-pytest-asyncio
-pytest-cov
-sklearn
+
+scikit-learn
 
