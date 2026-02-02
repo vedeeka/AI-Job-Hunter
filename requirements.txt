@@ -1,1 +1,4 @@
-gliner
+fastapi
+pandas
+uvicorn
+os
