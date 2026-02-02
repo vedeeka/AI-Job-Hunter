@@ -22,7 +22,7 @@ weasyprint
 jinja2
 
 # File & path utilities
-python-filesystem-spec
+
 
 # Scraping / automation
 playwright
