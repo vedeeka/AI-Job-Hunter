@@ -8,23 +8,53 @@ interface ProfileDetailsProps {
 
 const ProfileDetails = ({ name, about_raw, experience_raw }: ProfileDetailsProps) => {
   return (
-    <div className="p-6 bg-white rounded-xl border border-gray-200 shadow-sm space-y-6">
+    <div 
+      className="p-6 rounded-xl border-2 shadow-md space-y-6"
+      style={{
+        background: '#fff',
+        borderColor: '#e9d5ff'
+      }}
+    >
       {/* Name */}
-      <h2 className="text-xl font-bold text-gray-900">{name}</h2>
+      <h2 className="text-2xl font-bold" style={{ color: '#1e1b4b' }}>
+        {name}
+      </h2>
 
       {/* About Section */}
       {about_raw && (
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">About</h3>
-          <p className="text-gray-700 text-sm leading-relaxed">{about_raw}</p>
+          <h3 className="text-lg font-semibold mb-3" style={{ color: '#7c3aed' }}>
+            About
+          </h3>
+          <div 
+            className="p-4 rounded-lg text-sm leading-relaxed"
+            style={{
+              background: '#faf5ff',
+              borderLeft: '4px solid #7c3aed',
+              color: '#374151'
+            }}
+          >
+            {about_raw}
+          </div>
         </div>
       )}
 
       {/* Experience Section */}
       {experience_raw && (
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">Experience</h3>
-          <p className="text-gray-700 text-sm leading-relaxed">{experience_raw}</p>
+          <h3 className="text-lg font-semibold mb-3" style={{ color: '#7c3aed' }}>
+            Experience
+          </h3>
+          <div 
+            className="p-4 rounded-lg text-sm leading-relaxed"
+            style={{
+              background: '#faf5ff',
+              borderLeft: '4px solid #7c3aed',
+              color: '#374151'
+            }}
+          >
+            {experience_raw}
+          </div>
         </div>
       )}
     </div>

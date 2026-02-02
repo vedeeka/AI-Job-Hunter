@@ -94,19 +94,19 @@ const handleGenerate = async () => {
 
 
   return (
-    <div className="min-h-screen bg-white p-6">
+    <div className="min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #f8f7ff 0%, #f3f0ff 50%, #faf8ff 100%)' }}>
       <div className="max-w-6xl mx-auto space-y-8">
         
         {/* Header Section */}
         <div className="text-center space-y-4 mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-100 border border-indigo-300 rounded-full text-indigo-700 text-sm font-semibold">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border-2" style={{ background: '#faf5ff', color: '#7c3aed', borderColor: '#e9d5ff' }}>
             <Sparkles size={16} />
             AI-Powered Resume Optimization
           </div>
-          <h1 className="text-5xl font-black text-gray-900">
-            Resume <span className="text-indigo-600">Doctor</span>
+          <h1 className="text-5xl font-black" style={{ color: '#1e1b4b' }}>
+            Resume <span style={{ color: '#7c3aed' }}>Doctor</span>
           </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="max-w-2xl mx-auto text-lg leading-relaxed" style={{ color: '#6b7280' }}>
             Transform your resume to match any job description. Our AI analyzes keywords, optimizes your summary, and ensures you pass ATS screening.
           </p>
         </div>
@@ -117,29 +117,42 @@ const handleGenerate = async () => {
           <div className="space-y-6">
             
             {/* Job Description Input */}
-            <div className="bg-white p-6 rounded-2xl border border-gray-200 hover:border-indigo-300 transition-colors shadow-sm">
-              <div className="flex items-center gap-2 mb-4 text-gray-900 font-semibold">
-                <FileText size={20} className="text-indigo-600" />
+            <div className="p-6 rounded-2xl border-2 shadow-sm" style={{ background: '#fff', borderColor: '#e9d5ff' }} onMouseEnter={(e) => e.currentTarget.style.borderColor = '#c4b5fd'} onMouseLeave={(e) => e.currentTarget.style.borderColor = '#e9d5ff'}>
+              <div className="flex items-center gap-2 mb-4 font-semibold" style={{ color: '#1e1b4b' }}>
+                <FileText size={20} style={{ color: '#7c3aed' }} />
                 <span>Target Job Description</span>
               </div>
               
               <textarea
-                className="w-full p-4 border border-gray-300 rounded-xl bg-gray-50 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 focus:border-transparent focus:bg-white transition-all outline-none resize-none text-sm leading-relaxed"
+                className="w-full p-4 border-2 rounded-xl resize-none text-sm leading-relaxed focus:outline-none transition-all"
+                style={{
+                  borderColor: '#e9d5ff',
+                  background: '#faf5ff',
+                  color: '#1e1b4b'
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = '#7c3aed';
+                  e.currentTarget.style.background = '#fff';
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = '#e9d5ff';
+                  e.currentTarget.style.background = '#faf5ff';
+                }}
                 placeholder="Paste the job description here (e.g. 'We are looking for a Senior Python Engineer...')"
                 rows={10}
                 value={jobDescription}
                 onChange={(e) => setJobDescription(e.target.value)}
               />
 
-              <div className="mt-4 text-xs text-gray-500">
+              <div className="mt-4 text-xs" style={{ color: '#9ca3af' }}>
                 {jobDescription.length} characters
               </div>
             </div>
 
             {/* Resume Upload */}
-            <div className="bg-white p-6 rounded-2xl border border-gray-200 hover:border-indigo-300 transition-colors shadow-sm">
-              <div className="flex items-center gap-2 mb-4 text-gray-900 font-semibold">
-                <Upload size={20} className="text-indigo-600" />
+            <div className="p-6 rounded-2xl border-2 shadow-sm" style={{ background: '#fff', borderColor: '#e9d5ff' }} onMouseEnter={(e) => e.currentTarget.style.borderColor = '#c4b5fd'} onMouseLeave={(e) => e.currentTarget.style.borderColor = '#e9d5ff'}>
+              <div className="flex items-center gap-2 mb-4 font-semibold" style={{ color: '#1e1b4b' }}>
+                <Upload size={20} style={{ color: '#7c3aed' }} />
                 <span>Your Resume (Optional)</span>
               </div>
               
@@ -150,12 +163,26 @@ const handleGenerate = async () => {
                   onChange={handleFileUpload}
                   className="hidden"
                 />
-                <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-indigo-400 transition-colors bg-gray-50 hover:bg-indigo-50">
-                  <FileText className="mx-auto mb-2 text-gray-400" size={28} />
-                  <p className="text-gray-700 font-medium">
+                <div 
+                  className="border-2 border-dashed rounded-xl p-6 text-center transition-all"
+                  style={{
+                    borderColor: '#e9d5ff',
+                    background: '#faf5ff'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = '#7c3aed';
+                    e.currentTarget.style.background = '#f3f0ff';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = '#e9d5ff';
+                    e.currentTarget.style.background = '#faf5ff';
+                  }}
+                >
+                  <FileText className="mx-auto mb-2" size={28} style={{ color: '#a78bfa' }} />
+                  <p className="font-medium" style={{ color: '#1e1b4b' }}>
                     {resumeFile ? resumeFile.name : "Click to upload or drag & drop"}
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">PDF, DOC, DOCX or TXT</p>
+                  <p className="text-xs mt-1" style={{ color: '#9ca3af' }}>PDF, DOC, DOCX or TXT</p>
                 </div>
               </label>
             </div>
@@ -164,7 +191,11 @@ const handleGenerate = async () => {
             <button
               onClick={handleGenerate}
               disabled={loading || !jobDescription}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-3 transition-all shadow-lg hover:shadow-xl hover:shadow-indigo-200 disabled:cursor-not-allowed"
+              className="w-full text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-3 transition-all shadow-lg hover:shadow-xl disabled:cursor-not-allowed"
+              style={{
+                background: loading || !jobDescription ? 'rgba(124, 58, 237, 0.5)' : 'linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)',
+                cursor: loading || !jobDescription ? 'not-allowed' : 'pointer'
+              }}
             >
               {loading ? (
                 <>
@@ -180,7 +211,7 @@ const handleGenerate = async () => {
             </button>
             
             {error && (
-              <div className="p-4 bg-red-50 border border-red-300 text-red-700 text-sm rounded-xl flex items-center gap-3">
+              <div className="p-4 border-2 text-sm rounded-xl flex items-center gap-3" style={{ background: '#fee2e2', borderColor: '#fecaca', color: '#991b1b' }}>
                 <AlertCircle size={18} className="flex-shrink-0" />
                 <span>{error}</span>
               </div>
@@ -188,17 +219,17 @@ const handleGenerate = async () => {
           </div>
 
           {/* Right Column: Output / Preview */}
-          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col min-h-[600px]">
+          <div className="rounded-2xl border-2 shadow-sm overflow-hidden flex flex-col min-h-[600px]" style={{ background: '#fff', borderColor: '#e9d5ff' }}>
             
             {!result ? (
               // Empty State
-              <div className="h-full flex flex-col items-center justify-center text-gray-400 space-y-4 p-8">
-                <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center">
-                  <Sparkles size={40} className="text-gray-300" />
+              <div className="h-full flex flex-col items-center justify-center space-y-4 p-8" style={{ color: '#d1d5db' }}>
+                <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ background: '#faf5ff' }}>
+                  <Sparkles size={40} style={{ color: '#c4b5fd' }} />
                 </div>
                 <p className="text-center">
-                  <span className="block font-semibold text-gray-600">Paste a job description</span>
-                  <span className="text-sm text-gray-500">and click Generate to see your optimized resume</span>
+                  <span className="block font-semibold" style={{ color: '#6b7280' }}>Paste a job description</span>
+                  <span className="text-sm" style={{ color: '#9ca3af' }}>and click Generate to see your optimized resume</span>
                 </p>
               </div>
             ) : (
@@ -206,8 +237,8 @@ const handleGenerate = async () => {
               <div className="flex flex-col h-full">
                 
                 {/* Header Success Bar */}
-                <div className="px-6 pt-6 pb-4 border-b border-gray-200">
-                  <div className="flex items-center gap-2 text-green-700 font-bold bg-green-50 p-4 rounded-xl border border-green-200 mb-4">
+                <div className="px-6 pt-6 pb-4 border-b-2" style={{ borderColor: '#e9d5ff' }}>
+                  <div className="flex items-center gap-2 font-bold p-4 rounded-xl border-2 mb-4" style={{ background: '#f0fdf4', color: '#166534', borderColor: '#dcfce7' }}>
                     <CheckCircle size={20} />
                     <span>Resume Optimized Successfully!</span>
                   </div>
@@ -215,47 +246,47 @@ const handleGenerate = async () => {
                   {/* Match Score */}
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-semibold text-gray-700">ATS Match Score</span>
-                      <span className="text-2xl font-bold text-indigo-600">{result.match_score}%</span>
+                      <span className="text-sm font-semibold" style={{ color: '#6b7280' }}>ATS Match Score</span>
+                      <span className="text-2xl font-bold" style={{ color: '#7c3aed' }}>{result.match_score}%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                    <div className="w-full rounded-full h-2 overflow-hidden" style={{ background: '#e9d5ff' }}>
                       <div 
-                        className="bg-indigo-600 h-full transition-all duration-1000"
-                        style={{ width: `${result.match_score}%` }}
+                        className="h-full transition-all duration-1000"
+                        style={{ background: 'linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%)', width: `${result.match_score}%` }}
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* Tabs */}
-                <div className="flex gap-4 px-6 pt-6 border-b border-gray-200">
+                <div className="flex gap-4 px-6 pt-6 border-b-2" style={{ borderColor: '#e9d5ff' }}>
                   <button
                     onClick={() => setActiveTab('preview')}
-                    className={`pb-3 px-2 font-semibold text-sm transition-all border-b-2 ${
-                      activeTab === 'preview'
-                        ? 'text-indigo-600 border-indigo-600'
-                        : 'text-gray-500 border-transparent hover:text-gray-700'
-                    }`}
+                    className="pb-3 px-2 font-semibold text-sm transition-all border-b-2"
+                    style={{
+                      color: activeTab === 'preview' ? '#7c3aed' : '#9ca3af',
+                      borderColor: activeTab === 'preview' ? '#7c3aed' : 'transparent'
+                    }}
                   >
                     Preview
                   </button>
                   <button
                     onClick={() => setActiveTab('keywords')}
-                    className={`pb-3 px-2 font-semibold text-sm transition-all border-b-2 ${
-                      activeTab === 'keywords'
-                        ? 'text-indigo-600 border-indigo-600'
-                        : 'text-gray-500 border-transparent hover:text-gray-700'
-                    }`}
+                    className="pb-3 px-2 font-semibold text-sm transition-all border-b-2"
+                    style={{
+                      color: activeTab === 'keywords' ? '#7c3aed' : '#9ca3af',
+                      borderColor: activeTab === 'keywords' ? '#7c3aed' : 'transparent'
+                    }}
                   >
                     Keywords
                   </button>
                   <button
                     onClick={() => setActiveTab('tips')}
-                    className={`pb-3 px-2 font-semibold text-sm transition-all border-b-2 ${
-                      activeTab === 'tips'
-                        ? 'text-indigo-600 border-indigo-600'
-                        : 'text-gray-500 border-transparent hover:text-gray-700'
-                    }`}
+                    className="pb-3 px-2 font-semibold text-sm transition-all border-b-2"
+                    style={{
+                      color: activeTab === 'tips' ? '#7c3aed' : '#9ca3af',
+                      borderColor: activeTab === 'tips' ? '#7c3aed' : 'transparent'
+                    }}
                   >
                     Tips
                   </button>
@@ -267,12 +298,12 @@ const handleGenerate = async () => {
                   {activeTab === 'preview' && (
                     <div className="space-y-6 animate-in fade-in duration-300">
                       <div>
-                        <h3 className="text-xs font-bold text-gray-600 uppercase tracking-wider mb-3 flex items-center gap-2">
-                          <Sparkles size={14} className="text-indigo-600" />
+                        <h3 className="text-xs font-bold uppercase tracking-wider mb-3 flex items-center gap-2" style={{ color: '#6b7280' }}>
+                          <Sparkles size={14} style={{ color: '#7c3aed' }} />
                           Professional Summary
                         </h3>
-                        <div className="bg-indigo-50 p-4 rounded-xl border border-indigo-200 text-gray-800 text-sm leading-relaxed relative">
-                          <div className="absolute top-3 right-3 bg-indigo-600 text-white text-[10px] px-2 py-1 rounded font-bold">
+                        <div className="p-4 rounded-xl border-2 text-sm leading-relaxed relative" style={{ background: '#faf5ff', borderColor: '#e9d5ff', color: '#374151' }}>
+                          <div className="absolute top-3 right-3 text-[10px] px-2 py-1 rounded font-bold text-white" style={{ background: '#7c3aed' }}>
                             AI GENERATED
                           </div>
                           <p>"{result.summary}"</p>
@@ -284,15 +315,28 @@ const handleGenerate = async () => {
                   {activeTab === 'keywords' && (
                     <div className="space-y-6 animate-in fade-in duration-300">
                       <div>
-                        <h3 className="text-xs font-bold text-gray-600 uppercase tracking-wider mb-3 flex items-center gap-2">
-                          <Zap size={14} className="text-indigo-600" />
+                        <h3 className="text-xs font-bold uppercase tracking-wider mb-3 flex items-center gap-2" style={{ color: '#6b7280' }}>
+                          <Zap size={14} style={{ color: '#7c3aed' }} />
                           Prioritized Keywords
                         </h3>
                         <div className="flex flex-wrap gap-2">
                           {result.skills.map((skill, i) => (
                             <span 
                               key={i} 
-                              className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium border border-gray-300 hover:border-indigo-400 transition-all cursor-default"
+                              className="px-4 py-2 rounded-lg text-sm font-medium border-2 transition-all"
+                              style={{
+                                background: '#faf5ff',
+                                color: '#1e1b4b',
+                                borderColor: '#e9d5ff'
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.background = '#f3f0ff';
+                                e.currentTarget.style.borderColor = '#7c3aed';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.background = '#faf5ff';
+                                e.currentTarget.style.borderColor = '#e9d5ff';
+                              }}
                             >
                               {skill}
                             </span>
@@ -302,12 +346,17 @@ const handleGenerate = async () => {
 
                       {result.missing_keywords && result.missing_keywords.length > 0 && (
                         <div>
-                          <h3 className="text-xs font-bold text-gray-600 uppercase tracking-wider mb-3">Missing Keywords</h3>
-                          <div className="flex flex-wrap gap-2">
+                          <h3 className="text-xs font-bold uppercase tracking-wider" style={{ color: '#6b7280' }}>Missing Keywords</h3>
+                          <div className="flex flex-wrap gap-2 mt-3">
                             {result.missing_keywords.map((keyword, i) => (
                               <span 
                                 key={i} 
-                                className="px-3 py-1 bg-orange-50 text-orange-700 rounded-lg text-xs font-medium border border-orange-300"
+                                className="px-3 py-1 rounded-lg text-xs font-medium border-2"
+                                style={{
+                                  background: '#fef2f2',
+                                  color: '#991b1b',
+                                  borderColor: '#fecaca'
+                                }}
                               >
                                 {keyword}
                               </span>
@@ -320,39 +369,40 @@ const handleGenerate = async () => {
 
                   {activeTab === 'tips' && (
                     <div className="space-y-3 animate-in fade-in duration-300">
-                      <h3 className="text-xs font-bold text-gray-600 uppercase tracking-wider">Optimization Tips</h3>
+                      <h3 className="text-xs font-bold uppercase tracking-wider" style={{ color: '#6b7280' }}>Optimization Tips</h3>
                       {result.optimization_tips && result.optimization_tips.length > 0 ? (
                         result.optimization_tips.map((tip, i) => (
-                          <div key={i} className="p-4 bg-gray-50 rounded-lg border border-gray-200 text-gray-700 text-sm leading-relaxed">
+                          <div key={i} className="p-4 rounded-lg border-2 text-sm leading-relaxed" style={{ background: '#faf5ff', borderColor: '#e9d5ff', color: '#374151' }}>
                             <div className="flex gap-3">
-                              <div className="text-indigo-600 font-bold flex-shrink-0">{i + 1}.</div>
+                              <div className="font-bold flex-shrink-0" style={{ color: '#7c3aed' }}>{i + 1}.</div>
                               <div>{tip}</div>
                             </div>
                           </div>
                         ))
                       ) : (
-                        <p className="text-gray-500 text-sm">No additional tips at this time.</p>
+                        <p className="text-sm" style={{ color: '#9ca3af' }}>No additional tips at this time.</p>
                       )}
                     </div>
                   )}
                 </div>
 
                 {/* Download Action */}
-                <div className="px-6 pb-6 pt-6 border-t border-gray-200">
+                <div className="px-6 pb-6 pt-6 border-t-2" style={{ borderColor: '#e9d5ff' }}>
                   <a 
                     href={result.download_url} 
                     target="_blank"
                     rel="noopener noreferrer"
                     download="Tailored_Resume.pdf"
-                    className="flex items-center justify-between p-4 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-all group cursor-pointer shadow-lg hover:shadow-green-200"
+                    className="flex items-center justify-between p-4 text-white rounded-xl transition-all group cursor-pointer shadow-lg"
+                    style={{ background: 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)' }}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="bg-white/20 p-2 rounded-lg">
+                      <div className="p-2 rounded-lg" style={{ background: 'rgba(255, 255, 255, 0.2)' }}>
                         <Download size={24} />
                       </div>
                       <div>
                         <div className="font-bold">Download PDF</div>
-                        <div className="text-xs text-green-100">ATS-Ready Format</div>
+                        <div className="text-xs" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>ATS-Ready Format</div>
                       </div>
                     </div>
                     <div className="group-hover:translate-y-1 transition-transform">
@@ -365,10 +415,10 @@ const handleGenerate = async () => {
             
             {/* Loading Overlay */}
             {loading && (
-              <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center z-10 rounded-2xl">
-                <Loader2 className="animate-spin text-indigo-600 mb-4" size={48} />
-                <p className="text-gray-900 font-semibold">Analyzing keywords...</p>
-                <p className="text-gray-600 text-sm mt-1">Optimizing your resume</p>
+              <div className="absolute inset-0 backdrop-blur-sm flex flex-col items-center justify-center z-10 rounded-2xl" style={{ background: 'rgba(255, 255, 255, 0.8)' }}>
+                <Loader2 className="animate-spin mb-4" size={48} style={{ color: '#7c3aed' }} />
+                <p className="font-semibold" style={{ color: '#1e1b4b' }}>Analyzing keywords...</p>
+                <p className="text-sm mt-1" style={{ color: '#6b7280' }}>Optimizing your resume</p>
               </div>
             )}
           </div>

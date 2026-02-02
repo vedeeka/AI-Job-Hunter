@@ -45,9 +45,9 @@ export default function ScraperPage() {
   };
 
   const SocialLink = ({ url, icon: Icon, label }: { url?: string; icon: any; label: string }) => {
-    if (!url) return <span className="text-slate-400">—</span>;
+    if (!url) return <span style={{ color: '#9ca3af' }}>—</span>;
     return (
-      <a href={url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+      <a href={url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 transition" style={{ color: '#7c3aed' }} onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'} onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
         <Icon size={16} />
         {label}
       </a>
@@ -55,33 +55,44 @@ export default function ScraperPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #f8f7ff 0%, #f3f0ff 50%, #faf8ff 100%)' }}>
       {/* Header */}
-      <div className="bg-white border-b border-slate-200">
+      <div className="border-b-2" style={{ background: '#fff', borderColor: '#e9d5ff' }}>
         <div className="max-w-6xl mx-auto px-6 py-8">
-          <h1 className="text-4xl font-bold text-slate-900">Email Scraper</h1>
-          <p className="text-slate-600 mt-2">Find and extract business contacts from Google Maps</p>
+          <h1 className="text-4xl font-bold" style={{ color: '#1e1b4b' }}>Email Scraper</h1>
+          <p className="mt-2" style={{ color: '#6b7280' }}>Find and extract business contacts from Google Maps</p>
         </div>
       </div>
 
       {/* Main */}
       <div className="max-w-6xl mx-auto px-6 py-8">
         {/* Search Box */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 mb-8">
-          <label className="block text-sm font-semibold text-slate-900 mb-3">What are you looking for?</label>
+        <div className="rounded-lg shadow-sm border-2 p-6 mb-8" style={{ background: '#fff', borderColor: '#e9d5ff' }}>
+          <label className="block text-sm font-semibold mb-3" style={{ color: '#1e1b4b' }}>What are you looking for?</label>
           <div className="flex gap-3">
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               disabled={isRunning}
-              className="flex-1 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none disabled:bg-slate-50"
+              className="flex-1 px-4 py-3 border-2 rounded-lg focus:outline-none disabled:opacity-50 transition"
+              style={{
+                borderColor: '#e9d5ff',
+                background: '#fff',
+                color: '#1e1b4b'
+              }}
+              onFocus={(e) => e.target.style.borderColor = '#7c3aed'}
+              onBlur={(e) => e.target.style.borderColor = '#e9d5ff'}
               placeholder="e.g., Software Companies in Ponda Goa"
             />
             <button
               onClick={startScraping}
               disabled={isRunning}
-              className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-400 text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 transition"
+              className="text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 transition"
+              style={{
+                background: isRunning ? 'rgba(124, 58, 237, 0.6)' : 'linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)',
+                cursor: isRunning ? 'not-allowed' : 'pointer'
+              }}
             >
               {isRunning ? (
                 <>
@@ -99,43 +110,46 @@ export default function ScraperPage() {
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+          <div className="border-2 text-white px-4 py-3 rounded-lg mb-6" style={{ background: '#fee2e2', borderColor: '#fecaca', color: '#991b1b' }}>
             {error}
           </div>
         )}
 
         {/* Results */}
-        <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-          <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
+        <div className="rounded-lg shadow-sm border-2 overflow-hidden" style={{ background: '#fff', borderColor: '#e9d5ff' }}>
+          <div className="px-6 py-4 border-b-2 flex items-center justify-between" style={{ borderColor: '#e9d5ff' }}>
             <div>
-              <h2 className="text-lg font-semibold text-slate-900">Results</h2>
-              <p className="text-sm text-slate-600 mt-1">{results.length} found</p>
+              <h2 className="text-lg font-semibold" style={{ color: '#1e1b4b' }}>Results</h2>
+              <p className="text-sm mt-1" style={{ color: '#6b7280' }}>{results.length} found</p>
             </div>
           </div>
 
           {results.length === 0 ? (
-            <div className="px-6 py-12 text-center text-slate-600">
+            <div className="px-6 py-12 text-center" style={{ color: '#6b7280' }}>
               {isRunning ? 'Searching… this may take a minute.' : 'No results yet.'}
             </div>
           ) : (
-            <div className="divide-y divide-slate-200">
+            <div style={{ borderTop: '1px solid #e9d5ff' }}>
               {results.map((row, i) => (
-                <div key={i} className="hover:bg-slate-50 transition">
+                <div key={i} style={{ borderBottom: '1px solid #e9d5ff' }}>
                   <button
                     onClick={() => setExpandedId(expandedId === i ? null : i)}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-slate-50"
+                    className="w-full px-6 py-4 text-left flex items-center justify-between transition"
+                    style={{ color: '#1e1b4b' }}
+                    onMouseEnter={(e) => e.currentTarget.style.background = '#faf5ff'}
+                    onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                   >
                     <div className="flex-1">
-                      <h3 className="font-semibold text-slate-900">{row.Name}</h3>
-                      <div className="flex items-center gap-4 mt-2 text-sm text-slate-600">
+                      <h3 className="font-semibold">{row.Name}</h3>
+                      <div className="flex items-center gap-4 mt-2 text-sm" style={{ color: '#6b7280' }}>
                         {row.Website && (
-                          <a href={row.Website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-blue-600 hover:text-blue-700">
+                          <a href={row.Website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 transition" style={{ color: '#7c3aed' }} onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'} onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
                             <Globe size={14} />
                             Visit Site
                           </a>
                         )}
                         {row.Emails && (
-                          <a href={`mailto:${row.Emails}`} className="flex items-center gap-1 text-blue-600 hover:text-blue-700">
+                          <a href={`mailto:${row.Emails}`} className="flex items-center gap-1 transition" style={{ color: '#7c3aed' }} onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'} onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
                             <Mail size={14} />
                             {row.Emails}
                           </a>
@@ -144,57 +158,58 @@ export default function ScraperPage() {
                     </div>
                     <ChevronDown
                       size={20}
-                      className={`text-slate-400 transition-transform flex-shrink-0 ml-4 ${expandedId === i ? 'rotate-180' : ''}`}
+                      style={{ color: '#a78bfa', transition: 'transform 0.2s' }}
+                      className={expandedId === i ? 'rotate-180' : ''}
                     />
                   </button>
 
                   {expandedId === i && (
-                    <div className="px-6 py-4 bg-slate-50 border-t border-slate-200">
+                    <div className="px-6 py-4 border-t-2" style={{ background: '#faf5ff', borderColor: '#e9d5ff' }}>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* Left Column */}
                         <div className="space-y-4">
                           <div>
-                            <label className="text-xs font-semibold text-slate-500 uppercase">Business Name</label>
-                            <p className="text-slate-900 font-medium mt-1">{row.Name}</p>
+                            <label className="text-xs font-semibold uppercase" style={{ color: '#a78bfa' }}>Business Name</label>
+                            <p className="font-medium mt-1" style={{ color: '#1e1b4b' }}>{row.Name}</p>
                           </div>
 
                           <div>
-                            <label className="text-xs font-semibold text-slate-500 uppercase">Email</label>
+                            <label className="text-xs font-semibold uppercase" style={{ color: '#a78bfa' }}>Email</label>
                             {row.Emails ? (
-                              <a href={`mailto:${row.Emails}`} className="text-blue-600 hover:text-blue-700 mt-1 block break-all">
+                              <a href={`mailto:${row.Emails}`} className="mt-1 block break-all transition" style={{ color: '#7c3aed' }} onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'} onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
                                 {row.Emails}
                               </a>
                             ) : (
-                              <p className="text-slate-400 mt-1">—</p>
+                              <p className="mt-1" style={{ color: '#9ca3af' }}>—</p>
                             )}
                           </div>
 
                           <div>
-                            <label className="text-xs font-semibold text-slate-500 uppercase">Website</label>
+                            <label className="text-xs font-semibold uppercase" style={{ color: '#a78bfa' }}>Website</label>
                             {row.Website ? (
-                              <a href={row.Website} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 mt-1 block break-all">
+                              <a href={row.Website} target="_blank" rel="noopener noreferrer" className="mt-1 block break-all transition" style={{ color: '#7c3aed' }} onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'} onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
                                 {row.Website}
                               </a>
                             ) : (
-                              <p className="text-slate-400 mt-1">—</p>
+                              <p className="mt-1" style={{ color: '#9ca3af' }}>—</p>
                             )}
                           </div>
 
                           <div>
-                            <label className="text-xs font-semibold text-slate-500 uppercase">Status</label>
-                            <p className="text-slate-900 mt-1">{row.Status || '—'}</p>
+                            <label className="text-xs font-semibold uppercase" style={{ color: '#a78bfa' }}>Status</label>
+                            <p className="mt-1" style={{ color: '#1e1b4b' }}>{row.Status || '—'}</p>
                           </div>
                         </div>
 
                         {/* Right Column */}
                         <div className="space-y-4">
                           <div>
-                            <label className="text-xs font-semibold text-slate-500 uppercase">Description</label>
-                            <p className="text-slate-700 mt-1">{row.description || '—'}</p>
+                            <label className="text-xs font-semibold uppercase" style={{ color: '#a78bfa' }}>Description</label>
+                            <p className="mt-1" style={{ color: '#374151' }}>{row.description || '—'}</p>
                           </div>
 
                           <div>
-                            <label className="text-xs font-semibold text-slate-500 uppercase mb-3 block">Social Media</label>
+                            <label className="text-xs font-semibold uppercase mb-3 block" style={{ color: '#a78bfa' }}>Social Media</label>
                             <div className="space-y-2">
                               <SocialLink url={row.LinkedIn} icon={Linkedin} label="LinkedIn" />
                               <SocialLink url={row.Facebook} icon={Facebook} label="Facebook" />
@@ -213,15 +228,16 @@ export default function ScraperPage() {
         </div>
 
         {downloadUrl && (
-          <div className="mt-6 bg-white rounded-lg shadow-sm border border-slate-200 p-6 flex items-center justify-between">
+          <div className="mt-6 rounded-lg shadow-sm border-2 p-6 flex items-center justify-between" style={{ background: '#fff', borderColor: '#e9d5ff' }}>
             <div>
-              <h3 className="font-semibold text-slate-900">All results ready</h3>
-              <p className="text-sm text-slate-600 mt-1">Download your scraped data as CSV</p>
+              <h3 className="font-semibold" style={{ color: '#1e1b4b' }}>All results ready</h3>
+              <p className="text-sm mt-1" style={{ color: '#6b7280' }}>Download your scraped data as CSV</p>
             </div>
             <a
               href={downloadUrl}
               download
-              className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 transition"
+              className="text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 transition"
+              style={{ background: 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)' }}
             >
               <Download size={20} />
               CSV File

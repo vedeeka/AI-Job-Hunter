@@ -7,7 +7,10 @@ export const metadata = {
 
 export default function ResumePage() {
   return (
-    <div className="min-h-[80vh] flex flex-col justify-center">
+    <div 
+      className="min-h-[80vh] flex flex-col justify-center"
+      style={{ background: 'linear-gradient(135deg, #f8f7ff 0%, #f3f0ff 50%, #faf8ff 100%)' }}
+    >
       <ResumeTailor />
     </div>
   );

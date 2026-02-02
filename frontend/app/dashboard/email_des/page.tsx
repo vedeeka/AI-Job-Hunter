@@ -36,7 +36,7 @@ export default function EmailGeneratorPage() {
   return (
     <div style={{
       minHeight: "100vh",
-      background: "white",
+      background: "linear-gradient(135deg, #f8f7ff 0%, #f3f0ff 50%, #faf8ff 100%)",
       padding: "40px 20px"
     }}>
       <div style={{
@@ -49,14 +49,14 @@ export default function EmailGeneratorPage() {
           <h1 style={{
             fontSize: "32px",
             fontWeight: "700",
-            color: "#1a1a1a",
+            color: "#1e1b4b",
             marginBottom: "8px"
           }}>
             Cold Email Generator
           </h1>
           <p style={{
             fontSize: "16px",
-            color: "#666",
+            color: "#6b7280",
             margin: 0
           }}>
             Generate professional cold emails based on job descriptions
@@ -66,10 +66,10 @@ export default function EmailGeneratorPage() {
         {/* Form Container */}
         <div style={{
           background: "white",
-          border: "1px solid #e5e5e5",
+          border: "2px solid #e9d5ff",
           borderRadius: "12px",
           padding: "32px",
-          boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
+          boxShadow: "0 4px 6px rgba(124, 58, 237, 0.1)"
         }}>
           {/* Job Description Input */}
           <div style={{ marginBottom: "24px" }}>
@@ -77,7 +77,7 @@ export default function EmailGeneratorPage() {
               display: "block",
               fontSize: "14px",
               fontWeight: "600",
-              color: "#333",
+              color: "#1e1b4b",
               marginBottom: "8px"
             }}>
               Job Description
@@ -91,17 +91,24 @@ export default function EmailGeneratorPage() {
                 width: "100%",
                 padding: "12px 16px",
                 fontSize: "15px",
-                border: "1px solid #d1d5db",
+                border: "2px solid #e9d5ff",
                 borderRadius: "8px",
                 fontFamily: "inherit",
                 resize: "vertical",
-                 color: "#111827",
+                color: "#1e1b4b",
                 outline: "none",
-                transition: "border-color 0.2s",
-                boxSizing: "border-box"
+                transition: "border-color 0.2s, background-color 0.2s",
+                boxSizing: "border-box",
+                background: "#faf5ff"
               }}
-              onFocus={(e) => e.target.style.borderColor = "#3b82f6"}
-              onBlur={(e) => e.target.style.borderColor = "#d1d5db"}
+              onFocus={(e) => {
+                e.target.style.borderColor = "#7c3aed";
+                e.target.style.background = "#fff";
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = "#e9d5ff";
+                e.target.style.background = "#faf5ff";
+              }}
             />
           </div>
 
@@ -111,7 +118,7 @@ export default function EmailGeneratorPage() {
               display: "block",
               fontSize: "14px",
               fontWeight: "600",
-              color: "#333",
+              color: "#1e1b4b",
               marginBottom: "8px"
             }}>
               Company Name
@@ -125,16 +132,23 @@ export default function EmailGeneratorPage() {
                 width: "100%",
                 padding: "12px 16px",
                 fontSize: "15px",
-                border: "1px solid #d1d5db",
+                border: "2px solid #e9d5ff",
                 borderRadius: "8px",
                 fontFamily: "inherit",
                 outline: "none",
-                color: "#111827",
-                transition: "border-color 0.2s",
-                boxSizing: "border-box"
+                color: "#1e1b4b",
+                transition: "border-color 0.2s, background-color 0.2s",
+                boxSizing: "border-box",
+                background: "#faf5ff"
               }}
-              onFocus={(e) => e.target.style.borderColor = "#3b82f6"}
-              onBlur={(e) => e.target.style.borderColor = "#d1d5db"}
+              onFocus={(e) => {
+                e.target.style.borderColor = "#7c3aed";
+                e.target.style.background = "#fff";
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = "#e9d5ff";
+                e.target.style.background = "#faf5ff";
+              }}
             />
           </div>
 
@@ -149,24 +163,24 @@ export default function EmailGeneratorPage() {
               fontWeight: "600",
               color: "white",
               background: loading || !jobDesc.trim() || !company.trim() 
-                ? "#9ca3af" 
-                : "#3b82f6",
+                ? "rgba(124, 58, 237, 0.5)"
+                : "linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)",
               border: "none",
               borderRadius: "8px",
               cursor: loading || !jobDesc.trim() || !company.trim() 
                 ? "not-allowed" 
                 : "pointer",
-              transition: "background 0.2s",
+              transition: "opacity 0.2s",
               fontFamily: "inherit"
             }}
             onMouseOver={(e) => {
               if (!loading && jobDesc.trim() && company.trim()) {
-                e.currentTarget.style.background = "#2563eb";
+                e.currentTarget.style.opacity = "0.9";
               }
             }}
             onMouseOut={(e) => {
               if (!loading && jobDesc.trim() && company.trim()) {
-                e.currentTarget.style.background = "#3b82f6";
+                e.currentTarget.style.opacity = "1";
               }
             }}
           >
@@ -194,10 +208,10 @@ export default function EmailGeneratorPage() {
           <div style={{
             marginTop: "24px",
             padding: "16px",
-            background: "#fef2f2",
-            border: "1px solid #fecaca",
+            background: "#fee2e2",
+            border: "2px solid #fecaca",
             borderRadius: "8px",
-            color: "#dc2626",
+            color: "#991b1b",
             fontSize: "14px"
           }}>
             <strong>Error:</strong> {error}
@@ -209,33 +223,32 @@ export default function EmailGeneratorPage() {
           <div style={{
             marginTop: "24px",
             background: "white",
-            border: "1px solid #e5e5e5",
+            border: "2px solid #e9d5ff",
             borderRadius: "12px",
             padding: "24px",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
+            boxShadow: "0 4px 6px rgba(124, 58, 237, 0.1)"
           }}>
             <h3 style={{
               fontSize: "18px",
               fontWeight: "600",
-              color: "#060505ff",
+              color: "#1e1b4b",
               marginTop: 0,
               marginBottom: "16px"
             }}>
               Generated Email
             </h3>
             <pre style={{
-              background: "#f9fafb",
+              background: "#faf5ff",
               padding: "20px",
               borderRadius: "8px",
               fontSize: "14px",
-              color: "#111827",
+              color: "#1e1b4b",
               lineHeight: "1.6",
               overflow: "auto",
               margin: 0,
-              
               whiteSpace: "pre-wrap",
               wordWrap: "break-word",
-              border: "1px solid #e5e7eb"
+              border: "2px solid #e9d5ff"
             }}>
               {result}
             </pre>

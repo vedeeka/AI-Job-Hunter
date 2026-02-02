@@ -8,8 +8,16 @@ const ResumeAnalyzer = ({ analysis }) => {
   ];
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-md">
-      <h2 className="text-xl font-bold mb-4">Resume Fit Analysis</h2>
+    <div 
+      className="p-6 rounded-xl shadow-md border-2"
+      style={{
+        background: '#fff',
+        borderColor: '#e9d5ff'
+      }}
+    >
+      <h2 className="text-xl font-bold mb-6" style={{ color: '#1e1b4b' }}>
+        Resume Fit Analysis
+      </h2>
       
       <div className="flex flex-col md:flex-row gap-8 items-center">
         {/* Visualization: Match Score Gauge */}
@@ -17,29 +25,48 @@ const ResumeAnalyzer = ({ analysis }) => {
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie data={data} innerRadius={40} outerRadius={60} dataKey="value">
-                <Cell fill="#4F46E5" /> {/* Indigo */}
-                <Cell fill="#E5E7EB" /> {/* Gray */}
+                <Cell fill="#7c3aed" /> {/* Vibrant Purple */}
+                <Cell fill="#e9d5ff" /> {/* Light Purple */}
               </Pie>
             </PieChart>
           </ResponsiveContainer>
-          <div className="absolute inset-0 flex items-center justify-center text-xl font-bold">
+          <div 
+            className="absolute inset-0 flex items-center justify-center text-2xl font-bold"
+            style={{ color: '#7c3aed' }}
+          >
             {analysis.match_score}%
           </div>
         </div>
 
         {/* Actionable Insights */}
-        <div className="flex-1">
-          <h4 className="text-sm font-semibold text-red-500 uppercase tracking-wide">Missing Skills</h4>
-          <div className="flex flex-wrap gap-2 mt-2">
+        <div className="flex-1 space-y-4">
+          <h4 
+            className="text-sm font-semibold uppercase tracking-wide"
+            style={{ color: '#dc2626' }}
+          >
+            Missing Skills
+          </h4>
+          <div className="flex flex-wrap gap-2">
             {analysis.missing_skills.map((skill) => (
-              <span key={skill} className="px-2 py-1 bg-red-50 text-red-600 border border-red-100 rounded text-sm">
+              <span 
+                key={skill} 
+                className="px-3 py-1.5 border-2 rounded-lg text-sm font-medium transition hover:shadow-md"
+                style={{
+                  background: '#fef2f2',
+                  borderColor: '#fecaca',
+                  color: '#dc2626'
+                }}
+              >
                 + Add {skill}
               </span>
             ))}
           </div>
           
-          <p className="text-xs text-gray-500 mt-4">
-            Tip: Our Generative AI can rewrite your summary to include these keywords.
+          <p 
+            className="text-xs mt-4 leading-relaxed"
+            style={{ color: '#6b7280' }}
+          >
+            💡 <span style={{ color: '#7c3aed', fontWeight: '600' }}>Tip:</span> Our Generative AI can rewrite your summary to include these keywords.
           </p>
         </div>
       </div>
