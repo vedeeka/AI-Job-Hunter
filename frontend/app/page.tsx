@@ -172,7 +172,7 @@ export default function LandingPage() {
                 <div 
                   key={idx}
                   className="group relative bg-white border border-gray-200 rounded-xl p-6 hover:border-blue-200 hover:shadow-lg transition-all cursor-pointer"
-                  onMouseEnter={() => setHoveredFeature(idx)}
+                 
                   onMouseLeave={() => setHoveredFeature(null)}
                 >
                   <div className="w-12 h-12 rounded-lg bg-blue-50 p-2.5 mb-4 group-hover:bg-blue-100 transition-all">
