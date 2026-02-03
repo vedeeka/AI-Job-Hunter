@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @page { margin: 2cm; }
+        body { font-family: "Times New Roman", serif; }
+        h1 { text-align: center; text-transform: uppercase; border-bottom: 1px solid black; }
+        .contact { text-align: center; margin-bottom: 20px; }
+        h3 { background: #eee; padding: 5px; }
+    </style>
+</head>
+<body>
+    <h1>{{ name }}</h1>
+    <div class="contact">{{ email }} • {{ phone }} • {{ location }}</div>
+    
+    <h3>Professional Summary</h3>
+    <p>{{ summary }}</p>
+
+    <h3>Work History</h3>
+    {% for job in experience %}
+    <p>
+        <b>{{ job.title }}</b>, {{ job.company }}<br>
+        <i>{{ job.dates }}</i><br>
+        {{ job.description }}
+    </p>
+    {% endfor %}
+</body>
+</html>

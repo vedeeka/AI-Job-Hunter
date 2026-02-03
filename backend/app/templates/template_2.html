@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @page { size: A4; margin: 2.5cm; }
+        body { font-family: "Times New Roman", serif; line-height: 1.4; }
+        h1 { text-transform: uppercase; font-size: 16pt; border-bottom: 1px solid black; }
+        h2 { font-size: 24pt; margin: 0; }
+        .contact { font-size: 10pt; margin-bottom: 20px; }
+        .bold { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <center>
+        <h2>{{ name }}</h2>
+        <div class="contact">{{ email }} • {{ phone }} • {{ location }}</div>
+    </center>
+
+    <h1>Professional Summary</h1>
+    <p>{{ summary }}</p>
+
+    <h1>Work History</h1>
+    {% for job in experience %}
+        <p>
+            <span class="bold">{{ job.title }}</span> at {{ job.company }}<br>
+            <i>{{ job.dates }}</i><br>
+            {{ job.description }}
+        </p>
+    {% endfor %}
+
+    <h1>Technical Skills</h1>
+    <p>{{ skills | join(', ') }}</p>
+</body>
+</html>

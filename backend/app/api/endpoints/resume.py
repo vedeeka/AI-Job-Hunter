@@ -1,13 +1,18 @@
-from fastapi import APIRouter, UploadFile,File, Form
+from fastapi import APIRouter, UploadFile,File, Form, HTTPException
 from pydantic import BaseModel
 from  backend.app.services.resume_generator import tailor_resume
 import os
 from fastapi.responses import FileResponse
 from backend.app.services.pdf_json import pdf_to_text
-router = APIRouter()
+import glob
 import json
 import shutil
+from backend.schemas.schemas import ResumeRequest
+from backend.app.services.ai_service import get_resume_json
+from backend.app.services.pdf_service import create_pdf_bytes
+router = APIRouter()
 
+from fastapi import Response
 import google.generativeai as genai
 
 def resume_text_to_json(resume_text: str):
@@ -97,3 +102,31 @@ async def download_file(filename: str):
         filename=filename, 
         media_type='application/pdf'
     )
+
+
+
+@router.get("/templates")
+def list_templates():
+    """List available HTML templates"""
+    files = glob.glob("backend/app/templates/*.html")
+    return [{"id": os.path.basename(f), "name": os.path.basename(f).replace(".html", "").title()} for f in files]
+
+@router.post("/generate")
+def generate_resume(request: ResumeRequest):
+    """Generate JSON -> Render PDF -> Return Blob"""
+    print("Generating resume with template:", request.template_name)
+    data = get_resume_json(request.user_description)
+    
+    if not data:
+        raise HTTPException(status_code=500, detail="AI generation failed")
+    
+    # 2. PDF Rendering
+    try:
+        pdf_bytes = create_pdf_bytes(request.template_name, data)
+        return Response(
+            content=pdf_bytes,
+            media_type="application/pdf",
+            headers={"Content-Disposition": "attachment; filename=resume.pdf"}
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
