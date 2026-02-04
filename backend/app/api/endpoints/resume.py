@@ -244,6 +244,15 @@ from pydantic import BaseModel
 from pathlib import Path
 from fastapi.responses import HTMLResponse
 from jinja2 import Template
+class EditResumeRequest(BaseModel):
+    current_data: dict
+    user_input: str
+
+
+class EditResumeResponse(BaseModel):
+    type: str
+    message: str
+    updated_data: dict | None = None
 
 class PreviewRequest(BaseModel):
     template_name: str
@@ -289,13 +298,11 @@ def tailor_resume(path, desc, out): pass
 
 @router.post("/ai/edit-resume")
 async def ai_edit_resume(payload: EditResumeRequest):
-    prompt = f"""
-    You are a professional Resume Editor.
-    
-    Current Data JSON: {json.dumps(payload.current_data)}
-    User Command: "{payload.user_input}"
-    
-    INSTRUCTIONS:
+    try:
+        prompt = f"""
+You are an intelligent resume copilot.
+
+CRITICAL RULES (DO NOT VIOLATE):
     1. Update the JSON strictly based on the User Command.
 
     2. The JSON schema must strictly follow these keys:
@@ -311,14 +318,59 @@ async def ai_edit_resume(payload: EditResumeRequest):
     3. If the user says "Add project X", add a new object to the 'projects' array.
     4. Return ONLY the valid JSON data. No markdown, no explanations.
     5. the most important point is to ask questions in every reponse.
-    """
-    
-    try:
+
+Your job:
+1. Determine user intent: ASK, ANSWER, or EDIT
+2. Respond accordingly
+
+INTENTS (VERY IMPORTANT PRIORITY ORDER):
+
+1. EDIT (DEFAULT)
+- If the user gives ANY instruction that can be applied without inventing facts
+- Rewording, improving, shortening, expanding, restructuring = EDIT
+- Assume the user wants the resume updated unless explicitly asking a question
+
+2. ANSWER
+- Only if the user asks a HOW / WHY / WHAT question
+- Do NOT modify resume
+
+3. ASK (LAST RESORT)
+- ONLY if editing would require guessing missing factual data
+- Ask ONLY ONE question
+- Do NOT ask clarifying questions for wording/style improvements
+
+
+RESPONSE FORMAT (STRICT JSON ONLY):
+{{
+  "type": "ask" | "edit" | "answer",
+  "message": "string",
+  "updated_data": object | null
+}}
+
+---------------------------------
+
+CURRENT RESUME JSON (SOURCE OF TRUTH — DO NOT REWRITE):
+{json.dumps(payload.current_data, indent=2)}
+
+USER INPUT:
+{payload.user_input}
+"""
+
+
         response = model.generate_content(prompt)
-        return json.loads(response.text)
+
+        result = json.loads(response.text)
+
+        if "type" not in result or "message" not in result:
+            raise ValueError("Invalid AI response format")
+
+        return result
+
     except Exception as e:
-        print(f"AI Error: {e}")
+        print("AI ERROR:", e)
         raise HTTPException(status_code=500, detail="AI processing failed")
+
+
 
 @router.get("/templates")
 def list_templates():

@@ -181,54 +181,51 @@ export default function ResumeApp() {
   };
 
   // --- CORE: AI HANDLER ---
-  const handleChatSend = async () => {
-    if (!input.trim()) return;
-    
-    const userMsg = input;
-    setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
-    setInput("");
-    setLoading(true);
+const handleChatSend = async () => {
+  if (!input.trim()) return;
 
-    try {
-     const response = await fetch('http://127.0.0.1:8000/ai/edit-resume', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    current_data: resumeData,
-    user_input: userMsg
-  })
-});
+  const userMsg = input;
 
-if (!response.ok) throw new Error("AI Request Failed");
+  setMessages(prev => [...prev, { role: "user", text: userMsg }]);
+  setInput("");
+  setLoading(true);
 
-const result = await response.json();
+  try {
+    const res = await fetch("http://127.0.0.1:8000/ai/edit-resume", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        current_data: resumeData,
+        user_input: userMsg
+      })
+    });
 
-// 🔹 If it's a QUESTION → show AI message in chat
-if (result.type === "question") {
-  setMessages(prev => [
-    ...prev,
-    { role: 'ai', text: result.message }
-  ]);
-}
+    if (!res.ok) throw new Error("AI failed");
 
-// 🔹 If it's an EDIT → update resume + confirmation
-if (result.type === "edit") {
-  setResumeData(result.updated_data);
-  setMessages(prev => [
-    ...prev,
-    { role: 'ai', text: "Done. Resume updated." }
-  ]);
-}
-    } catch (error) {
-      console.error("AI Error:", error);
-      setMessages(prev => [
-        ...prev,
-        { role: 'ai', text: "Sorry, something went wrong processing your request." }
-      ]);
-    } finally {
-      setLoading(false);
+    const result = await res.json();
+
+    // ALWAYS show AI message
+    setMessages(prev => [
+      ...prev,
+      { role: "ai", text: result.message }
+    ]);
+
+    // Update resume ONLY if edit
+    if (result.type === "edit" && result.updated_data) {
+      setResumeData(result.updated_data);
     }
+
+  } catch (err) {
+    console.error(err);
+    setMessages(prev => [
+      ...prev,
+      { role: "ai", text: "Something went wrong. Try again." }
+    ]);
+  } finally {
+    setLoading(false);
   }
+};
+
 
   if (step === 'selection') {
     return (
