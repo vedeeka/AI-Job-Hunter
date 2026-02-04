@@ -73,7 +73,7 @@ def tailor_resume(master_json_path, job_description_text, output_pdf_path):
         # 4. Render HTML
         # Point this to where your template file is located
         env = Environment(loader=FileSystemLoader('.')) 
-        template = env.get_template('backend/app/templates/resume_template.html')
+        template = env.get_template('backend/app/resume_template.html')
 
         # Pass the WHOLE tailored_data object as 'resume'
         html_content = template.render(resume=tailored_data)

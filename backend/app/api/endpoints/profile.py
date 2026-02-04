@@ -100,3 +100,44 @@ def get_full_profile(linkedin_url: str = Query(...)):
         "skills": data.get("skills", []),
         "analysis": analysis
     }
+
+# --- Main endpoint: Full profile ---
+@router.get("/profile")
+def get_full_profile(linkedin_url: str = Query(...)):
+    ensure_linkedin_cookies()
+    username = linkedin_url.rstrip("/").split("/")[-1]
+    file_path = DATA_DIR / f"{username}_profile.json"
+
+    # --- Scrape profile if missing ---
+    if not file_path.exists():
+        scrape_my_profile(linkedin_url, str(file_path))
+
+    # --- Run NER pipeline ---
+    run_profile_ner(str(file_path))
+
+    # --- Load profile data ---
+    with open(file_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    about_raw = data.get("about_raw", "")
+    experience_raw = data.get("experience_raw", "")
+
+    # --- Extract skills via Gemini (cache if missing) ---
+    if "skills" not in data or not data["skills"]:
+        structured = extract_skills_with_gemini(about_raw, experience_raw)
+        data["skills"] = structured["skills"]
+        with open(file_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+
+    # --- Optional analysis placeholder ---
+    analysis = data.get("analysis", {"match_score": 0, "missing_skills": []})
+
+    # --- Return full structured profile ---
+    return {
+        "name": data.get("name", ""),
+        "linkedin": linkedin_url,
+        "about_raw": about_raw,
+        "experience_raw": experience_raw,
+        "skills": data.get("skills", []),
+        "analysis": analysis
+    }

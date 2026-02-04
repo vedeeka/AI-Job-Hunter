@@ -1,41 +1,109 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <style>
-        @page { margin: 1cm; }
-        body { font-family: sans-serif; color: #333; }
-        .header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
-        h1 { margin: 0; }
+        @page { margin: 1cm; size: A4; }
+        body { font-family: sans-serif; color: #333; line-height: 1.6; }
+        
+        .header { background: #2c3e50; color: white; padding: 25px; text-align: center; border-radius: 5px; }
+        h1 { margin: 0; font-size: 28px; text-transform: uppercase; }
+        .contact-info { margin-top: 10px; font-size: 14px; opacity: 0.9; }
+        
         .section { margin-top: 20px; }
-        h2 { color: #2980b9; border-bottom: 2px solid #2980b9; }
-        .job { margin-bottom: 15px; }
-        .bold { font-weight: bold; }
+        h2 { color: #2980b9; border-bottom: 2px solid #2980b9; padding-bottom: 5px; font-size: 18px; margin-bottom: 15px; }
+        
+        .item { margin-bottom: 15px; page-break-inside: avoid; }
+        .item-header { display: flex; justify-content: space-between; font-weight: bold; }
+        .item-sub { color: #555; font-style: italic; margin-bottom: 5px; font-size: 14px; }
+        
+        ul { margin: 5px 0 15px 20px; padding: 0; }
+        li { margin-bottom: 5px; }
+        
+        .skill-tag { background: #ecf0f1; color: #2c3e50; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; display: inline-block; margin: 2px; }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>{{ name }}</h1>
-        <p>{{ email }} | {{ phone }} | {{ location }}</p>
+        <div class="contact-info">
+            {{ email }} | {{ phone }} | {{ linkedin }}
+        </div>
     </div>
+
+    {% if summary %}
     <div class="section">
-        <h2>Summary</h2>
+        <h2>Professional Summary</h2>
         <p>{{ summary }}</p>
     </div>
+    {% endif %}
+
+    {% if skills %}
+    <div class="section">
+        <h2>Technical Skills</h2>
+        <div>
+            {% for skill in skills %}
+            <span class="skill-tag">{{ skill }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if experience %}
     <div class="section">
         <h2>Experience</h2>
         {% for job in experience %}
-        <div class="job">
-            <div class="bold">{{ job.title }} @ {{ job.company }}</div>
-            <i>{{ job.dates }}</i>
+        <div class="item">
+            <div class="item-header">
+                <span>{{ job.role }}</span>
+                <span>{{ job.date }}</span>
+            </div>
+            <div class="item-sub">{{ job.company }}</div>
             <p>{{ job.description }}</p>
         </div>
         {% endfor %}
     </div>
+    {% endif %}
+
+    {% if projects %}
+    <div class="section">
+        <h2>Key Projects</h2>
+        {% for proj in projects %}
+        <div class="item">
+            <div class="item-header">
+                <span>{{ proj.name }}</span>
+            </div>
+            <div class="item-sub">Stack: {{ proj.technologies }}</div>
+            <p>{{ proj.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if education %}
     <div class="section">
         <h2>Education</h2>
         {% for edu in education %}
-        <p><b>{{ edu.degree }}</b> - {{ edu.school }} ({{ edu.year }})</p>
+        <div class="item">
+            <div class="item-header">
+                <span>{{ edu.degree }}</span>
+                <span>{{ edu.date }}</span>
+            </div>
+            <div class="item-sub">{{ edu.school }}</div>
+        </div>
         {% endfor %}
     </div>
+    {% endif %}
+
+    {% if achievements %}
+    <div class="section">
+        <h2>Achievements</h2>
+        <ul>
+            {% for ach in achievements %}
+            <li>{{ ach }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
 </body>
 </html>

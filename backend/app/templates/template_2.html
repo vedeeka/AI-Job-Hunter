@@ -1,34 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <style>
         @page { size: A4; margin: 2.5cm; }
-        body { font-family: "Times New Roman", serif; line-height: 1.4; }
-        h1 { text-transform: uppercase; font-size: 16pt; border-bottom: 1px solid black; }
-        h2 { font-size: 24pt; margin: 0; }
-        .contact { font-size: 10pt; margin-bottom: 20px; }
+        body { font-family: "Times New Roman", serif; line-height: 1.4; color: #000; }
+        
+        h1 { text-align: center; font-size: 24pt; margin-bottom: 5px; text-transform: uppercase; }
+        .contact { text-align: center; font-size: 11pt; margin-bottom: 20px; border-bottom: 1px solid #000; padding-bottom: 15px; }
+        
+        h2 { font-size: 14pt; text-transform: uppercase; border-bottom: 1px solid #000; margin-top: 20px; margin-bottom: 10px; padding-bottom: 2px; }
+        
+        .entry { margin-bottom: 12px; page-break-inside: avoid; }
         .bold { font-weight: bold; }
+        .right { float: right; }
+        .clear { clear: both; }
+        
+        p, li { font-size: 12pt; margin: 3px 0; }
+        ul { margin-top: 2px; margin-bottom: 2px; padding-left: 20px; }
     </style>
 </head>
 <body>
-    <center>
-        <h2>{{ name }}</h2>
-        <div class="contact">{{ email }} • {{ phone }} • {{ location }}</div>
-    </center>
+    <h1>{{ name }}</h1>
+    <div class="contact">
+        {{ email }} | {{ phone }} | {{ linkedin }}
+    </div>
 
-    <h1>Professional Summary</h1>
+    {% if summary %}
+    <h2>Professional Summary</h2>
     <p>{{ summary }}</p>
+    {% endif %}
 
-    <h1>Work History</h1>
-    {% for job in experience %}
-        <p>
-            <span class="bold">{{ job.title }}</span> at {{ job.company }}<br>
-            <i>{{ job.dates }}</i><br>
-            {{ job.description }}
-        </p>
-    {% endfor %}
-
-    <h1>Technical Skills</h1>
+    {% if skills %}
+    <h2>Technical Skills</h2>
     <p>{{ skills | join(', ') }}</p>
+    {% endif %}
+
+    {% if experience %}
+    <h2>Work Experience</h2>
+    {% for job in experience %}
+    <div class="entry">
+        <div>
+            <span class="bold">{{ job.role }}</span>, {{ job.company }}
+            <span class="right">{{ job.date }}</span>
+        </div>
+        <p>{{ job.description }}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if projects %}
+    <h2>Key Projects</h2>
+    {% for proj in projects %}
+    <div class="entry">
+        <div>
+            <span class="bold">{{ proj.name }}</span>
+            <span class="right"><i>{{ proj.technologies }}</i></span>
+        </div>
+        <p>{{ proj.description }}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if education %}
+    <h2>Education</h2>
+    {% for edu in education %}
+    <div class="entry">
+        <div>
+            <span class="bold">{{ edu.school }}</span>
+            <span class="right">{{ edu.date }}</span>
+        </div>
+        <div>{{ edu.degree }}</div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if achievements %}
+    <h2>Achievements</h2>
+    <ul>
+        {% for item in achievements %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 </body>
 </html>
