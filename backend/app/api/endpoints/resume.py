@@ -297,6 +297,7 @@ async def ai_edit_resume(payload: EditResumeRequest):
     
     INSTRUCTIONS:
     1. Update the JSON strictly based on the User Command.
+
     2. The JSON schema must strictly follow these keys:
        - name, email, phone, linkedin (Strings)
        - summary (String)
@@ -309,6 +310,7 @@ async def ai_edit_resume(payload: EditResumeRequest):
     
     3. If the user says "Add project X", add a new object to the 'projects' array.
     4. Return ONLY the valid JSON data. No markdown, no explanations.
+    5. the most important point is to ask questions in every reponse.
     """
     
     try:

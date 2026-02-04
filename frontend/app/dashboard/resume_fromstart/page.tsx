@@ -190,28 +190,45 @@ export default function ResumeApp() {
     setLoading(true);
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/ai/edit-resume', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          current_data: resumeData,
-          user_input: userMsg
-        })
-      });
+     const response = await fetch('http://127.0.0.1:8000/ai/edit-resume', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    current_data: resumeData,
+    user_input: userMsg
+  })
+});
 
-      if (!response.ok) throw new Error("AI Request Failed");
+if (!response.ok) throw new Error("AI Request Failed");
 
-      const newData = await response.json();
-      setResumeData(newData);
-      setMessages(prev => [...prev, { role: 'ai', text: "Done! I've updated your resume." }]);
+const result = await response.json();
 
+// 🔹 If it's a QUESTION → show AI message in chat
+if (result.type === "question") {
+  setMessages(prev => [
+    ...prev,
+    { role: 'ai', text: result.message }
+  ]);
+}
+
+// 🔹 If it's an EDIT → update resume + confirmation
+if (result.type === "edit") {
+  setResumeData(result.updated_data);
+  setMessages(prev => [
+    ...prev,
+    { role: 'ai', text: "Done. Resume updated." }
+  ]);
+}
     } catch (error) {
-      console.error(error);
-      setMessages(prev => [...prev, { role: 'ai', text: "Sorry, something went wrong with the AI." }]);
+      console.error("AI Error:", error);
+      setMessages(prev => [
+        ...prev,
+        { role: 'ai', text: "Sorry, something went wrong processing your request." }
+      ]);
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   if (step === 'selection') {
     return (
@@ -297,221 +314,172 @@ export default function ResumeApp() {
   }
 
   return (
-    <div style={{ display: 'flex', height: '100vh', fontFamily: 'sans-serif', background: '#fff' }}>
-      {/* LEFT: Chat Panel */}
+   <div style={{
+  display: 'flex',
+  height: '100vh',
+  background: '#f1f5f9',
+  fontFamily: 'Inter, system-ui, sans-serif',
+  overflow: 'hidden'
+}}>
+  
+  {/* LEFT: Slim Sidebar (Control Panel) */}
+  <div style={{
+    width: '320px', // Fixed small width
+    display: 'flex',
+    flexDirection: 'column',
+    background: '#ffffff',
+    borderRight: '1px solid #e2e8f0',
+    zIndex: 10
+  }}>
+    <div style={{ padding: '20px 16px', borderBottom: '1px solid #f1f5f9' }}>
+      <h2 style={{ margin: 0, fontSize: '16px', color: '#1e293b', fontWeight: '600' }}>Editor</h2>
+    </div>
+
+    {/* Compact Chat Window */}
+    <div style={{
+      flex: 1,
+      overflowY: 'auto',
+      padding: '16px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '12px',
+      background: '#fafafa'
+    }}>
+      {messages.map((msg, i) => (
+        <div key={i} style={{
+          alignSelf: msg.role === 'ai' ? 'flex-start' : 'flex-end',
+          background: msg.role === 'ai' ? '#fff' : '#7c3aed',
+          color: msg.role === 'ai' ? '#475569' : '#fff',
+          padding: '10px 12px',
+          borderRadius: '12px',
+          maxWidth: '90%',
+          fontSize: '13px',
+          lineHeight: '1.4',
+          boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+          border: msg.role === 'ai' ? '1px solid #e2e8f0' : 'none'
+        }}>
+          {msg.text}
+        </div>
+      ))}
+      <div ref={chatEndRef} />
+    </div>
+
+    {/* Compact Input Area */}
+    <div style={{ padding: '16px', borderTop: '1px solid #f1f5f9' }}>
       <div style={{
-        width: '35%',
-        background: '#fff',
         display: 'flex',
         flexDirection: 'column',
-        borderRight: '2px solid #e9d5ff',
-        overflow: 'hidden'
+        gap: '8px'
       }}>
-        {/* Header */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '15px',
-          padding: '20px',
-          borderBottom: '2px solid #e9d5ff',
-          background: 'linear-gradient(135deg, #faf5ff 0%, #f3f0ff 100%)'
-        }}>
-          <button 
-            onClick={() => setStep('selection')}
-            style={{
-              cursor: 'pointer',
-              padding: '8px 12px',
-              background: 'transparent',
-              border: '2px solid #e9d5ff',
-              borderRadius: '6px',
-              color: '#7c3aed',
-              fontWeight: 'bold',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '5px',
-              transition: 'all 0.2s'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#f3f0ff';
-              e.currentTarget.style.borderColor = '#c4b5fd';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = '#e9d5ff';
-            }}
-          >
-            <ArrowLeft size={18} />
-            Back
-          </button>
-          <h2 style={{ margin: 0, color: '#1e1b4b', fontSize: '20px', fontWeight: 'bold' }}>AI Editor</h2>
-        </div>
-
-        {/* Chat Window */}
-        <div style={{
-          flex: 1,
-          overflowY: 'auto',
-          padding: '20px',
-          background: '#faf5ff',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '12px'
-        }}>
-          {messages.map((msg, i) => (
-            <div key={i} style={{
-              alignSelf: msg.role === 'ai' ? 'flex-start' : 'flex-end',
-              background: msg.role === 'ai' ? '#f3f0ff' : 'linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)',
-              color: msg.role === 'ai' ? '#1e1b4b' : '#fff',
-              padding: '12px 16px',
-              borderRadius: '12px',
-              maxWidth: '85%',
-              wordWrap: 'break-word',
-              fontSize: '14px',
-              lineHeight: '1.5',
-              border: msg.role === 'ai' ? '1px solid #e9d5ff' : 'none'
-            }}>
-              {msg.text}
-            </div>
-          ))}
-          <div ref={chatEndRef} />
-        </div>
-
-        {/* Input Area */}
-        <div style={{
-          display: 'flex',
-          gap: '10px',
-          padding: '20px',
-          borderTop: '2px solid #e9d5ff',
-          background: '#fff'
-        }}>
-          <textarea
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            placeholder="Ex: 'Add SQL to skills' or 'Update my experience at Tech Corp'"
-            style={{
-              flex: 1,
-              padding: '12px',
-              borderRadius: '8px',
-              border: '2px solid #e9d5ff',
-              height: '60px',
-              resize: 'none',
-              fontFamily: 'inherit',
-              fontSize: '14px',
-              color: '#1e1b4b',
-              background: '#faf5ff',
-              transition: 'border-color 0.2s'
-            }}
-            onFocus={(e) => e.target.style.borderColor = '#7c3aed'}
-            onBlur={(e) => e.target.style.borderColor = '#e9d5ff'}
-            onKeyDown={e => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleChatSend())}
-          />
-          <button 
-            onClick={handleChatSend}
-            disabled={loading}
-            style={{
-              width: '50px',
-              background: loading ? 'rgba(124, 58, 237, 0.5)' : 'linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              fontWeight: 'bold',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transition: 'all 0.2s'
-            }}
-            onMouseEnter={(e) => {
-              if (!loading) {
-                e.currentTarget.style.boxShadow = '0 6px 12px rgba(124, 58, 237, 0.3)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = 'none';
-            }}
-          >
-            {loading ? '...' : <Send size={20} />}
-          </button>
-        </div>
-      </div>
-
-      {/* RIGHT: Preview Panel */}
-      <div style={{
-        width: '65%',
-        background: 'linear-gradient(135deg, #2d1b4e 0%, #3d2463 100%)',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '20px',
-        overflow: 'hidden'
-      }}>
-        {/* Preview Header */}
-        <div style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '20px',
-          maxWidth: '210mm'
-        }}>
-          <div style={{ color: '#fff', fontWeight: 'bold', fontSize: '18px' }}>Live Preview</div>
-          <button 
-            onClick={handleDownload}
-            disabled={downloading}
-            style={{
-              background: downloading ? 'rgba(255, 152, 0, 0.5)' : 'linear-gradient(135deg, #ff9800 0%, #f57c00 100%)',
-              color: '#fff',
-              border: 'none',
-              padding: '10px 20px',
-              borderRadius: '8px',
-              fontWeight: 'bold',
-              cursor: downloading ? 'not-allowed' : 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              fontSize: '14px',
-              transition: 'all 0.2s'
-            }}
-            onMouseEnter={(e) => {
-              if (!downloading) {
-                e.currentTarget.style.boxShadow = '0 6px 12px rgba(255, 152, 0, 0.3)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = 'none';
-            }}
-          >
-            <Download size={18} />
-            {downloading ? 'Generating...' : 'Download PDF'}
-          </button>
-        </div>
-
-        {/* Paper Wrapper */}
-        <div style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'flex-start',
-          overflow: 'auto',
-          paddingTop: '10px',
-          paddingBottom: '10px'
-        }}>
-          <iframe 
-            srcDoc={previewHtml}
-            style={{
-              width: '210mm',
-              height: '297mm',
-              minHeight: '297mm',
-              background: '#fff',
-              border: 'none',
-              boxShadow: '0 0 40px rgba(0, 0, 0, 0.5)',
-              borderRadius: '4px',
-              flexShrink: 0
-            }}
-            title="Live Preview"
-          />
-        </div>
+        <textarea
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          placeholder="Ask AI to edit..."
+          style={{
+            width: '100%',
+            height: '80px',
+            padding: '10px',
+            borderRadius: '8px',
+            color: '#1e293b',
+            border: '1px solid #e2e8f0',
+            fontSize: '13px',
+            resize: 'none',
+            outline: 'none',
+            boxSizing: 'border-box'
+          }}
+        />
+        <button 
+          onClick={handleChatSend}
+          disabled={loading}
+          style={{
+            width: '100%',
+            padding: '10px',
+            background: '#7c3aed',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '8px',
+            fontWeight: '600',
+            cursor: 'pointer',
+            fontSize: '13px'
+          }}
+        >
+          {loading ? 'Processing...' : 'Update Resume'}
+        </button>
       </div>
     </div>
+  </div>
+
+  {/* RIGHT: Dominant Preview Panel */}
+  <div style={{
+    flex: 1,
+    background: '#1e293b', 
+    backgroundImage: 'radial-gradient(circle at center, #334155 0%, #0f172a 100%)',
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'relative'
+  }}>
+    
+    {/* Floating Header Actions */}
+    <div style={{
+      padding: '15px 30px',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      background: 'rgba(15, 23, 42, 0.6)',
+      backdropFilter: 'blur(8px)',
+      borderBottom: '1px solid rgba(255,255,255,0.1)'
+    }}>
+      <span style={{ color: '#94a3b8', fontSize: '12px', fontWeight: 'bold', letterSpacing: '1px' }}>LIVE A4 PREVIEW</span>
+      <button 
+        onClick={handleDownload}
+        style={{
+          background: '#f59e0b',
+          color: '#fff',
+          border: 'none',
+          padding: '8px 16px',
+          borderRadius: '6px',
+          fontWeight: 'bold',
+          cursor: 'pointer',
+          fontSize: '13px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px'
+        }}
+      >
+        <Download size={16} /> Export PDF
+      </button>
+    </div>
+
+    {/* Scrollable Canvas Area */}
+    <div style={{
+      flex: 1,
+      overflowY: 'auto',
+      padding: '40px 20px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      scrollbarWidth: 'thin',
+      scrollbarColor: '#475569 transparent'
+    }}>
+      <div style={{
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)',
+        borderRadius: '2px',
+        background: '#fff',
+        lineHeight: 0 // Removes ghost whitespace
+      }}>
+        <iframe 
+          srcDoc={previewHtml}
+          style={{
+            width: '210mm',
+            height: '297mm',
+            border: 'none',
+            display: 'block'
+          }}
+          title="Live Preview"
+        />
+      </div>
+    </div>
+  </div>
+</div>
   );
 }

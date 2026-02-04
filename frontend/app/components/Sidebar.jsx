@@ -35,6 +35,7 @@ const Sidebar = () => {
       label: 'RESUME',
       items: [
         { name: 'Resume Doctor', icon: FileText, path: '/dashboard/resume' },
+        { name: 'Resume Builder', icon: Network, path: '/dashboard/resume_fromstart' },
       ]
     },
     {
