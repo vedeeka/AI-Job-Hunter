@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ name }} - Resume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Main Grid Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        /* Left Column - Profile & Contact */
+        .left-column {
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+            padding: 50px 40px;
+            position: relative;
+        }
+
+        .left-column::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.2) 100%);
+        }
+
+        .profile-image {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            border: 4px solid #ecf0f1;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-name {
+            font-size: 26px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .profile-tagline {
+            font-size: 12px;
+            text-align: center;
+            color: #bdc3c7;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 35px;
+        }
+
+        /* Contact Info Section */
+        .contact-section {
+            margin-bottom: 35px;
+        }
+
+        .contact-title {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #3498db;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(52, 152, 219, 0.3);
+        }
+
+        .contact-item {
+            margin-bottom: 12px;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .contact-label {
+            font-weight: 700;
+            color: #3498db;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .contact-value {
+            color: #ecf0f1;
+            word-break: break-word;
+        }
+
+        .contact-value a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-value a:hover {
+            color: #5dade2;
+            text-decoration: underline;
+        }
+
+        /* Skills Section in Left */
+        .skills-section {
+            margin-bottom: 35px;
+        }
+
+        .skills-title {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #2ecc71;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(46, 204, 113, 0.3);
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-item {
+            background: rgba(52, 152, 219, 0.2);
+            color: #ecf0f1;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            border: 1px solid rgba(52, 152, 219, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: rgba(52, 152, 219, 0.4);
+            border-color: #3498db;
+            transform: translateY(-2px);
+        }
+
+        /* Right Column - Content */
+        .right-column {
+            padding: 50px 40px;
+            background: #f8f9fa;
+        }
+
+        /* Summary Box */
+        .summary-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 35px;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+        }
+
+        .summary-label {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .summary-text {
+            font-size: 13px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        /* Section Heading */
+        .section-heading {
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #2c3e50;
+            margin: 35px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .section-heading::before {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #764ba2;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .timeline-item {
+            margin-bottom: 28px;
+            position: relative;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -27px;
+            top: 5px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            background: #764ba2;
+            box-shadow: 0 0 0 3px #764ba2;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .timeline-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .timeline-company {
+            font-size: 13px;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .timeline-date {
+            font-size: 11px;
+            color: #95a5a6;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .timeline-description {
+            font-size: 12px;
+            color: #555;
+            line-height: 1.7;
+            margin-top: 8px;
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 3px solid #2ecc71;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .project-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 18px;
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .project-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .project-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 6px;
+        }
+
+        .project-tech {
+            font-size: 10px;
+            color: #667eea;
+            background: #f0f4ff;
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .project-description {
+            font-size: 12px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Education Cards */
+        .education-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .education-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #e74c3c;
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.2);
+        }
+
+        .education-school {
+            font-size: 13px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 6px;
+        }
+
+        .education-degree {
+            font-size: 12px;
+            color: #e74c3c;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .education-date {
+            font-size: 11px;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        /* Achievements */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .achievement-badge {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.5;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
+        }
+
+        .achievement-badge:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .achievement-badge::before {
+            content: '⭐ ';
+            display: block;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .left-column {
+                padding: 40px 30px;
+            }
+
+            .right-column {
+                padding: 40px 30px;
+            }
+
+            .left-column::after {
+                display: none;
+            }
+
+            .projects-grid,
+            .education-cards {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .left-column {
+                padding: 30px 25px;
+            }
+
+            .right-column {
+                padding: 30px 25px;
+            }
+
+            .profile-image {
+                width: 110px;
+                height: 110px;
+                font-size: 50px;
+            }
+
+            .profile-name {
+                font-size: 22px;
+            }
+
+            .section-heading {
+                font-size: 13px;
+            }
+
+            .timeline-header {
+                flex-direction: column;
+            }
+
+            .projects-grid,
+            .education-cards,
+            .achievements-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 0;
+            }
+
+            .left-column,
+            .right-column {
+                padding: 25px 20px;
+            }
+
+            .profile-image {
+                width: 100px;
+                height: 100px;
+                font-size: 45px;
+            }
+
+            .profile-name {
+                font-size: 20px;
+            }
+
+            .timeline {
+                padding-left: 20px;
+            }
+
+            .timeline-dot {
+                left: -19px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Main Grid Layout -->
+        <div class="main-grid">
+            <!-- Left Column - Profile & Contact -->
+            <div class="left-column">
+                <div class="profile-image">👨‍💼</div>
+                <div class="profile-name">{{ name }}</div>
+                <div class="profile-tagline">Professional Profile</div>
+
+                <!-- Contact Section -->
+                <div class="contact-section">
+                    <div class="contact-title">Contact Info</div>
+                    {% if email %}
+                    <div class="contact-item">
+                        <span class="contact-label">Email</span>
+                        <div class="contact-value">
+                            <a href="mailto:{{ email }}">{{ email }}</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if phone %}
+                    <div class="contact-item">
+                        <span class="contact-label">Phone</span>
+                        <div class="contact-value">{{ phone }}</div>
+                    </div>
+                    {% endif %}
+                    {% if linkedin %}
+                    <div class="contact-item">
+                        <span class="contact-label">LinkedIn</span>
+                        <div class="contact-value">
+                            <a href="https://linkedin.com/in/{{ linkedin }}" target="_blank">{{ linkedin }}</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Skills Section -->
+                {% if skills %}
+                <div class="skills-section">
+                    <div class="skills-title">Core Skills</div>
+                    <div class="skills-list">
+                        {% for skill in skills %}
+                        <span class="skill-item">{{ skill }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Right Column - Main Content -->
+            <div class="right-column">
+                <!-- Summary -->
+                {% if summary %}
+                <div class="summary-box">
+                    <div class="summary-label">Professional Summary</div>
+                    <p class="summary-text">{{ summary }}</p>
+                </div>
+                {% endif %}
+
+                <!-- Experience Timeline -->
+                {% if experience %}
+                <h2 class="section-heading">Experience</h2>
+                <div class="timeline">
+                    {% for job in experience %}
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-header">
+                            <div>
+                                <div class="timeline-title">{{ job.role }}</div>
+                                <div class="timeline-company">{{ job.company }}</div>
+                            </div>
+                            <div class="timeline-date">{{ job.date }}</div>
+                        </div>
+                        <p class="timeline-description">{{ job.description }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Projects Grid -->
+                {% if projects %}
+                <h2 class="section-heading">Projects</h2>
+                <div class="projects-grid">
+                    {% for proj in projects %}
+                    <div class="project-card">
+                        <div class="project-title">{{ proj.name }}</div>
+                        {% if proj.technologies %}
+                        <div class="project-tech">{{ proj.technologies }}</div>
+                        {% endif %}
+                        <p class="project-description">{{ proj.description }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Education Cards -->
+                {% if education %}
+                <h2 class="section-heading">Education</h2>
+                <div class="education-cards">
+                    {% for edu in education %}
+                    <div class="education-card">
+                        <div class="education-school">{{ edu.school }}</div>
+                        <div class="education-degree">{{ edu.degree }}</div>
+                        <div class="education-date">{{ edu.date }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Achievements -->
+                {% if achievements %}
+                <h2 class="section-heading">Achievements</h2>
+                <div class="achievements-grid">
+                    {% for item in achievements %}
+                    <div class="achievement-badge">{{ item }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
