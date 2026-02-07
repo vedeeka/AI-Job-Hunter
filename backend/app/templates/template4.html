@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ name }} - Professional Resume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Calibri', 'Georgia', serif;
+            color: #333333;
+            background-color: #e8e8e8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #1f3a5f 0%, #2d4a6b 100%);
+            color: #d4af6b;
+            padding: 50px 40px;
+            text-align: center;
+            border-bottom: 3px solid #d4af6b;
+        }
+
+        .header-name {
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+            color: #d4af6b;
+        }
+
+        .header-title {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #d4af6b;
+            font-weight: 500;
+        }
+
+        /* Main Content Grid */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 0;
+        }
+
+        /* Left Sidebar */
+        .left-sidebar {
+            background-color: #f8f8f8;
+            padding: 40px 25px;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        /* Right Main Content */
+        .right-content {
+            padding: 40px 35px;
+        }
+
+        /* Sidebar Section Heading */
+        .sidebar-section-heading {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #1f3a5f;
+            margin: 28px 0 18px 0;
+            letter-spacing: 1.5px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #d4af6b;
+        }
+
+        .sidebar-section-heading:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Contact Section */
+        .contact-item {
+            font-size: 12px;
+            color: #555555;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .contact-icon {
+            flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: #333333;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            margin-top: 2px;
+        }
+
+        .contact-value {
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        .contact-value a {
+            color: #1f3a5f;
+            text-decoration: none;
+        }
+
+        .contact-value a:hover {
+            text-decoration: underline;
+        }
+
+        /* Education Section */
+        .education-item {
+            margin-bottom: 20px;
+        }
+
+        .education-degree {
+            font-size: 12px;
+            font-weight: 700;
+            color: #1f3a5f;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+        }
+
+        .education-school {
+            font-size: 11px;
+            color: #555555;
+            margin-bottom: 2px;
+        }
+
+        .education-years {
+            font-size: 11px;
+            color: #999999;
+        }
+
+        /* Skills Section */
+        .skills-list {
+            list-style: none;
+        }
+
+        .skills-list li {
+            font-size: 12px;
+            color: #555555;
+            margin-bottom: 10px;
+            padding-left: 16px;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .skills-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #1f3a5f;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        /* Main Content Section Heading */
+        .main-section-heading {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #1f3a5f;
+            margin: 30px 0 20px 0;
+            letter-spacing: 1.5px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #d4af6b;
+        }
+
+        .main-section-heading:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Profile Section */
+        .profile-text {
+            font-size: 12px;
+            color: #555555;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+
+        /* Experience Item */
+        .experience-item {
+            margin-bottom: 26px;
+        }
+
+        .job-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1f3a5f;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+        }
+
+        .job-company-info {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .job-company-info strong {
+            color: #1f3a5f;
+        }
+
+        .job-description {
+            font-size: 12px;
+            color: #555555;
+            line-height: 1.7;
+        }
+
+        .job-description ul {
+            list-style: none;
+            margin-left: 0;
+            margin-top: 8px;
+        }
+
+        .job-description li {
+            margin-bottom: 8px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .job-description li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #1f3a5f;
+            font-weight: bold;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: #ffffff;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .content-wrapper {
+                grid-template-columns: 180px 1fr;
+            }
+
+            .left-sidebar {
+                padding: 35px 20px;
+            }
+
+            .right-content {
+                padding: 35px 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+            }
+
+            .header {
+                padding: 40px 30px;
+            }
+
+            .header-name {
+                font-size: 36px;
+                letter-spacing: 2px;
+            }
+
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .left-sidebar {
+                border-right: none;
+                border-bottom: 2px solid #e0e0e0;
+                padding: 30px 30px;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .sidebar-section-heading {
+                grid-column: 1 / -1;
+            }
+
+            .right-content {
+                padding: 30px;
+            }
+
+            .contact-item {
+                font-size: 11px;
+            }
+
+            .main-section-heading,
+            .sidebar-section-heading {
+                font-size: 11px;
+            }
+
+            .job-title {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header-name {
+                font-size: 28px;
+                letter-spacing: 1px;
+            }
+
+            .header-title {
+                font-size: 11px;
+            }
+
+            .left-sidebar {
+                grid-template-columns: 1fr;
+                padding: 20px;
+                gap: 20px;
+            }
+
+            .right-content {
+                padding: 20px;
+            }
+
+            .contact-item {
+                font-size: 10px;
+            }
+
+            .profile-text,
+            .job-description {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="header-name">{{ name }}</h1>
+            <p class="header-title">{% if job_title %}{{ job_title }}{% else %}Your Professional Title{% endif %}</p>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="content-wrapper">
+            <!-- Left Sidebar -->
+            <div class="left-sidebar">
+                <!-- Contact Section -->
+                <div>
+                    <h2 class="sidebar-section-heading">Contact</h2>
+                    {% if phone %}
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-value">{{ phone }}</div>
+                    </div>
+                    {% endif %}
+                    {% if email %}
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-value">
+                            <a href="mailto:{{ email }}">{{ email }}</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if location %}
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-value">{{ location }}</div>
+                    </div>
+                    {% endif %}
+                    {% if linkedin %}
+                    <div class="contact-item">
+                        <div class="contact-icon">🔗</div>
+                        <div class="contact-value">
+                            <a href="https://linkedin.com/in/{{ linkedin }}" target="_blank">{{ linkedin }}</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Education Section -->
+                {% if education %}
+                <div>
+                    <h2 class="sidebar-section-heading">Education</h2>
+                    {% for edu in education %}
+                    <div class="education-item">
+                        <div class="education-degree">{{ edu.degree }}</div>
+                        <div class="education-school">{{ edu.school }}</div>
+                        <div class="education-years">{{ edu.date }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Skills Section -->
+                {% if skills %}
+                <div>
+                    <h2 class="sidebar-section-heading">Skills</h2>
+                    <ul class="skills-list">
+                        {% for skill in skills %}
+                        <li>{{ skill }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Right Content -->
+            <div class="right-content">
+                <!-- Profile Section -->
+                {% if summary %}
+                <h2 class="main-section-heading">Profile</h2>
+                <p class="profile-text">{{ summary }}</p>
+                {% endif %}
+
+                <!-- Experience Section -->
+                {% if experience %}
+                <h2 class="main-section-heading">Professional Experience</h2>
+                {% for job in experience %}
+                <div class="experience-item">
+                    <div class="job-title">{{ job.role }}</div>
+                    <div class="job-company-info">
+                        <strong>{{ job.company }}</strong>
+                        {% if job.location %}| {{ job.location }}{% endif %} 
+                        | {{ job.date }}
+                    </div>
+                    <div class="job-description">
+                        {% if job.description is string %}
+                            <p>{{ job.description }}</p>
+                        {% else %}
+                            <ul>
+                                {% for point in job.description %}
+                                <li>{{ point }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                <!-- Projects Section (Optional) -->
+                {% if projects %}
+                <h2 class="main-section-heading">Projects</h2>
+                {% for proj in projects %}
+                <div class="experience-item">
+                    <div class="job-title">{{ proj.name }}</div>
+                    {% if proj.technologies %}
+                    <div class="job-company-info">
+                        <strong>Technologies:</strong> {{ proj.technologies }}
+                    </div>
+                    {% endif %}
+                    <div class="job-description">
+                        {{ proj.description }}
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
