@@ -234,8 +234,4 @@ class RobustScraper:
         return enriched_data
 
 
-if __name__ == "__main__":
-    bot = RobustScraper("Software Companies in ponda goa")
-    maps_data = bot.scrape_google_maps()
-    final_data = bot.run_stage_2_enrichment(maps_data)
-    print(f"\nPipeline Complete. Data saved to {OUTPUT_FILE}")
+

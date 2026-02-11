@@ -15,7 +15,7 @@ interface BusinessResult {
 }
 
 export default function ScraperPage() {
-  const [query, setQuery] = useState('Software Companies in Ponda Goa');
+  const [query, setQuery] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [results, setResults] = useState<BusinessResult[]>([]);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
