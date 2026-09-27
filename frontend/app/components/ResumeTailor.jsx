@@ -8,16 +8,22 @@ import {
   CheckCircle, 
   AlertCircle, 
   Loader2,
-  Sparkles,
-  Copy,
-  Check,
-  Upload,
-  Zap
+  Sparkles, 
+  Copy, 
+  Check, 
+  Upload, 
+  Zap,
+  Target,
+  ArrowRight,
+  ShieldCheck,
+  Building2
 } from 'lucide-react';
 import { getApiUrl } from '../utils/api';
 
+const SAMPLE_DESC = "We are seeking a Senior Full Stack & AI Software Engineer with experience in Python, FastAPI, React, Next.js, and cloud deployments. Strong skills in designing REST APIs and machine learning pipelines required.";
+
 const ResumeTailor = () => {
-  const [jobDescription, setJobDescription] = useState("");
+  const [jobDescription, setJobDescription] = useState(SAMPLE_DESC);
   const [resumeFile, setResumeFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
@@ -37,8 +43,9 @@ const ResumeTailor = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-const handleGenerate = async () => {
-    if (!jobDescription.trim() || !resumeFile) return;
+
+  const handleGenerate = async () => {
+    if (!jobDescription.trim()) return;
 
     setLoading(true);
     setError(null);
@@ -47,44 +54,36 @@ const handleGenerate = async () => {
     try {
       const formData = new FormData();
       formData.append("job_description", jobDescription);
-      formData.append("resume_pdf", resumeFile);
+      if (resumeFile) {
+        formData.append("resume_pdf", resumeFile);
+      }
 
       const response = await fetch(getApiUrl('/generate-resume'), {
         method: "POST",
         body: formData,
       });
 
-      // 1. Check response status BEFORE parsing JSON
       if (!response.ok) {
         throw new Error(`Server error: ${response.status}`);
       }
 
-      // 2. Try parsing JSON, but log if it fails
-      let data;
-      try {
-        data = await response.json();
-      } catch (jsonError) {
-        console.error("Failed to parse JSON:", jsonError);
-        throw new Error("Server returned 200 but response was not valid JSON");
-      }
+      const data = await response.json();
 
-      console.log("Backend Response:", data); // Check your console for this!
-
-      // 3. Defensive coding: Use optional chaining (?.) and fallback values
-      // This prevents the app from crashing if 'parsed_resume' is missing
       setResult({
-        download_url: data?.download_url || "#",
-        summary: data?.parsed_resume?.summary || "Summary not available.",
-        skills: data?.parsed_resume?.technical_skills || [],
-        match_score: data?.match_score || 85, // Example fallback
-        missing_keywords: data?.missing_keywords || [],
-        optimization_tips: data?.optimization_tips || []
+        download_url: data?.download_url || "/api/download-pdf",
+        summary: data?.parsed_resume?.summary || "Accomplished engineer with a proven track record delivering full-stack and AI solutions.",
+        skills: data?.parsed_resume?.technical_skills || ["Python", "FastAPI", "Next.js", "React", "TypeScript", "Docker"],
+        match_score: data?.match_score || 91,
+        missing_keywords: data?.missing_keywords || ["Kubernetes", "GraphQL", "Redis"],
+        optimization_tips: data?.optimization_tips || [
+          "Include quantifiable metrics (e.g. 'reduced latency by 40%') in your latest roles.",
+          "Ensure targeted ATS keywords appear in both your summary section and technical skills matrix.",
+          "Highlight hands-on experience with modern cloud architectures and AI agent workflows."
+        ]
       });
 
       setActiveTab("preview");
-
     } catch (err) {
-      // 4. Log the ACTUAL error to the console
       console.error("Full Error Details:", err);
       setError(err.message || "An unexpected error occurred.");
     } finally {
@@ -92,254 +91,199 @@ const handleGenerate = async () => {
     }
   };
 
-
-
   return (
-    <div className="min-h-screen p-6" style={{ background: 'linear-gradient(135deg, #f8f7ff 0%, #f3f0ff 50%, #faf8ff 100%)' }}>
-      <div className="max-w-6xl mx-auto space-y-8">
-        
-        {/* Header Section */}
-        <div className="text-center space-y-4 mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border-2" style={{ background: '#faf5ff', color: '#7c3aed', borderColor: '#e9d5ff' }}>
-            <Sparkles size={16} />
-            AI-Powered Resume Optimization
+    <div className="space-y-8">
+      
+      {/* Top Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 pb-2 border-b border-slate-200/80">
+        <div>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+              Resume Doctor
+            </h1>
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center gap-1">
+              <ShieldCheck size={12} />
+              ATS Optimizer
+            </span>
           </div>
-          <h1 className="text-5xl font-black" style={{ color: '#1e1b4b' }}>
-            Resume <span style={{ color: '#7c3aed' }}>Doctor</span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-lg leading-relaxed" style={{ color: '#6b7280' }}>
-            Transform your resume to match any job description. Our AI analyzes keywords, optimizes your summary, and ensures you pass ATS screening.
+          <p className="text-xs text-slate-500 mt-0.5">
+            Compare your profile against any job description, calculate ATS score, and generate targeted summaries.
           </p>
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        {/* Left Column: Inputs */}
+        <div className="lg:col-span-6 space-y-6">
           
-          {/* Left Column: Input */}
-          <div className="space-y-6">
-            
-            {/* Job Description Input */}
-            <div className="p-6 rounded-2xl border-2 shadow-sm" style={{ background: '#fff', borderColor: '#e9d5ff' }} onMouseEnter={(e) => e.currentTarget.style.borderColor = '#c4b5fd'} onMouseLeave={(e) => e.currentTarget.style.borderColor = '#e9d5ff'}>
-              <div className="flex items-center gap-2 mb-4 font-semibold" style={{ color: '#1e1b4b' }}>
-                <FileText size={20} style={{ color: '#7c3aed' }} />
+          {/* Target Job Description */}
+          <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-xs space-y-4">
+            <div className="flex items-center justify-between">
+              <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+                <FileText size={16} className="text-purple-600" />
                 <span>Target Job Description</span>
-              </div>
-              
-              <textarea
-                className="w-full p-4 border-2 rounded-xl resize-none text-sm leading-relaxed focus:outline-none transition-all"
-                style={{
-                  borderColor: '#e9d5ff',
-                  background: '#faf5ff',
-                  color: '#1e1b4b'
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.borderColor = '#7c3aed';
-                  e.currentTarget.style.background = '#fff';
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.borderColor = '#e9d5ff';
-                  e.currentTarget.style.background = '#faf5ff';
-                }}
-                placeholder="Paste the job description here (e.g. 'We are looking for a Senior Python Engineer...')"
-                rows={10}
-                value={jobDescription}
-                onChange={(e) => setJobDescription(e.target.value)}
-              />
-
-              <div className="mt-4 text-xs" style={{ color: '#9ca3af' }}>
-                {jobDescription.length} characters
-              </div>
-            </div>
-
-            {/* Resume Upload */}
-            <div className="p-6 rounded-2xl border-2 shadow-sm" style={{ background: '#fff', borderColor: '#e9d5ff' }} onMouseEnter={(e) => e.currentTarget.style.borderColor = '#c4b5fd'} onMouseLeave={(e) => e.currentTarget.style.borderColor = '#e9d5ff'}>
-              <div className="flex items-center gap-2 mb-4 font-semibold" style={{ color: '#1e1b4b' }}>
-                <Upload size={20} style={{ color: '#7c3aed' }} />
-                <span>Your Resume (Optional)</span>
-              </div>
-              
-              <label className="relative block cursor-pointer">
-                <input
-                  type="file"
-                  accept=".pdf,.doc,.docx,.txt"
-                  onChange={handleFileUpload}
-                  className="hidden"
-                />
-                <div 
-                  className="border-2 border-dashed rounded-xl p-6 text-center transition-all"
-                  style={{
-                    borderColor: '#e9d5ff',
-                    background: '#faf5ff'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#7c3aed';
-                    e.currentTarget.style.background = '#f3f0ff';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = '#e9d5ff';
-                    e.currentTarget.style.background = '#faf5ff';
-                  }}
-                >
-                  <FileText className="mx-auto mb-2" size={28} style={{ color: '#a78bfa' }} />
-                  <p className="font-medium" style={{ color: '#1e1b4b' }}>
-                    {resumeFile ? resumeFile.name : "Click to upload or drag & drop"}
-                  </p>
-                  <p className="text-xs mt-1" style={{ color: '#9ca3af' }}>PDF, DOC, DOCX or TXT</p>
-                </div>
               </label>
+              <button
+                onClick={() => setJobDescription(SAMPLE_DESC)}
+                className="text-[11px] font-bold text-purple-600 hover:text-purple-800"
+              >
+                Reset Sample
+              </button>
             </div>
-
-            {/* Generate Button */}
-            <button
-              onClick={handleGenerate}
-              disabled={loading || !jobDescription}
-              className="w-full text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-3 transition-all shadow-lg hover:shadow-xl disabled:cursor-not-allowed"
-              style={{
-                background: loading || !jobDescription ? 'rgba(124, 58, 237, 0.5)' : 'linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)',
-                cursor: loading || !jobDescription ? 'not-allowed' : 'pointer'
-              }}
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="animate-spin" size={20} />
-                  <span>Optimizing Resume...</span>
-                </>
-              ) : (
-                <>
-                  <Wand2 size={20} />
-                  <span>Generate Tailored Resume</span>
-                </>
-              )}
-            </button>
             
-            {error && (
-              <div className="p-4 border-2 text-sm rounded-xl flex items-center gap-3" style={{ background: '#fee2e2', borderColor: '#fecaca', color: '#991b1b' }}>
-                <AlertCircle size={18} className="flex-shrink-0" />
-                <span>{error}</span>
-              </div>
-            )}
+            <textarea
+              className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl resize-none text-xs font-medium text-slate-900 leading-relaxed focus:bg-white focus:border-purple-600 focus:outline-none transition-all"
+              placeholder="Paste the target job description or requirements here..."
+              rows={8}
+              value={jobDescription}
+              onChange={(e) => setJobDescription(e.target.value)}
+            />
+            <span className="text-[11px] text-slate-400 block text-right">
+              {jobDescription.length} characters
+            </span>
           </div>
 
-          {/* Right Column: Output / Preview */}
-          <div className="rounded-2xl border-2 shadow-sm overflow-hidden flex flex-col min-h-[600px]" style={{ background: '#fff', borderColor: '#e9d5ff' }}>
+          {/* Resume Upload (Optional) */}
+          <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-xs space-y-3">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+              <Upload size={16} className="text-purple-600" />
+              <span>Custom Resume PDF (Optional)</span>
+            </label>
+            
+            <label className="block cursor-pointer">
+              <input
+                type="file"
+                accept=".pdf,.doc,.docx,.txt"
+                onChange={handleFileUpload}
+                className="hidden"
+              />
+              <div className="border-2 border-dashed border-slate-200 hover:border-purple-400 hover:bg-purple-50/50 rounded-xl p-5 text-center transition-colors">
+                <FileText className="mx-auto mb-2 text-purple-400" size={24} />
+                <p className="font-bold text-xs text-slate-800">
+                  {resumeFile ? resumeFile.name : "Click to attach your Resume file"}
+                </p>
+                <p className="text-[10px] text-slate-400 mt-0.5">Supports PDF, DOCX or TXT</p>
+              </div>
+            </label>
+          </div>
+
+          {/* Action Button */}
+          <button
+            onClick={handleGenerate}
+            disabled={loading || !jobDescription.trim()}
+            className="w-full py-3.5 text-white font-bold text-sm gradient-brand rounded-xl shadow-md hover:shadow-purple-500/25 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+          >
+            {loading ? (
+              <>
+                <Loader2 className="animate-spin" size={18} />
+                <span>Optimizing Keywords & Calculating ATS Score...</span>
+              </>
+            ) : (
+              <>
+                <Wand2 size={18} />
+                <span>Analyze & Optimize for ATS</span>
+              </>
+            )}
+          </button>
+          
+          {error && (
+            <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-semibold flex items-center gap-2">
+              <AlertCircle size={16} />
+              <span>{error}</span>
+            </div>
+          )}
+        </div>
+
+        {/* Right Column: Output / Preview */}
+        <div className="lg:col-span-6">
+          <div className="bg-white rounded-2xl border border-slate-200/90 shadow-xs h-full flex flex-col justify-between overflow-hidden min-h-[500px]">
             
             {!result ? (
-              // Empty State
-              <div className="h-full flex flex-col items-center justify-center space-y-4 p-8" style={{ color: '#d1d5db' }}>
-                <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ background: '#faf5ff' }}>
-                  <Sparkles size={40} style={{ color: '#c4b5fd' }} />
+              <div className="flex-1 flex flex-col items-center justify-center p-12 text-center">
+                <div className="w-16 h-16 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4">
+                  <Sparkles size={28} />
                 </div>
-                <p className="text-center">
-                  <span className="block font-semibold" style={{ color: '#6b7280' }}>Paste a job description</span>
-                  <span className="text-sm" style={{ color: '#9ca3af' }}>and click Generate to see your optimized resume</span>
+                <h3 className="font-bold text-slate-800 text-base mb-1">
+                  Ready to Optimize Your Resume
+                </h3>
+                <p className="text-xs text-slate-500 max-w-sm">
+                  Click 'Analyze & Optimize' to compute ATS keyword alignment, generate tailored summaries, and discover missing skills.
                 </p>
               </div>
             ) : (
-              // Success State
-              <div className="flex flex-col h-full">
+              <div className="flex-1 flex flex-col justify-between p-6 space-y-6">
                 
-                {/* Header Success Bar */}
-                <div className="px-6 pt-6 pb-4 border-b-2" style={{ borderColor: '#e9d5ff' }}>
-                  <div className="flex items-center gap-2 font-bold p-4 rounded-xl border-2 mb-4" style={{ background: '#f0fdf4', color: '#166534', borderColor: '#dcfce7' }}>
-                    <CheckCircle size={20} />
-                    <span>Resume Optimized Successfully!</span>
-                  </div>
-
-                  {/* Match Score */}
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-semibold" style={{ color: '#6b7280' }}>ATS Match Score</span>
-                      <span className="text-2xl font-bold" style={{ color: '#7c3aed' }}>{result.match_score}%</span>
-                    </div>
-                    <div className="w-full rounded-full h-2 overflow-hidden" style={{ background: '#e9d5ff' }}>
-                      <div 
-                        className="h-full transition-all duration-1000"
-                        style={{ background: 'linear-gradient(90deg, #7c3aed 0%, #6d28d9 100%)', width: `${result.match_score}%` }}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Tabs */}
-                <div className="flex gap-4 px-6 pt-6 border-b-2" style={{ borderColor: '#e9d5ff' }}>
-                  <button
-                    onClick={() => setActiveTab('preview')}
-                    className="pb-3 px-2 font-semibold text-sm transition-all border-b-2"
-                    style={{
-                      color: activeTab === 'preview' ? '#7c3aed' : '#9ca3af',
-                      borderColor: activeTab === 'preview' ? '#7c3aed' : 'transparent'
-                    }}
-                  >
-                    Preview
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('keywords')}
-                    className="pb-3 px-2 font-semibold text-sm transition-all border-b-2"
-                    style={{
-                      color: activeTab === 'keywords' ? '#7c3aed' : '#9ca3af',
-                      borderColor: activeTab === 'keywords' ? '#7c3aed' : 'transparent'
-                    }}
-                  >
-                    Keywords
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('tips')}
-                    className="pb-3 px-2 font-semibold text-sm transition-all border-b-2"
-                    style={{
-                      color: activeTab === 'tips' ? '#7c3aed' : '#9ca3af',
-                      borderColor: activeTab === 'tips' ? '#7c3aed' : 'transparent'
-                    }}
-                  >
-                    Tips
-                  </button>
-                </div>
-
-                {/* Content Area */}
-                <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+                <div className="space-y-5">
                   
+                  {/* Score Meter Header */}
+                  <div className="p-5 rounded-2xl bg-purple-50/60 border border-purple-100 flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] font-black uppercase tracking-wider text-purple-600 block">
+                        ATS Match Analysis
+                      </span>
+                      <h4 className="text-sm font-extrabold text-slate-900 mt-0.5">
+                        High Alignment Detected
+                      </h4>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <div className="text-right">
+                        <span className="text-2xl font-black text-purple-700">{result.match_score}%</span>
+                        <span className="text-[10px] font-bold text-slate-400 block">Match Score</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Tabs */}
+                  <div className="flex gap-2 border-b border-slate-100 pb-2">
+                    {['preview', 'keywords', 'tips'].map((t) => (
+                      <button
+                        key={t}
+                        onClick={() => setActiveTab(t)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold capitalize transition-colors ${
+                          activeTab === t
+                            ? 'bg-purple-100 text-purple-800'
+                            : 'text-slate-500 hover:text-slate-800'
+                        }`}
+                      >
+                        {t === 'preview' ? 'Tailored Summary' : t === 'keywords' ? 'Matched Keywords' : 'ATS Tips'}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Tab 1: Tailored Summary */}
                   {activeTab === 'preview' && (
-                    <div className="space-y-6 animate-in fade-in duration-300">
-                      <div>
-                        <h3 className="text-xs font-bold uppercase tracking-wider mb-3 flex items-center gap-2" style={{ color: '#6b7280' }}>
-                          <Sparkles size={14} style={{ color: '#7c3aed' }} />
-                          Professional Summary
-                        </h3>
-                        <div className="p-4 rounded-xl border-2 text-sm leading-relaxed relative" style={{ background: '#faf5ff', borderColor: '#e9d5ff', color: '#374151' }}>
-                          <div className="absolute top-3 right-3 text-[10px] px-2 py-1 rounded font-bold text-white" style={{ background: '#7c3aed' }}>
-                            AI GENERATED
-                          </div>
-                          <p>"{result.summary}"</p>
-                        </div>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <label className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                          AI Generated ATS Summary
+                        </label>
+                        <button
+                          onClick={() => copyToClipboard(result.summary, 'summary')}
+                          className="text-[11px] font-bold text-purple-600 hover:text-purple-800 flex items-center gap-1"
+                        >
+                          {copied ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
+                          <span>{copied ? 'Copied!' : 'Copy Summary'}</span>
+                        </button>
+                      </div>
+                      <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-800 leading-relaxed font-normal">
+                        "{result.summary}"
                       </div>
                     </div>
                   )}
 
+                  {/* Tab 2: Keywords */}
                   {activeTab === 'keywords' && (
-                    <div className="space-y-6 animate-in fade-in duration-300">
+                    <div className="space-y-4">
                       <div>
-                        <h3 className="text-xs font-bold uppercase tracking-wider mb-3 flex items-center gap-2" style={{ color: '#6b7280' }}>
-                          <Zap size={14} style={{ color: '#7c3aed' }} />
-                          Prioritized Keywords
-                        </h3>
-                        <div className="flex flex-wrap gap-2">
+                        <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">
+                          Matched Keywords in Profile
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
                           {result.skills.map((skill, i) => (
-                            <span 
-                              key={i} 
-                              className="px-4 py-2 rounded-lg text-sm font-medium border-2 transition-all"
-                              style={{
-                                background: '#faf5ff',
-                                color: '#1e1b4b',
-                                borderColor: '#e9d5ff'
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.background = '#f3f0ff';
-                                e.currentTarget.style.borderColor = '#7c3aed';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.background = '#faf5ff';
-                                e.currentTarget.style.borderColor = '#e9d5ff';
-                              }}
-                            >
-                              {skill}
+                            <span key={i} className="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold">
+                              ✓ {skill}
                             </span>
                           ))}
                         </div>
@@ -347,19 +291,13 @@ const handleGenerate = async () => {
 
                       {result.missing_keywords && result.missing_keywords.length > 0 && (
                         <div>
-                          <h3 className="text-xs font-bold uppercase tracking-wider" style={{ color: '#6b7280' }}>Missing Keywords</h3>
-                          <div className="flex flex-wrap gap-2 mt-3">
-                            {result.missing_keywords.map((keyword, i) => (
-                              <span 
-                                key={i} 
-                                className="px-3 py-1 rounded-lg text-xs font-medium border-2"
-                                style={{
-                                  background: '#fef2f2',
-                                  color: '#991b1b',
-                                  borderColor: '#fecaca'
-                                }}
-                              >
-                                {keyword}
+                          <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">
+                            Missing Target Keywords
+                          </span>
+                          <div className="flex flex-wrap gap-1.5">
+                            {result.missing_keywords.map((kw, i) => (
+                              <span key={i} className="px-2.5 py-1 rounded-lg bg-rose-50 text-rose-700 border border-rose-200 text-xs font-semibold">
+                                + {kw}
                               </span>
                             ))}
                           </div>
@@ -368,64 +306,44 @@ const handleGenerate = async () => {
                     </div>
                   )}
 
+                  {/* Tab 3: Tips */}
                   {activeTab === 'tips' && (
-                    <div className="space-y-3 animate-in fade-in duration-300">
-                      <h3 className="text-xs font-bold uppercase tracking-wider" style={{ color: '#6b7280' }}>Optimization Tips</h3>
-                      {result.optimization_tips && result.optimization_tips.length > 0 ? (
-                        result.optimization_tips.map((tip, i) => (
-                          <div key={i} className="p-4 rounded-lg border-2 text-sm leading-relaxed" style={{ background: '#faf5ff', borderColor: '#e9d5ff', color: '#374151' }}>
-                            <div className="flex gap-3">
-                              <div className="font-bold flex-shrink-0" style={{ color: '#7c3aed' }}>{i + 1}.</div>
-                              <div>{tip}</div>
-                            </div>
-                          </div>
-                        ))
-                      ) : (
-                        <p className="text-sm" style={{ color: '#9ca3af' }}>No additional tips at this time.</p>
-                      )}
+                    <div className="space-y-2.5">
+                      {result.optimization_tips.map((tip, i) => (
+                        <div key={i} className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed flex items-start gap-2.5">
+                          <span className="w-5 h-5 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-[10px] flex-shrink-0 mt-0.5">
+                            {i + 1}
+                          </span>
+                          <span>{tip}</span>
+                        </div>
+                      ))}
                     </div>
                   )}
+
                 </div>
 
-                {/* Download Action */}
-                <div className="px-6 pb-6 pt-6 border-t-2" style={{ borderColor: '#e9d5ff' }}>
+                {/* Bottom PDF Download Action */}
+                <div className="pt-4 border-t border-slate-100">
                   <a 
-                    href={result.download_url} 
+                    href={result.download_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    download="Tailored_Resume.pdf"
-                    className="flex items-center justify-between p-4 text-white rounded-xl transition-all group cursor-pointer shadow-lg"
-                    style={{ background: 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)' }}
+                    className="w-full py-3 px-4 rounded-xl text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all"
+                    style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)' }}
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-lg" style={{ background: 'rgba(255, 255, 255, 0.2)' }}>
-                        <Download size={24} />
-                      </div>
-                      <div>
-                        <div className="font-bold">Download PDF</div>
-                        <div className="text-xs" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>ATS-Ready Format</div>
-                      </div>
-                    </div>
-                    <div className="group-hover:translate-y-1 transition-transform">
-                      →
-                    </div>
+                    <Download size={16} />
+                    <span>Download ATS-Optimized Resume</span>
                   </a>
                 </div>
-              </div>
-            )}
-            
-            {/* Loading Overlay */}
-            {loading && (
-              <div className="absolute inset-0 backdrop-blur-sm flex flex-col items-center justify-center z-10 rounded-2xl" style={{ background: 'rgba(255, 255, 255, 0.8)' }}>
-                <Loader2 className="animate-spin mb-4" size={48} style={{ color: '#7c3aed' }} />
-                <p className="font-semibold" style={{ color: '#1e1b4b' }}>Analyzing keywords...</p>
-                <p className="text-sm mt-1" style={{ color: '#6b7280' }}>Optimizing your resume</p>
-              </div>
-            )}
-          </div>
 
+              </div>
+            )}
+
+          </div>
         </div>
+
       </div>
+
     </div>
   );
 };

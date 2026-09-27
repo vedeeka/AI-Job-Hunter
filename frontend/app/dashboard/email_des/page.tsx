@@ -1,19 +1,50 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { getApiUrl } from "../../utils/api";
+import { useState } from 'react';
+import { 
+  MessageSquare, 
+  Sparkles, 
+  Copy, 
+  Check, 
+  Send, 
+  Loader2, 
+  Building2, 
+  FileText, 
+  Zap,
+  RefreshCw,
+  Mail,
+  ChevronRight
+} from 'lucide-react';
+import { getApiUrl } from '../../utils/api';
+
+const TONES = [
+  { id: 'direct', label: 'Professional & Direct' },
+  { id: 'technical', label: 'Technical & High-Impact' },
+  { id: 'startup', label: 'Startup & Enthusiastic' },
+  { id: 'short', label: 'Short & Punchy' }
+];
+
+const PRESETS = [
+  { company: 'Google Cloud', desc: 'Seeking Full Stack Engineers to build cloud-native services and AI developer tooling using Python, React, and TypeScript.' },
+  { company: 'Scale AI', desc: 'Looking for a Machine Learning Intern with strong foundations in NLP, PyTorch, FastAPIs, and data pipeline pipelines.' },
+  { company: 'Stripe', desc: 'Backend Software Engineer to scale global financial infrastructure, high-throughput microservices, and reliable APIs.' }
+];
 
 export default function EmailGeneratorPage() {
-  const [jobDesc, setJobDesc] = useState("");
-  const [company, setCompany] = useState("");
-  const [result, setResult] = useState("");
+  const [jobDesc, setJobDesc] = useState('');
+  const [company, setCompany] = useState('');
+  const [selectedTone, setSelectedTone] = useState('technical');
+  const [subject, setSubject] = useState('');
+  const [emailBody, setEmailBody] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
+  const [copiedSubject, setCopiedSubject] = useState(false);
+  const [copiedBody, setCopiedBody] = useState(false);
 
-  async function generateEmail() {
+  const generateEmail = async () => {
+    if (!jobDesc.trim() || !company.trim()) return;
     setLoading(true);
-    setError("");
-    setResult("");
+    setError('');
 
     try {
       const res = await fetch(
@@ -21,254 +52,254 @@ export default function EmailGeneratorPage() {
       );
 
       const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Failed to generate cold email');
 
-      if (!res.ok) {
-        throw new Error(data.message || "Server error");
-      }
-
-      if (data.body) {
-        setResult(`SUBJECT: ${data.subject || ''}\n\n${data.body}`);
-      } else {
-        setResult(JSON.stringify(data, null, 2));
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "An unknown error occurred");
+      setSubject(data.subject || `Application for Engineering Role at ${company}`);
+      setEmailBody(data.body || JSON.stringify(data, null, 2));
+    } catch (err: any) {
+      setError(err.message || 'An error occurred while generating outreach email');
     } finally {
       setLoading(false);
     }
-  }
+  };
+
+  const loadPreset = (preset: { company: string; desc: string }) => {
+    setCompany(preset.company);
+    setJobDesc(preset.desc);
+  };
+
+  const copyText = (text: string, type: 'subject' | 'body') => {
+    navigator.clipboard.writeText(text);
+    if (type === 'subject') {
+      setCopiedSubject(true);
+      setTimeout(() => setCopiedSubject(false), 2000);
+    } else {
+      setCopiedBody(true);
+      setTimeout(() => setCopiedBody(false), 2000);
+    }
+  };
 
   return (
-    <div style={{
-      minHeight: "100vh",
-      background: "linear-gradient(135deg, #f8f7ff 0%, #f3f0ff 50%, #faf8ff 100%)",
-      padding: "40px 20px"
-    }}>
-      <div style={{
-        maxWidth: "800px",
-        margin: "0 auto",
-        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-      }}>
-        {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "40px" }}>
-          <h1 style={{
-            fontSize: "32px",
-            fontWeight: "700",
-            color: "#1e1b4b",
-            marginBottom: "8px"
-          }}>
-            Cold Email Generator
-          </h1>
-          <p style={{
-            fontSize: "16px",
-            color: "#6b7280",
-            margin: 0
-          }}>
-            Generate professional cold emails based on job descriptions
+    <div className="min-h-screen pb-16 pt-2">
+      
+      {/* Top Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 pt-4 pb-2 border-b border-slate-200/80">
+        <div>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+              AI Cold Email Generator
+            </h1>
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-50 text-amber-700 border border-amber-200">
+              Gemini AI
+            </span>
+          </div>
+          <p className="text-xs text-slate-500 mt-0.5">
+            Craft tailored cold outreach emails that reference specific requirements and boost reply rates.
           </p>
         </div>
-
-        {/* Form Container */}
-        <div style={{
-          background: "white",
-          border: "2px solid #e9d5ff",
-          borderRadius: "12px",
-          padding: "32px",
-          boxShadow: "0 4px 6px rgba(124, 58, 237, 0.1)"
-        }}>
-          {/* Job Description Input */}
-          <div style={{ marginBottom: "24px" }}>
-            <label style={{
-              display: "block",
-              fontSize: "14px",
-              fontWeight: "600",
-              color: "#1e1b4b",
-              marginBottom: "8px"
-            }}>
-              Job Description
-            </label>
-            <textarea
-              placeholder="Paste the job description here..."
-              value={jobDesc}
-              onChange={(e) => setJobDesc(e.target.value)}
-              rows={8}
-              style={{
-                width: "100%",
-                padding: "12px 16px",
-                fontSize: "15px",
-                border: "2px solid #e9d5ff",
-                borderRadius: "8px",
-                fontFamily: "inherit",
-                resize: "vertical",
-                color: "#1e1b4b",
-                outline: "none",
-                transition: "border-color 0.2s, background-color 0.2s",
-                boxSizing: "border-box",
-                background: "#faf5ff"
-              }}
-              onFocus={(e) => {
-                e.target.style.borderColor = "#7c3aed";
-                e.target.style.background = "#fff";
-              }}
-              onBlur={(e) => {
-                e.target.style.borderColor = "#e9d5ff";
-                e.target.style.background = "#faf5ff";
-              }}
-            />
-          </div>
-
-          {/* Company Name Input */}
-          <div style={{ marginBottom: "24px" }}>
-            <label style={{
-              display: "block",
-              fontSize: "14px",
-              fontWeight: "600",
-              color: "#1e1b4b",
-              marginBottom: "8px"
-            }}>
-              Company Name
-            </label>
-            <input
-              type="text"
-              placeholder="Enter company name..."
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
-              style={{
-                width: "100%",
-                padding: "12px 16px",
-                fontSize: "15px",
-                border: "2px solid #e9d5ff",
-                borderRadius: "8px",
-                fontFamily: "inherit",
-                outline: "none",
-                color: "#1e1b4b",
-                transition: "border-color 0.2s, background-color 0.2s",
-                boxSizing: "border-box",
-                background: "#faf5ff"
-              }}
-              onFocus={(e) => {
-                e.target.style.borderColor = "#7c3aed";
-                e.target.style.background = "#fff";
-              }}
-              onBlur={(e) => {
-                e.target.style.borderColor = "#e9d5ff";
-                e.target.style.background = "#faf5ff";
-              }}
-            />
-          </div>
-
-          {/* Generate Button */}
-          <button
-            onClick={generateEmail}
-            disabled={loading || !jobDesc.trim() || !company.trim()}
-            style={{
-              width: "100%",
-              padding: "14px 24px",
-              fontSize: "16px",
-              fontWeight: "600",
-              color: "white",
-              background: loading || !jobDesc.trim() || !company.trim() 
-                ? "rgba(124, 58, 237, 0.5)"
-                : "linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)",
-              border: "none",
-              borderRadius: "8px",
-              cursor: loading || !jobDesc.trim() || !company.trim() 
-                ? "not-allowed" 
-                : "pointer",
-              transition: "opacity 0.2s",
-              fontFamily: "inherit"
-            }}
-            onMouseOver={(e) => {
-              if (!loading && jobDesc.trim() && company.trim()) {
-                e.currentTarget.style.opacity = "0.9";
-              }
-            }}
-            onMouseOut={(e) => {
-              if (!loading && jobDesc.trim() && company.trim()) {
-                e.currentTarget.style.opacity = "1";
-              }
-            }}
-          >
-            {loading ? (
-              <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
-                <span style={{
-                  width: "16px",
-                  height: "16px",
-                  border: "2px solid white",
-                  borderTopColor: "transparent",
-                  borderRadius: "50%",
-                  animation: "spin 0.8s linear infinite",
-                  display: "inline-block"
-                }}></span>
-                Generating...
-              </span>
-            ) : (
-              "Generate Email"
-            )}
-          </button>
-        </div>
-
-        {/* Error Message */}
-        {error && (
-          <div style={{
-            marginTop: "24px",
-            padding: "16px",
-            background: "#fee2e2",
-            border: "2px solid #fecaca",
-            borderRadius: "8px",
-            color: "#991b1b",
-            fontSize: "14px"
-          }}>
-            <strong>Error:</strong> {error}
-          </div>
-        )}
-
-        {/* Result Display */}
-        {result && (
-          <div style={{
-            marginTop: "24px",
-            background: "white",
-            border: "2px solid #e9d5ff",
-            borderRadius: "12px",
-            padding: "24px",
-            boxShadow: "0 4px 6px rgba(124, 58, 237, 0.1)"
-          }}>
-            <h3 style={{
-              fontSize: "18px",
-              fontWeight: "600",
-              color: "#1e1b4b",
-              marginTop: 0,
-              marginBottom: "16px"
-            }}>
-              Generated Email
-            </h3>
-            <pre style={{
-              background: "#faf5ff",
-              padding: "20px",
-              borderRadius: "8px",
-              fontSize: "14px",
-              color: "#1e1b4b",
-              lineHeight: "1.6",
-              overflow: "auto",
-              margin: 0,
-              whiteSpace: "pre-wrap",
-              wordWrap: "break-word",
-              border: "2px solid #e9d5ff"
-            }}>
-              {result}
-            </pre>
-          </div>
-        )}
       </div>
 
-      {/* CSS for spinner animation */}
-      <style>{`
-        @keyframes spin {
-          to {
-            transform: rotate(360deg);
-          }
-        }
-      `}</style>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        {/* Left Column: Form Inputs */}
+        <div className="lg:col-span-6 space-y-6">
+          
+          <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-xs space-y-5">
+            
+            {/* Quick Presets */}
+            <div>
+              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">
+                Quick Sample Roles
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {PRESETS.map((preset) => (
+                  <button
+                    key={preset.company}
+                    onClick={() => loadPreset(preset)}
+                    className="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-50 border border-slate-200 text-slate-700 hover:bg-purple-50 hover:text-purple-700 hover:border-purple-200 transition-colors"
+                  >
+                    {preset.company}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Target Company */}
+            <div>
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                Target Company Name
+              </label>
+              <div className="relative">
+                <Building2 className="absolute left-3.5 top-3 text-purple-400" size={16} />
+                <input
+                  type="text"
+                  placeholder="e.g. Stripe, Razorpay, Google, TechCorp"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:bg-white focus:border-purple-600 focus:outline-none transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Job Description */}
+            <div>
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                Job Description or Core Requirements
+              </label>
+              <textarea
+                placeholder="Paste the job description or required skills here..."
+                value={jobDesc}
+                onChange={(e) => setJobDesc(e.target.value)}
+                rows={7}
+                className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-900 focus:bg-white focus:border-purple-600 focus:outline-none resize-none transition-all leading-relaxed"
+              />
+              <span className="text-[11px] text-slate-400 mt-1 block text-right">
+                {jobDesc.length} characters
+              </span>
+            </div>
+
+            {/* Tone Selector */}
+            <div>
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                Outreach Tone
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                {TONES.map((tone) => (
+                  <button
+                    key={tone.id}
+                    onClick={() => setSelectedTone(tone.id)}
+                    className={`py-2 px-3 rounded-xl text-xs font-bold text-left transition-all border ${
+                      selectedTone === tone.id
+                        ? 'gradient-brand text-white border-transparent shadow-xs'
+                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                    }`}
+                  >
+                    {tone.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Generate Button */}
+            <button
+              onClick={generateEmail}
+              disabled={loading || !jobDesc.trim() || !company.trim()}
+              className="w-full py-3.5 text-white font-bold text-sm gradient-brand rounded-xl shadow-md hover:shadow-purple-500/25 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="animate-spin" size={18} />
+                  <span>Synthesizing Tailored Email...</span>
+                </>
+              ) : (
+                <>
+                  <Sparkles size={18} />
+                  <span>Generate High-Impact Outreach</span>
+                </>
+              )}
+            </button>
+
+          </div>
+
+          {error && (
+            <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-semibold">
+              Error: {error}
+            </div>
+          )}
+
+        </div>
+
+        {/* Right Column: Output / Preview */}
+        <div className="lg:col-span-6">
+          
+          <div className="bg-white rounded-2xl border border-slate-200/90 shadow-xs h-full flex flex-col justify-between overflow-hidden min-h-[500px]">
+            
+            {!emailBody ? (
+              <div className="flex-1 flex flex-col items-center justify-center p-12 text-center">
+                <div className="w-16 h-16 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4">
+                  <Mail size={28} />
+                </div>
+                <h3 className="font-bold text-slate-800 text-base mb-1">
+                  Your Tailored Email Will Appear Here
+                </h3>
+                <p className="text-xs text-slate-500 max-w-sm">
+                  Enter a target company and job description on the left, then click Generate.
+                </p>
+              </div>
+            ) : (
+              <div className="flex-1 flex flex-col justify-between p-6 space-y-6">
+                
+                <div className="space-y-4">
+                  
+                  {/* Subject Line Field */}
+                  <div>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                        Subject Line
+                      </label>
+                      <button
+                        onClick={() => copyText(subject, 'subject')}
+                        className="text-[11px] font-bold text-purple-600 hover:text-purple-800 flex items-center gap-1"
+                      >
+                        {copiedSubject ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
+                        <span>{copiedSubject ? 'Copied!' : 'Copy Subject'}</span>
+                      </button>
+                    </div>
+                    <div className="p-3 bg-purple-50/60 rounded-xl border border-purple-100 text-xs font-bold text-slate-900">
+                      {subject}
+                    </div>
+                  </div>
+
+                  {/* Body Field */}
+                  <div>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                        Email Message
+                      </label>
+                      <button
+                        onClick={() => copyText(emailBody, 'body')}
+                        className="text-[11px] font-bold text-purple-600 hover:text-purple-800 flex items-center gap-1"
+                      >
+                        {copiedBody ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
+                        <span>{copiedBody ? 'Copied!' : 'Copy Body'}</span>
+                      </button>
+                    </div>
+
+                    <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-800 font-normal leading-relaxed whitespace-pre-wrap max-h-[380px] overflow-y-auto">
+                      {emailBody}
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* Direct Mail App Action */}
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+                  <button
+                    onClick={() => copyText(`${subject}\n\n${emailBody}`, 'body')}
+                    className="flex-1 py-2.5 px-4 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors"
+                  >
+                    <Copy size={14} />
+                    Copy Entire Outreach
+                  </button>
+
+                  <a
+                    href={`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`}
+                    className="py-2.5 px-5 rounded-xl gradient-brand text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm hover:shadow-md transition-all"
+                  >
+                    <Send size={14} />
+                    Open in Mail
+                  </a>
+                </div>
+
+              </div>
+            )}
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }
