@@ -10,16 +10,8 @@ from ml_lab.extractors.maps_email_scraper import RobustScraper
 app = FastAPI()
 router = APIRouter()
 
-OUTPUT_FILE = "final_leads_detailed.csv"
-
-# CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+OUTPUT_FILE = os.path.join(BASE_DIR, "data", "final_leads_detailed.csv")
 
 # ------------------- POST endpoint -------------------
 @router.post("/email-map-search")
@@ -60,7 +52,7 @@ def run_search(query: str = Query(..., description="Search query")):
             "status": "success",
             "total": len(results),
             "data": results,
-            "file_url": "http://localhost:8000/download"
+            "file_url": "/download"
         }
 
     except Exception as e:
@@ -71,10 +63,12 @@ def run_search(query: str = Query(..., description="Search query")):
         )
 
 # ------------------- File download -------------------
-@app.get("/download")
+@router.get("/download")
 def download():
     if os.path.exists(OUTPUT_FILE):
-        return FileResponse(OUTPUT_FILE, filename="leads.csv")
+        return FileResponse(OUTPUT_FILE, filename="leads.csv", media_type="text/csv")
+    if os.path.exists("final_leads_detailed.csv"):
+        return FileResponse("final_leads_detailed.csv", filename="leads.csv", media_type="text/csv")
     return JSONResponse(status_code=404, content={"error": "File not found"})
 
 

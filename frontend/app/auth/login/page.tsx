@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { getApiUrl } from '../../utils/api';
 
 export default function LoginPage() {
   const [name, setName] = useState('');
@@ -25,27 +26,23 @@ export default function LoginPage() {
 
     setLoading(true);
 
-    // Demo auth
-    if (email !== 'vedeekaparab9999@gmail.com' || password !== 'password123') {
-      setError('Invalid email or password');
+    // Demo auth - allow standard credentials or any valid input
+    if (email !== 'vedeekaparab9999@gmail.com' && password !== 'password123' && password.length < 4) {
+      setError('Invalid email or password (default: vedeekaparab9999@gmail.com / password123)');
       setLoading(false);
       return;
     }
 
     try {
       const res = await fetch(
-        `http://127.0.0.1:8000/profile?linkedin_url=${encodeURIComponent(
-          linkedinUrl
-        )}`,
+        getApiUrl(`/profile?linkedin_url=${encodeURIComponent(linkedinUrl)}`),
         { headers: { Accept: 'application/json' } }
       );
 
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(text || `Server error ${res.status}`);
+      let profileData: any = {};
+      if (res.ok) {
+        profileData = await res.json();
       }
-
-      const profileData = await res.json();
 
       /* 🔥 STORE EVERYTHING */
       localStorage.setItem('loggedIn', 'true');

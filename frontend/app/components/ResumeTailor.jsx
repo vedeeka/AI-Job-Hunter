@@ -14,6 +14,7 @@ import {
   Upload,
   Zap
 } from 'lucide-react';
+import { getApiUrl } from '../utils/api';
 
 const ResumeTailor = () => {
   const [jobDescription, setJobDescription] = useState("");
@@ -48,7 +49,7 @@ const handleGenerate = async () => {
       formData.append("job_description", jobDescription);
       formData.append("resume_pdf", resumeFile);
 
-      const response = await fetch("http://localhost:8000/generate-resume", {
+      const response = await fetch(getApiUrl('/generate-resume'), {
         method: "POST",
         body: formData,
       });

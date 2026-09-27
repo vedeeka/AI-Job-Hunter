@@ -15,18 +15,11 @@ from backend.app.services.resume_from_start import get_templates
 
 app = FastAPI(title="AI Job Hunter API", version="1.0")
 
-
-origins = [
-    "http://localhost:3000",     # Next.js default
-    "http://127.0.0.1:3000",     # Alternative localhost
-    "http://localhost:8000", 
-    "http://localhost:8000", 
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,       # 👈 Set specific origins here
-    allow_credentials=True,      # This can stay True now
+    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1|.*\.vercel\.app)(:\d+)?$",
+    allow_origins=["*"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )

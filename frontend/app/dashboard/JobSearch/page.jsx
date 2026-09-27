@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react';
-import { Search, MapPin, Loader2, Briefcase, X, ExternalLink } from 'lucide-react';
+import { Search, MapPin, Loader2, Briefcase, X, ExternalLink, Download } from 'lucide-react';
+import { getApiUrl } from '../../utils/api';
 
 const JobSearch = () => {
   const [keyword, setKeyword] = useState("Intern");
@@ -16,7 +17,7 @@ const JobSearch = () => {
     setJobs([]);
 
     try {
-      const response = await fetch('http://localhost:8000/run-search', {
+      const response = await fetch(getApiUrl('/run-search'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ keyword, location, max_jobs: 10 }),
@@ -25,12 +26,36 @@ const JobSearch = () => {
       const result = await response.json();
       if (!response.ok) throw new Error(result.detail || "Search failed");
 
-      setJobs(result.data);
+      setJobs(result.data || []);
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
+  };
+
+  const downloadJobsCsv = () => {
+    if (!jobs || jobs.length === 0) return;
+    const keys = Object.keys(jobs[0]);
+    const csvRows = [
+      keys.join(','),
+      ...jobs.map(row => 
+        keys.map(k => {
+          const val = row[k];
+          const str = typeof val === 'object' ? JSON.stringify(val) : String(val ?? '');
+          return `"${str.replace(/"/g, '""')}"`;
+        }).join(',')
+      )
+    ];
+    const blob = new Blob([csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `jobs_${keyword}_${location}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
   };
 
   const renderValue = (val) => {
@@ -187,8 +212,16 @@ const JobSearch = () => {
         {jobs.length > 0 && (
           <div className="border-2 rounded-lg overflow-hidden" style={{ borderColor: '#e9d5ff' }}>
 
-            <div className="p-4 border-b-2 font-semibold" style={{ borderColor: '#e9d5ff', background: '#faf5ff', color: '#1e1b4b' }}>
-              Results Found: {jobs.length}
+            <div className="p-4 border-b-2 font-semibold flex items-center justify-between" style={{ borderColor: '#e9d5ff', background: '#faf5ff', color: '#1e1b4b' }}>
+              <span>Results Found: {jobs.length}</span>
+              <button
+                onClick={downloadJobsCsv}
+                className="px-3 py-1.5 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition text-white"
+                style={{ background: 'linear-gradient(135deg, #16a34a 0%, #15803d 100%)' }}
+              >
+                <Download size={14} />
+                Export CSV
+              </button>
             </div>
 
             <div className="overflow-x-auto">

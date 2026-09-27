@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { getApiUrl } from "../../utils/api";
 
 export default function EmailGeneratorPage() {
   const [jobDesc, setJobDesc] = useState("");
@@ -16,7 +17,7 @@ export default function EmailGeneratorPage() {
 
     try {
       const res = await fetch(
-        `http://localhost:8000/email_des?job_description=${encodeURIComponent(jobDesc)}&company_name=${encodeURIComponent(company)}`
+        getApiUrl(`/email_des?job_description=${encodeURIComponent(jobDesc)}&company_name=${encodeURIComponent(company)}`)
       );
 
       const data = await res.json();
@@ -25,7 +26,11 @@ export default function EmailGeneratorPage() {
         throw new Error(data.message || "Server error");
       }
 
-      setResult(JSON.stringify(data, null, 2));
+      if (data.body) {
+        setResult(`SUBJECT: ${data.subject || ''}\n\n${data.body}`);
+      } else {
+        setResult(JSON.stringify(data, null, 2));
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "An unknown error occurred");
     } finally {

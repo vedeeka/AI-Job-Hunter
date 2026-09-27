@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState, useRef } from 'react';
 import { Download, ArrowLeft, Send } from 'lucide-react';
+import { getApiUrl } from '../../utils/api';
 
 // --- Types ---
 interface Template {
@@ -14,7 +15,6 @@ interface Message {
 }
 
 // Default Data
-// --- Types ---
 interface Experience {
   role: string;
   company: string;
@@ -34,12 +34,12 @@ interface Project {
   description: string;
 }
 
-// Updated Resume Data Structure
+// Safe initial structure for SSR
 const INITIAL_DATA = {
-  name: localStorage.getItem("user_name") || "Alex Morgan",
-  email: localStorage.getItem("user_email") || "alex@example.com",
-  phone: localStorage.getItem("user_phone") || "+1 (555) 010-9988",
-  linkedin: localStorage.getItem("user_linkedin") || "linkedin.com/in/alexmorgan",
+  name: "Alex Morgan",
+  email: "alex@example.com",
+  phone: "+1 (555) 010-9988",
+  linkedin: "linkedin.com/in/alexmorgan",
   
   // 1. Professional Summary
   summary: "Senior Software Engineer with 6+ years of experience specializing in Full Stack development. Proven track record of leading teams and delivering scalable web solutions.",
@@ -105,12 +105,49 @@ export default function ResumeApp() {
   
   const chatEndRef = useRef<HTMLDivElement>(null);
 
+  // Safely hydrate from localStorage on client mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedName = localStorage.getItem("user_name");
+      const storedEmail = localStorage.getItem("user_email");
+      const storedPhone = localStorage.getItem("user_phone");
+      const storedLinkedin = localStorage.getItem("user_linkedin") || localStorage.getItem("user_linkedin_input");
+
+      if (storedName || storedEmail || storedPhone || storedLinkedin) {
+        setResumeData(prev => ({
+          ...prev,
+          name: storedName || prev.name,
+          email: storedEmail || prev.email,
+          phone: storedPhone || prev.phone,
+          linkedin: storedLinkedin || prev.linkedin,
+        }));
+      }
+    }
+  }, []);
+
   // 1. Fetch Templates on Load
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/templates')
+    fetch(getApiUrl('/templates'))
       .then(res => res.json())
-      .then(data => setTemplates(data))
-      .catch(err => console.error("Error loading templates:", err));
+      .then(data => {
+        if (Array.isArray(data)) {
+          setTemplates(data);
+        } else {
+          setTemplates([
+            { id: 'modern', name: 'Modern Clean' },
+            { id: 'classic', name: 'Executive Classic' },
+            { id: 'minimal', name: 'Tech Minimal' }
+          ]);
+        }
+      })
+      .catch(err => {
+        console.error("Error loading templates:", err);
+        setTemplates([
+          { id: 'modern', name: 'Modern Clean' },
+          { id: 'classic', name: 'Executive Classic' },
+          { id: 'minimal', name: 'Tech Minimal' }
+        ]);
+      });
   }, []);
 
   // 2. Update Preview when data or template changes
@@ -132,7 +169,7 @@ export default function ResumeApp() {
 
   const updatePreview = async () => {
     try {
-      const res = await fetch('http://127.0.0.1:8000/templates/render-preview', {
+      const res = await fetch(getApiUrl('/templates/render-preview'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -151,7 +188,7 @@ export default function ResumeApp() {
   const handleDownload = async () => {
     setDownloading(true);
     try {
-      const response = await fetch('http://127.0.0.1:8000/download-pdf', {
+      const response = await fetch(getApiUrl('/download-pdf'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -181,50 +218,50 @@ export default function ResumeApp() {
   };
 
   // --- CORE: AI HANDLER ---
-const handleChatSend = async () => {
-  if (!input.trim()) return;
+  const handleChatSend = async () => {
+    if (!input.trim()) return;
 
-  const userMsg = input;
+    const userMsg = input;
 
-  setMessages(prev => [...prev, { role: "user", text: userMsg }]);
-  setInput("");
-  setLoading(true);
+    setMessages(prev => [...prev, { role: "user", text: userMsg }]);
+    setInput("");
+    setLoading(true);
 
-  try {
-    const res = await fetch("http://127.0.0.1:8000/ai/edit-resume", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        current_data: resumeData,
-        user_input: userMsg
-      })
-    });
+    try {
+      const res = await fetch(getApiUrl('/ai/edit-resume'), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          current_data: resumeData,
+          user_input: userMsg
+        })
+      });
 
-    if (!res.ok) throw new Error("AI failed");
+      if (!res.ok) throw new Error("AI failed");
 
-    const result = await res.json();
+      const result = await res.json();
 
-    // ALWAYS show AI message
-    setMessages(prev => [
-      ...prev,
-      { role: "ai", text: result.message }
-    ]);
+      // ALWAYS show AI message
+      setMessages(prev => [
+        ...prev,
+        { role: "ai", text: result.message || "Updated resume successfully!" }
+      ]);
 
-    // Update resume ONLY if edit
-    if (result.type === "edit" && result.updated_data) {
-      setResumeData(result.updated_data);
+      // Update resume ONLY if edit
+      if (result.type === "edit" && result.updated_data) {
+        setResumeData(result.updated_data);
+      }
+
+    } catch (err) {
+      console.error(err);
+      setMessages(prev => [
+        ...prev,
+        { role: "ai", text: "Something went wrong. Try again." }
+      ]);
+    } finally {
+      setLoading(false);
     }
-
-  } catch (err) {
-    console.error(err);
-    setMessages(prev => [
-      ...prev,
-      { role: "ai", text: "Something went wrong. Try again." }
-    ]);
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
 
   if (step === 'selection') {
@@ -270,7 +307,7 @@ const handleChatSend = async () => {
               >
                 <div style={{ height: '330px', position: 'relative', background: '#fff', overflow: 'hidden' }}>
                   <iframe 
-                    src={`http://127.0.0.1:8000/templates/${t.id}/raw`} 
+                    src={getApiUrl(`/templates/${t.id}/raw`)} 
                     style={{
                       width: '210mm',
                       height: '297mm',
